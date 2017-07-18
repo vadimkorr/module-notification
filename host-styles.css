@@ -1,7 +1,14 @@
-#notifications {
-	width: 200px;
-	background-color: azure;
-	min-height: 100px;
+#notifications-outer-container {
+    margin: 0 auto;
+    width: 400px;
+    background-color: #f7f9ff;
+    min-height: 100px;
+    padding: 10px;
+
+    border-radius: 20px;
+	border-color: #a8bbff;
+    border-width: 2px;
+    border-style: solid;
 }
 
 .btn-group {

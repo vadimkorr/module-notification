@@ -1,12 +1,18 @@
 .mn-notification-container {
 	width: 100%;
 	min-height: 50px;
-	margin-top: 15px !important;
-	margin-bottom: 15px !important;
 }
 
 .mn-notification-container-content {
 	width: 100%;
+}
+
+.mn-module-container .mn-notification-container:not(:last-child) {
+  margin-bottom: 10px !important;
+}
+
+.mn-module-container .mn-notification-container:last-child {
+  margin-bottom: 0px !important;
 }
 
 .mn-module-container {
