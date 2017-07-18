@@ -9,15 +9,13 @@ $(function() {
 	
 	/* create Notifications */
 	myMNModule.pushNotif({
-		closeCond: false,
 		title: "Hello!",
-		message: "Welcome ;)",
+		message: "and Welcome ;)",
 		type: "notice",
 		closeCond: 5000,
 	});
 
 	myMNModule.pushNotif({
-		closeCond: false,
 		message: "Click buttons to push/pull the notifications",
 		type: "success",
 		closeCond: 7000

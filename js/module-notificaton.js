@@ -76,7 +76,7 @@
         //pull from UI
         //$(notif.id).remove();
         $(notif.id).fadeOut(300, function() { 
-          $(this).remove();
+          $(notif.id).remove();
         });
         _self._groups[notif.group].notifs.splice(index, 1);
       }
@@ -175,7 +175,7 @@
     function _getTemplate() {
       var template = (
         "<div role='alert' id='" + _self._getNotificationElementId(true) + "' class='mn-notification-container alert alert-" + _options.type + " alert-dismissible'>" +
-          "<button type='button' class='close-btn close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+          "<button type='button' class='close-btn close'><span aria-hidden='true'>&times;</span></button>" +
           "<div class='mn-notification-container-content'>"+ 
             "<i class='glyphicon glyphicon-" + _getIcon() + "'></i>" + 
             "<span> <strong>" + _options.title + "</strong> " + _options.message + "</span>" + 
