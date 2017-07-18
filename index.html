@@ -19,13 +19,23 @@
 
   <script src="script.js"></script>
   <script src="module-notificaton.js"></script>
- 
-  <button class="title" >Notification center</button>
-  <button class="title2" >Remove gr</button>
- 
+
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" id="add-common-notif">Add "Common" notification</button>
+    <button type="button" class="btn btn-default" id="remove-common-group">Remove "Common" Group</button>
+  </div>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" id="add-test-group">Add "Test" Group</button>
+    <button type="button" class="btn btn-default" id="add-test-notification">Add "Test" Notification</button>
+    <button type="button" class="btn btn-default" id="remove-test-group">Remove "Test" Group</button>
+  </div>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" id="add-greedy-group">Add "Greedy" Group</button>
+    <button type="button" class="btn btn-default" id="add-notif-to-greedy-group">Add Element To "Greedy" Group</button>
+    <button type="button" class="btn btn-default" id="remove-greedy-group">Remove "Greedy" Group</button>
+   </div>
   <div id="notifications"></div>
   <div id="notifications2"></div>
-  
-  
+
   </body>
 </html>

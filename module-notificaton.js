@@ -114,10 +114,16 @@
    * 
    * @param {any} groupName name of the group
    */
-  this.MNModule.prototype.pullGroup = function(groupName) {
-    for (var i = 0; i < this._groups[groupName].notifs.length;) {
-      var id = this._groups[groupName].notifs[i];
-      this._pull({id: id, group: groupName});
+  this.MNModule.prototype.pullGroupNotifs = function(groupName) {
+    var _self = this;
+    if (_self._groups.hasOwnProperty(groupName)) {
+      for (var i = 0; i < _self._groups[groupName].notifs.length;) {
+        var id = _self._groups[groupName].notifs[i];
+        _self._pull({id: id, group: groupName});
+      } 
+      console.info("Group notifications were removed:", groupName);
+    } else {
+      console.warn("Group doesn't exist:", groupName);
     }
   }
 

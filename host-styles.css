@@ -3,3 +3,7 @@
 	background-color: azure;
 	min-height: 100px;
 }
+
+.btn-group {
+	margin: 5px;
+}
