@@ -43,6 +43,8 @@
   
     _self._currModuleIndex = _generateModuleIndex();
     _self._currNotifIndex = _generateNotifIndex();
+
+    $("<div id='" + _self._currModuleIndex + "' class='mn-module-container'></div>").appendTo(_self._configs.container);
   
     _self._currCount = 0;
     _self._groups = {};
@@ -72,7 +74,10 @@
         //dec index
         _self._decCount();
         //pull from UI
-        $(notif.id).remove();
+        //$(notif.id).remove();
+        $(notif.id).fadeOut(300, function() { 
+          $(this).remove();
+        });
         _self._groups[notif.group].notifs.splice(index, 1);
       }
     }
@@ -83,7 +88,7 @@
     }
     /* get selector of the close button of the notification element */
     _self._getCloseBtnSelector = function(id) {
-      var selector = id + " > .mn-close-btn";
+      var selector = id + " > .close-btn";
       return selector;
     }
   
@@ -169,13 +174,13 @@
     /* returns filled template */
     function _getTemplate() {
       var template = (
-        "<div role='mn-alert' id='" + _self._getNotificationElementId(true) + "' class='mn-container mn-alert mn-alert-" + _options.type + " mn-alert-dismissible'>" +
-          "<button type='button' class='mn-close-btn close' data-dismiss='mn-alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-            "<div class='mn-header'>"+ 
-              "<i class='glyphicon glyphicon-" + _getIcon() + "'></i>" + 
-              "<span> <strong>" + _options.title + "</strong> " + _options.message + "</span>" + 
-            "</div>" +
-          "</div>"
+        "<div role='alert' id='" + _self._getNotificationElementId(true) + "' class='mn-notification-container alert alert-" + _options.type + " alert-dismissible'>" +
+          "<button type='button' class='close-btn close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+          "<div class='mn-notification-container-content'>"+ 
+            "<i class='glyphicon glyphicon-" + _getIcon() + "'></i>" + 
+            "<span> <strong>" + _options.title + "</strong> " + _options.message + "</span>" + 
+          "</div>" +
+        "</div>"
       ); 
       return template;
     }
@@ -184,11 +189,11 @@
       var pushInner = function() {
         _self._incCount();
         _self._groups[_options.group].notifs.push(_self._getNotificationElementId());    
-        $(_getTemplate()).appendTo(_self._configs.container);
+        $(_getTemplate()).appendTo("#" + _self._currModuleIndex).hide().fadeIn(300);
         return { id: _self._getNotificationElementId(), group: _options.group };
       }
       //group is not exist yet
-      if (_self._groups[_options.group] == undefined) {
+      if (!_self._groups.hasOwnProperty(_options.group)) {
         _self._createEmptyGroup({ name: _options.group });
         return pushInner();
       //group exists

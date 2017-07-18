@@ -6,8 +6,9 @@
   <meta name="description" content=" ">
   <meta name="Vadim">
   <link rel="stylesheet" href="host-styles.css">
-  <link rel="stylesheet" href="module-notificaton.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="css/module-notificaton.css">
+  <link rel="stylesheet" href="css/glyph.css">
 </head>
 
 <body>
@@ -15,10 +16,9 @@
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
-  <script src="js/bootstrap.min.js"></script>
 
   <script src="script.js"></script>
-  <script src="module-notificaton.js"></script>
+  <script src="js/module-notificaton.js"></script>
 
   <div class="btn-group" role="group" aria-label="...">
     <button type="button" class="btn btn-default" id="add-common-notif">Add "Common" notification</button>
@@ -33,7 +33,15 @@
     <button type="button" class="btn btn-default" id="add-greedy-group">Add "Greedy" Group</button>
     <button type="button" class="btn btn-default" id="add-notif-to-greedy-group">Add Element To "Greedy" Group</button>
     <button type="button" class="btn btn-default" id="remove-greedy-group">Remove "Greedy" Group</button>
-   </div>
+  </div>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" id="add-success-notif">Add "Success" Notification</button>
+    <button type="button" class="btn btn-default" id="add-notice-notif">Add "Notice" Notification</button>
+    <button type="button" class="btn btn-default" id="add-warning-notif">Add "Warning" Notification</button>
+    <button type="button" class="btn btn-default" id="add-error-notif">Add "Error" Notification</button>
+  </div>
+
+  <button type="button" class="btn btn-default" id="add-timeout-notif">Add Notification with Timeout</button>
   <div id="notifications"></div>
   <div id="notifications2"></div>
 

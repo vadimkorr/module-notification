@@ -29,90 +29,7 @@ $(function() {
 	    onNotifsNumberChange: function(number) {
 		   console.info("Number of notifs = " + number);
 		}
-	});
-	
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "",
-	// 	message: "Hey, this is a succes messsage. Keep going! ;)",
-	// 	type: 'success',
-	// 	icon: 'music'
-	// });
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	type: 'success'
-	// });
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "Hello",
-	// 	type: 'notice'
-	// });
-	
-	
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "Hello",
-	// 	type: 'success',
-	// 	group: "test"
-	// });
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "Hello",
-	// 	type: 'success',
-	// 	group: "test"
-	// });
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "Hello",
-	// 	type: 'notice',
-	// 	group: "test"
-	// });
-
-	// mymnconfig.pushNotif({
-		// closeCond: 500,
-		// title: "Hello",
-		// type: 'success'
-	// });
-
-	// mymnconfig.pushNotif({
-		// closeCond: 500,
-		// title: "Hello",
-		// type: 'warning'
-	// });
-
-	// mymnconfig.pushNotif({
-		// closeCond: 500,
-		// title: "Hello",
-		// type: 'error'
-	// });
-	
-	// mymnconfig.createEmptyGroup({
-	//   name: "greedy",
-	//   greedy: true
-	// });
-	
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "GREEDY 1",
-	// 	type: 'warning',
-	// 	group: 'greedy'
-	// });
-
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "GREEDY 2",
-	// 	type: 'warning',
-	// 	group: 'greedy'
-	// });
-
-	// mymnconfig.pushNotif({
-	// 	closeCond: false,
-	// 	title: "GREEDY 3",
-	// 	type: 'warning',
-	// 	group: 'greedy'
-	// });
-	
-	
+	});	
 	
 	$(".title").greenify().on("click", function() {
 		mymnconfig.pushNotif({
@@ -186,7 +103,54 @@ $(function() {
 	$("#remove-greedy-group").on("click", function() {
 		mymnconfig.pullGroupNotifs("greedy");
 	});
-});
-  
-  
+	
+	//<button type="button" class="btn btn-default" id="add-success-notif">Add "Success" Notification</button>
+	$("#add-success-notif").on("click", function() {
+		mymnconfig.pushNotif({
+			closeCond: false,
+			title: "Success",
+			message: "Notification",
+			type: "success"
+		});
+	});
 
+    //<button type="button" class="btn btn-default" id="add-notice-notif">Add "Notice" Notification</button>
+	$("#add-notice-notif").on("click", function() {
+		mymnconfig.pushNotif({
+			closeCond: false,
+			title: "Notice",
+			message: "Notification",
+			type: "notice"
+		});
+	});
+
+    //<button type="button" class="btn btn-default" id="add-warning-notif">Add "Warning" Notification</button>
+	$("#add-warning-notif").on("click", function() {
+		mymnconfig.pushNotif({
+			closeCond: false,
+			title: "Warning",
+			message: "Notification",
+			type: "warning"
+		});
+	});
+
+    //<button type="button" class="btn btn-default" id="add-error-notif">Add "Error" Notification</button>
+	$("#add-error-notif").on("click", function() {
+		mymnconfig.pushNotif({
+			closeCond: false,
+			title: "Error",
+			message: "Notification",
+			type: "error"
+		});
+	});
+
+	//<button type="button" class="btn btn-default" id="add-timeout-notif">Add Notification with Timeout</button>
+	$("#add-timeout-notif").on("click", function() {
+		mymnconfig.pushNotif({
+			closeCond: 2000,
+			title: "Notice",
+			message: "Notification with Timeout",
+			type: "notice"
+		});
+	});
+});
