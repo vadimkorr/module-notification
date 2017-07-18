@@ -12,15 +12,24 @@
     return source;
   }
   
+  function applyArgs(argum, defaults) {
+    if (argum && typeof argum === "object") {
+      return extendDefaults(defaults, argum);
+    } else {
+		return defaults;
+	}
+  }
+  
 
   /* ===== MNConfig ===== */
   this.MNConfig = function() {
     let _defaultConfigs = {
       container: "#notifications",
     }
+	
+	this._configs = applyArgs(arguments[0], _defaultConfigs);
 
 	this._currModuleIndex = (+new Date).toString(16);
-	this._configs = {}
 	this._currNotifIndex = 0;
 	this._groups = {};
 
@@ -36,23 +45,32 @@
     }
 
 	this._pull = function(notif) {
-	  var index = this._groups[notif.group].indexOf(notif.id);
+	  var index = this._groups[notif.group].notifs.indexOf(notif.id);
 
 	  if (index > -1) {
 		//dec index
 		this._decIndex();
 		//pull from UI
 		$(notif.id).remove();//.fadeOut('fast');
-	    this._groups[notif.group].splice(index, 1);
+	    this._groups[notif.group].notifs.splice(index, 1);
+	  }
+	}
+	
+	  this._createEmptyGroup = function() {
+		  let _defaultOptions = {
+			  name: "common",
+			  greedy: false
+		  }
+		  
+		  let _options = applyArgs(arguments[0], _defaultOptions);
+		  
+		  this._groups[_options.name] = {
+			  options: _options,
+			  notifs: []
+		  }
 	  }
 
 
-	}
-
-    if (arguments[0] && typeof arguments[0] === "object") {
-      this._configs = extendDefaults(_defaultConfigs, arguments[0]);
-	  console.log(this._configs);
-    }
   }
   
   this.MNConfig.prototype = {
@@ -63,11 +81,17 @@
   }
 
   this.MNConfig.prototype.pullGroup = function(group) {
-	for (let i = 0; i < this._groups[group].length;) {
-		console.log("LEN = " + this._groups[group].length);
-		let id = this._groups[group][i];
+	for (let i = 0; i < this._groups[group].notifs.length;) {
+		console.log("LEN = " + this._groups[group].notifs.length);
+		let id = this._groups[group].notifs[i];
 		this._pull({id: id, group: group});
 	}
+  }
+  
+
+  
+  this.MNConfig.prototype.createEmptyGroup = function(options) {
+    this._createEmptyGroup(options); 
   }
 
   this.MNConfig.prototype.put = function() {
@@ -80,11 +104,7 @@
 	  group: "common"
     }
 
-    let _options = {}
-
-    if (arguments[0] && typeof arguments[0] === "object") {
-      _options = extendDefaults(defaultOptions, arguments[0]);
-    }
+    let _options = applyArgs(arguments[0], defaultOptions);
 
 	let _self = this;
 	
@@ -123,9 +143,10 @@
       let index = _self._incCounter();
 	  let id = _getNotificationId();
 	  if (_self._groups[_options.group] == undefined) {
-		  _self._groups[_options.group] = [];
+		  _self._createEmptyGroup({ name: _options.group });
+		  //_self._groups[_options.group].notifs = [];
 	  } 
-	  _self._groups[_options.group].push(id);
+	  _self._groups[_options.group].notifs.push(id);
       $(_getTemplate()).appendTo(_self._configs.container);
 	  return { id: id, group: _options.group};
     }
