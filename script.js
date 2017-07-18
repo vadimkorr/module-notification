@@ -5,7 +5,7 @@
 	var index = 0;
 	var container = "#notifications";
 	
-	$.fn.putNotif = function(title, message) {
+	$.fn.pushNotifNotif = function(title, message) {
 		var template = "<p>"+title+"</p><span>" + message + "</span>";
 		
 		$( template ).appendTo( container );
@@ -24,71 +24,101 @@
 
 $(function() {
 	
-	var mymnconfig = new MNConfig({
-		container: "#notifications"
+	var mymnconfig = new MNModule({
+		container: "#notifications",
+	    onNotifsNumberChange: function(number) {
+		   console.info("Number of notifs = " + number);
+		}
 	});
 	
-	mymnconfig.put({
+	mymnconfig.pushNotif({
 		closeCond: false,
-		title: "Hello",
+		title: "",
+		message: "Hey, this is a succes messsage. Keep going! ;)",
+		type: 'success',
+		icon: 'music'
+	});
+	mymnconfig.pushNotif({
+		closeCond: false,
 		type: 'success'
 	});
-	mymnconfig.put({
+	mymnconfig.pushNotif({
 		closeCond: false,
 		title: "Hello",
-		type: 'success'
-	});
-	mymnconfig.put({
-		closeCond: false,
-		title: "Hello",
-		type: 'info'
+		type: 'notice'
 	});
 	
 	
-	mymnconfig.put({
+	mymnconfig.pushNotif({
 		closeCond: false,
 		title: "Hello",
 		type: 'success',
 		group: "test"
 	});
-	mymnconfig.put({
+	mymnconfig.pushNotif({
 		closeCond: false,
 		title: "Hello",
 		type: 'success',
 		group: "test"
 	});
-	mymnconfig.put({
+	mymnconfig.pushNotif({
 		closeCond: false,
 		title: "Hello",
-		type: 'info',
+		type: 'notice',
 		group: "test"
 	});
 
-	mymnconfig.put({
-		closeCond: 500,
-		title: "Hello",
-		type: 'success'
+	// mymnconfig.pushNotif({
+		// closeCond: 500,
+		// title: "Hello",
+		// type: 'success'
+	// });
+
+	// mymnconfig.pushNotif({
+		// closeCond: 500,
+		// title: "Hello",
+		// type: 'warning'
+	// });
+
+	// mymnconfig.pushNotif({
+		// closeCond: 500,
+		// title: "Hello",
+		// type: 'error'
+	// });
+	
+	mymnconfig.createEmptyGroup({
+	  name: "greedy",
+	  greedy: true
+	});
+	
+	mymnconfig.pushNotif({
+		closeCond: false,
+		title: "GREEDY 1",
+		type: 'warning',
+		group: 'greedy'
 	});
 
-	mymnconfig.put({
-		closeCond: 500,
-		title: "Hello",
-		type: 'warning'
+	mymnconfig.pushNotif({
+		closeCond: false,
+		title: "GREEDY 2",
+		type: 'warning',
+		group: 'greedy'
 	});
 
-	mymnconfig.put({
-		closeCond: 500,
-		title: "Hello",
-		type: 'danger'
+	mymnconfig.pushNotif({
+		closeCond: false,
+		title: "GREEDY 3",
+		type: 'warning',
+		group: 'greedy'
 	});
 	
 	
 	
 	$(".title").greenify().on("click", function() {
-		mymnconfig.put({
+		mymnconfig.pushNotif({
 			closeCond: 1000,
 			title: "Hello",
-			type: 'info'
+			type: 'notice'
 		});
 	});
 
