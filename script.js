@@ -4,7 +4,8 @@ $(function() {
 		container: "#notifications",
 	    onNotifsNumberChange: function(number) {
 		   console.info("Number of notifs = " + number);
-		}
+		},
+		direction: "fromTop"
 	});	
 	
 	/* create Notifications */

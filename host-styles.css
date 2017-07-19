@@ -9,6 +9,15 @@
 	border-color: #a8bbff;
     border-width: 2px;
     border-style: solid;
+	
+	/* display: flex; */
+}
+
+#notifications {
+	/* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: flex-end; */
+    /* width: 100%; */
 }
 
 .btn-group {

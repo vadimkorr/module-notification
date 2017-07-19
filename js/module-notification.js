@@ -28,7 +28,8 @@
       container: "#notifications",
       onNotifsNumberChange: function(number) {
         console.info("Number of notifications", number, _defaultConfigs);
-      }
+      },
+	  direction: "fromTop"//"fromBottom"
     }
   
     var _self = this;
@@ -188,8 +189,13 @@
     function _push() {
       var pushInner = function() {
         _self._incCount();
-        _self._groups[_options.group].notifs.push(_self._getNotificationElementId());    
-        $(_getTemplate()).appendTo("#" + _self._currModuleIndex).hide().fadeIn(300);
+        _self._groups[_options.group].notifs.push(_self._getNotificationElementId()); 
+        if (_self._configs.direction == "fromTop") {
+          $(_getTemplate()).appendTo("#" + _self._currModuleIndex).hide().fadeIn(300);
+		} else {
+		  $(_getTemplate()).prependTo("#" + _self._currModuleIndex).hide().fadeIn(300);
+		}		
+        
         return { id: _self._getNotificationElementId(), group: _options.group };
       }
       //group is not exist yet
