@@ -88,7 +88,7 @@
     }
     /* get selector of the close button of the notification element */
     _self._getCloseBtnSelector = function(id) {
-      var selector = id + " > .close-btn";
+      var selector = id + " > .mn-close-btn";
       return selector;
     }
   
@@ -174,8 +174,8 @@
     /* returns filled template */
     function _getTemplate() {
       var template = (
-        "<div role='alert' id='" + _self._getNotificationElementId(true) + "' class='mn-notification-container alert alert-" + _options.type + " alert-dismissible'>" +
-          "<button type='button' class='close-btn close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div role='mn-alert' id='" + _self._getNotificationElementId(true) + "' class='mn-notification-container mn-alert mn-alert-" + _options.type + " mn-alert-dismissible'>" +
+          "<button type='button' class='mn-close-btn mn-close'><span aria-hidden='true'>&times;</span></button>" +
           "<div class='mn-notification-container-content'>"+ 
             "<i class='glyphicon glyphicon-" + _getIcon() + "'></i>" + 
             "<span> <strong>" + _options.title + "</strong> " + _options.message + "</span>" + 
