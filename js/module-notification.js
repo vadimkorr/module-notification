@@ -75,7 +75,6 @@
         //dec index
         _self._decCount();
         //pull from UI
-        //$(notif.id).remove();
         $(notif.id).fadeOut(300, function() { 
           $(notif.id).remove();
         });
@@ -245,4 +244,21 @@
       console.warn("New notification wasn't pushed", _options);
     }
   }
+
+  /**
+   * Pulls all notifications from current module
+   * 
+   * 
+   */
+  this.MNModule.prototype.pullAll = function() {
+    var _self = this;
+    for(var groupName in _self._groups) {
+      for (var i = 0; i < _self._groups[groupName].notifs.length;) {
+        var id = _self._groups[groupName].notifs[i];
+        _self._pull({id: id, group: groupName});
+      } 
+      console.info("Group notifications were removed:", groupName);
+    } 
+  }
+
 })(jQuery);

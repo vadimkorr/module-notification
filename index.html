@@ -22,33 +22,70 @@
   
   <script src="js/module-notification.js"></script>
 
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" id="add-common-notif">Add "Common" notification</button>
-    <button type="button" class="btn btn-default" id="remove-common-group">Remove "Common" Group</button>
-  </div>
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" id="add-test-group">Add "Test" Group</button>
-    <button type="button" class="btn btn-default" id="add-test-notification">Add "Test" Notification</button>
-    <button type="button" class="btn btn-default" id="remove-test-group">Remove "Test" Group</button>
-  </div>
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" id="add-greedy-group">Add "Greedy" Group</button>
-    <button type="button" class="btn btn-default" id="add-notif-to-greedy-group">Add Element To "Greedy" Group</button>
-    <button type="button" class="btn btn-default" id="remove-greedy-group">Remove "Greedy" Group</button>
-  </div>
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-success" id="add-success-notif">Add "Success" Notification</button>
-    <button type="button" class="btn btn-info" id="add-notice-notif">Add "Notice" Notification</button>
-    <button type="button" class="btn btn-warning" id="add-warning-notif">Add "Warning" Notification</button>
-    <button type="button" class="btn btn-danger" id="add-error-notif">Add "Error" Notification</button>
-  </div>
-  <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" id="add-timeout-notif">Add Notification with Timeout</button>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Basic stuff</div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel-content-unit">
+          <p>Notifications of default group</p>
+          <button type="button" class="btn btn-default" id="add-common-notif">Add "Common" notification</button>
+          <button type="button" class="btn btn-default" id="remove-common-group">Remove "Common" Group</button>
+          <p>.. and of custom group (i.e. "test" group)</p>
+          <button type="button" class="btn btn-default" id="add-test-group">Add "Test" Group</button>
+          <button type="button" class="btn btn-default" id="add-test-notification">Add "Test" Notification</button>
+          <button type="button" class="btn btn-default" id="remove-test-group">Remove "Test" Group</button>
+          <p>"greedy" group notifications</p>
+          <button type="button" class="btn btn-default" id="add-greedy-group">Add "Greedy" Group</button>
+          <button type="button" class="btn btn-default" id="add-notif-to-greedy-group">Add Element To "Greedy" Group</button>
+          <button type="button" class="btn btn-default" id="remove-greedy-group">Remove "Greedy" Group</button>
+          <p>Notifications with different types</p>
+          <button type="button" class="btn btn-success" id="add-success-notif">Add "Success" Notification</button>
+          <button type="button" class="btn btn-info" id="add-notice-notif">Add "Notice" Notification</button>
+          <button type="button" class="btn btn-warning" id="add-warning-notif">Add "Warning" Notification</button>
+          <button type="button" class="btn btn-danger" id="add-error-notif">Add "Error" Notification</button>
+          <p>Notifications with different timeouts</p>
+          <button type="button" class="btn btn-default" id="add-timeout-notif">Add Notification with Timeout</button>
+          <p>Removing notification</p>
+          <button type="button" class="btn btn-default" id="remove-all">Remove all notifications</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel-content-unit">
+          <div class="notifications-outer-container">
+            <div id="notifications"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="notifications-outer-container">
-    <div id="notifications"></div>
+ <div class="panel panel-primary">
+    <div class="panel-heading">Direction of notification occurances</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          <p>Let notifications occur from top</p>
+          <button type="button" class="btn btn-success" id="add-success-notif-from-top-dir">Add "Success" Notification</button>
+          <button type="button" class="btn btn-default" id="add-timeout-notif-from-top-dir">Add Notification with Timeout</button>
+          <div class="notifications-outer-container">
+            <div id="notifications-from-top"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          <p>Let notifications occur from bottom</p>
+          <button type="button" class="btn btn-success" id="add-success-notif-from-bottom-dir">Add "Success" Notification</button>
+          <button type="button" class="btn btn-default" id="add-timeout-notif-from-bottom-dir">Add Notification with Timeout</button>
+          <div class="notifications-outer-container notifications-outer-container-from-bottom">
+            <div id="notifications-from-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+
 
 </body>
 </html>

@@ -132,4 +132,64 @@ $(function() {
 			type: "notice"
 		});
 	});
+
+	//<button type="button" class="btn btn-default" id="remove-all">Remove all notifications</button>
+	$("#remove-all").on("click", function() {
+		myMNModule.pullAll();
+	});
+	
+	
+	/* DEMONSTRAING THE DIRECTIONS */
+	var dirFromTopMNModule = new MNModule({
+		container: "#notifications-from-top",
+	    onNotifsNumberChange: function(number) {
+		   console.info("Number of notifs = " + number);
+		},
+		direction: "fromTop"
+	});	
+
+	//<button type="button" class="btn btn-success" id="add-success-notif-from-top-dir">Add "Success" Notification</button>
+	$("#add-success-notif-from-top-dir").on("click", function() {
+		dirFromTopMNModule.pushNotif({
+			closeCond: false,
+			message: "Success",
+			type: "success"
+		});
+	});
+
+	//<button type="button" class="btn btn-default" id="add-timeout-notif-from-top-dir">Add Notification with Timeout</button>
+    $("#add-timeout-notif-from-top-dir").on("click", function() {
+		dirFromTopMNModule.pushNotif({
+			closeCond: 2000,
+			message: "Notice",
+			type: "notice"
+		});
+	}); 
+
+	var dirFromBottomMNModule = new MNModule({
+		container: "#notifications-from-bottom",
+	    onNotifsNumberChange: function(number) {
+		   console.info("Number of notifs = " + number);
+		},
+		direction: "fromBottom"
+	});
+	
+	//<button type="button" class="btn btn-success" id="add-success-notif-from-bottom-dir">Add "Success" Notification</button>
+	$("#add-success-notif-from-bottom-dir").on("click", function() {
+		dirFromBottomMNModule.pushNotif({
+			closeCond: false,
+			message: "Success",
+			type: "success"
+		});
+	});
+	
+	//<button type="button" class="btn btn-default" id="add-timeout-notif-from-bottom-dir">Add Notification with Timeout</button>
+    $("#add-timeout-notif-from-bottom-dir").on("click", function() {
+		dirFromBottomMNModule.pushNotif({
+			closeCond: 2000,
+			message: "Notice",
+			type: "notice"
+		});
+	});
+
 });
