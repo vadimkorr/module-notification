@@ -95,12 +95,12 @@ $(function() {
 
     //<button type="button" class="btn btn-default" id="add-notice-notif">Add "Notice" Notification</button>
 	$("#add-notice-notif").on("click", function() {
-		myMNModule.pushNotif({
+		console.log(myMNModule.pushNotif({
 			closeCond: false,
 			title: "Notice",
 			message: "Notification",
 			type: "notice"
-		});
+		}));
 	});
 
     //<button type="button" class="btn btn-default" id="add-warning-notif">Add "Warning" Notification</button>
@@ -133,11 +133,28 @@ $(function() {
 		});
 	});
 
+    /* <p>Removing notification</p> */
+
 	//<button type="button" class="btn btn-default" id="remove-all">Remove all notifications</button>
 	$("#remove-all").on("click", function() {
 		myMNModule.pullAll();
 	});
 	
+	//<button type="button" class="btn btn-info" id="add-notice-notif-to-remove">Add Notification to remove</button>
+	var notifToRemove;
+	$("#add-notice-notif-to-remove").on("click", function() {
+		notifToRemove = myMNModule.pushNotif({
+			closeCond: false,
+			title: "Add notification",
+			message: "to remove it",
+			type: "notice"
+		});
+	});
+
+	//<button type="button" class="btn btn-default" id="remove-specific-notif">Remove specific notification</button>
+	$("#remove-specific-notif").on("click", function() {
+		notifToRemove.pull();
+	});
 	
 	/* DEMONSTRAING THE DIRECTIONS */
 	var dirFromTopMNModule = new MNModule({
