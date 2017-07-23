@@ -1,0 +1,8 @@
+npm install -g browserify
+npm install -g watchify	
+npm install -g parcelify
+npm install -g jsdoc
+
+parcelify entry.js -c dist/module-notification.css
+browserify entry.js --debug > dist/module-notification.js
+jsdoc js/module-notification.js
