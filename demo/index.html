@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content=" ">
+  <meta name="Vadim">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/demo-styles.css">
+  
+  <!-- reference style -->
+  <link rel="stylesheet" href="../dist/module-notification.css">
+</head>
+
+<body>
+
+  <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+  <script src="js/demo-script.js"></script>
+  
+  <!-- reference script -->
+  <script src="../dist/module-notification.js"></script>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">Basic stuff</div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel-content-unit">
+          <p>Notifications of default group</p>
+          <button type="button" class="btn btn-default" onclick="addCommonNotif()">Add "Common" notification</button>
+          <button type="button" class="btn btn-default" onclick="removeCommonGroup()">Remove "Common" Group</button>
+          <p>.. and of custom group (i.e. "test" group)</p>
+          <button type="button" class="btn btn-default" onclick="addTestGroup()">Add "Test" Group</button>
+          <button type="button" class="btn btn-default" onclick="addTestNotification()">Add "Test" Notification</button>
+          <button type="button" class="btn btn-default" onclick="removeTestGroup()">Remove "Test" Group</button>
+          <p>"greedy" group notifications</p>
+          <button type="button" class="btn btn-default" onclick="addGreedyGroup()">Add "Greedy" Group</button>
+          <button type="button" class="btn btn-default" onclick="addNotifToGreedyGroup()">Add Element To "Greedy" Group</button>
+          <button type="button" class="btn btn-default" onclick="removeGreedyGroup()">Remove "Greedy" Group</button>
+          <p>Notifications with different types</p>
+          <button type="button" class="btn btn-success" onclick="addSuccessNotif()">Add "Success" Notification</button>
+          <button type="button" class="btn btn-info" onclick="addNoticeNotif()">Add "Notice" Notification</button>
+          <button type="button" class="btn btn-warning" onclick="addWarningNotif()">Add "Warning" Notification</button>
+          <button type="button" class="btn btn-danger" onclick="addErrorNotif()">Add "Error" Notification</button>
+          <p>Notifications with different timeouts</p>
+          <button type="button" class="btn btn-default" onclick="addTimeoutNotif()">Add Notification with Timeout</button>
+          <p>Removing notification</p>
+          <button type="button" class="btn btn-default" onclick="removeAll()">Remove all notifications</button>
+          <button type="button" class="btn btn-info" onclick="addNoticeNotifToRemove()">Add Notification to remove</button>
+          <button type="button" class="btn btn-default" onclick="removeSpecificNotif()">Remove specific notification</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel-content-unit">
+          <div class="notifications-outer-container">
+            <div id="notifications"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="panel panel-primary">
+    <div class="panel-heading">Direction of notification occurances</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          <p>Let notifications occur from top</p>
+          <button type="button" class="btn btn-success" onclick="addSuccessNotifFromTopDir()">Add "Success" Notification</button>
+          <button type="button" class="btn btn-default" onclick="addTimeoutNotifFromTopDir()">Add Notification with Timeout</button>
+          <div class="notifications-outer-container">
+            <div id="notifications-from-top"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          <p>Let notifications occur from bottom</p>
+          <button type="button" class="btn btn-success" onclick="addSuccessNotifFromBottomDir()">Add "Success" Notification</button>
+          <button type="button" class="btn btn-default" onclick="addTimeoutNotifFromBottomDir()">Add Notification with Timeout</button>
+          <div class="notifications-outer-container notifications-outer-container-from-bottom">
+            <div id="notifications-from-bottom"></div>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>

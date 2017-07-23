@@ -1,0 +1,38 @@
+{
+  "name": "module-notification",
+  "version": "1.0.0",
+  "description": "Plugin for displaying notifications inside specified html element containers (modules)",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadimkorr/module-notification.git"
+  },
+  "keywords": [
+    "notifications",
+    "jQuery",
+    "modules"
+  ],
+  "author": "Vadim Korr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vadimkorr/module-notification/issues"
+  },
+  "homepage": "https://github.com/vadimkorr/module-notification#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.6.4",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "browser": {
+    "module-notification": "./js/module-notification.js"
+  },
+  "style": [
+    "./css/glyph.css",
+    "./css/module-notification.css"
+  ]
+}

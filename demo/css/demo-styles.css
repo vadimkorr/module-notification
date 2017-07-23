@@ -13,10 +13,6 @@ body, html {
     border-style: solid;
 }
 
-#notifications {
-
-}
-
 .notifications-outer-container-from-bottom {
     display: flex;
 }
