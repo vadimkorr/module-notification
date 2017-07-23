@@ -1,6 +1,6 @@
 {
   "name": "module-notification",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Plugin for displaying notifications inside specified html element containers (modules)",
   "main": "entry.js",
   "scripts": {
