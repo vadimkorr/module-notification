@@ -4,7 +4,7 @@
   "description": "Plugin for displaying notifications inside specified html element containers (modules)",
   "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start spec/karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,11 @@
   },
   "homepage": "https://github.com/vadimkorr/module-notification#readme",
   "devDependencies": {
-    "jasmine-core": "^2.6.4",
-    "karma-jasmine": "^1.1.0"
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4"
   },
   "dependencies": {
     "jquery": "^3.2.1"
