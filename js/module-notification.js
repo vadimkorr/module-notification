@@ -91,13 +91,16 @@
     /**
      * Creates an empty group
      * @param {Object} groupOptions - Options of the group
+     * @returns Boolean value of result
      */
     createEmptyGroup: function(groupOptions) {
 	    if (this.isGroupExist(groupOptions.name)) {
         console.warn("Group with name already exist:", groupOptions.name);
-	    } else {
+        return false;
+      } else {
         this.groups[groupOptions.name] = new MNGroup(groupOptions)
         console.info("New group was created", groupOptions.name);
+        return true;
       }
     },
     /**
@@ -128,6 +131,7 @@
     /**
      * Pushes the new notification
      * @param {Object} options - Options of the notification
+     * @returns {Object} notif instance
      */
     pushNotif: function(notifOptions) {
       var _self = this;
