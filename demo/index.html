@@ -18,11 +18,11 @@
   <script src="js/demo-script.js"></script>
   
   <!-- Reference script -->
-  <script src="../dist/module-notification.js"></script>
+  <!-- <script src="../dist/module-notification.js"></script> -->
 
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- If you have jQuery installed use instead -->
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="../js/module-notification.js"></script> -->
+  <script src="../js/module-notification.js"></script>
 
   <div class="panel panel-primary">
     <div class="panel-heading">Basic stuff</div>
@@ -84,6 +84,34 @@
             <div id="notifications-from-bottom"></div>
           </div>
         </div>  
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Customization</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          <button type="button" class="btn btn-default" onclick="pushCustomNotif()">Push customized notification</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel-content-unit">
+          
+          <div class="cmd">
+            <div class="cmd-tool-panel">
+              <span>cmd</span>
+              <div class="cmd-tool-panel-btns">
+                <span onclick="pullCustomizedNotifs()" class="cmd-pull-all-btn">[X]</span>
+              </div>
+            </div>
+            <div class="cmd-canvas">
+              <div id="custom-notifications-container"></div>
+              <span>></span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

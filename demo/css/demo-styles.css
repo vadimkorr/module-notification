@@ -41,3 +41,42 @@ button {
 p {
     margin: 10px;
 }
+
+/* customized demo */
+
+.cmd {
+  background-color: black;
+  min-height: 250px;
+  border-color: #7c7c7c;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.custom-close-btn {
+  cursor: pointer;
+}
+
+.cmd-tool-panel {
+  background-color: white;
+  color: black;
+  padding: 0 5px;
+}
+
+.cmd-tool-panel-btns {
+  display: inline-block;
+  float: right;
+}
+
+.cmd-pull-all-btn {
+  cursor: pointer;
+}
+
+.cmd-canvas {
+  color: green;
+  display: inline-block;
+  padding: 5px;
+}
+
+.custom-notification {
+  margin: 3px 0;
+}
