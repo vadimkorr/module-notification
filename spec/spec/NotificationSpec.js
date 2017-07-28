@@ -17,21 +17,24 @@ describe("Notification", function() {
       icon: "music",
       closeCond: 5000,
       type: "notice",
-      group: "common"
+      group: "common",
+      template: () => { return "<div></div>" }
     }, {
       title: "title2",
       message: "message2",
       icon: "music",
       closeCond: 6000,
       type: "success",
-      group: "common"
+      group: "common",
+      template: () => { return "<div></div>" }
     }, {
       title: "title3",
       message: "message3",
       icon: "ok-sign",
       closeCond: 7000,
       type: "success",
-      group: "common"
+      group: "common",
+      template: () => { return "<div></div>" }
     }];
 
     for (var i=0; i<testNotifsOptions.length; i++) {
