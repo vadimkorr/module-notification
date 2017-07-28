@@ -1,14 +1,23 @@
-npm install -g browserify
-npm install -g watchify	
-npm install -g parcelify
-npm install -g jsdoc
+//install stuff globally
+npm install -g browserify watchify parcelify jsdoc
 
+//merge sources
 parcelify entry.js -c dist/module-notification.css
 browserify entry.js --debug > dist/module-notification.js
+
+//generate docs
 jsdoc js/module-notification.js
 
+//amend pushed
 $ git commit --amend -m "Updated readme file"
 $ git push --force origin master
 
+//squash pushed (for last 4 commits including current)
+git checkout awesome_branch
+git reset --soft HEAD~4
+git commit
+git push --force origin awesome_branch
+
+//push to npm
 npm version patch // minor, major
 npm publish

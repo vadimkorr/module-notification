@@ -10,8 +10,8 @@ describe("Module", function() {
     }
     var mnModule = new MNModule(testModuleOptions);
     //check if options were applied succesfully
-    expect(mnModule.moduleOptions).toEqual(testModuleOptions);
+    expect(mnModule.options).toEqual(testModuleOptions);
     //check if onNotifsNumberChange works correct
-    expect(mnModule.moduleOptions.onNotifsNumberChange()).toEqual(testValue);	
+    expect(mnModule.options.onNotifsNumberChange()).toEqual(testValue);	
   });
 })

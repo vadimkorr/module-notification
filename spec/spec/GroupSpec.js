@@ -57,7 +57,7 @@ describe("Group", function() {
       //check result
       expect(result).toBeTruthy();
       //check if options were applied
-      expect(mnModule.groups[testGroupOptions.name].groupOptions).toEqual(testGroupOptions);
+      expect(mnModule.groups[testGroupOptions.name].options).toEqual(testGroupOptions);
       //check the amount of groups
       expect(Object.keys(mnModule.groups).length).toEqual(i + 1);
     }
