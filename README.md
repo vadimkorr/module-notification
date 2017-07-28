@@ -9,7 +9,7 @@
 [![npm](https://img.shields.io/npm/l/module-notification.svg)](https://www.npmjs.com/package/module-notification)
 <br />
 #### Plugin for displaying Notifications inside specified html element containers (Modules). You can create multiple independent Modules which own their set of Notifications.
-You can check out the demo playground. Just open **index.html** from **demo** folder. The playground hosted on the [GitHub Pages](https://pages.github.com/) coming soon!)
+You can check out the [demo playground](https://github.com/vadimkorr/module-notification/tree/master/demo). Just open **index.html** from **demo** folder. The playground hosted on the [GitHub Pages](https://pages.github.com/) coming soon!)
 <br />
 <br />
 <img src="https://content.screencast.com/users/mintday/folders/Jing/media/4ca2e283-8194-46aa-a3d8-5004b2211644/2017-07-24_2108.png" alt="Notifications Preview" width="450px" />
@@ -18,6 +18,7 @@ You can check out the demo playground. Just open **index.html** from **demo** fo
 1. <a href="#installation">Installation</a>
 1. <a href="#referencing">Referencing</a>
 1. <a href="#usage">Usage</a>
+1. <a href="#customization">Customization</a>
 
 ## <a name="installation">Installation</a>
 ```
@@ -118,3 +119,40 @@ myMNModule.pullGroupNotifs("test");
 ```js
 myMNModule.pullAll();
 ```
+
+## <a name="customization">Customization</a>
+
+To add customized notidfications you have to:
+
+1. Specify function which will return custom template, e.g.
+```js
+var customTemplateFunc = function(title, message) {
+  return (
+    "<div class='custom-notification'>" +
+      "<span>" + title + "</span> " + 
+      "<span>" + message + "</span> " +
+      "<span class='mn-close-btn custom-close-btn'>[x]</span>" + 
+    "</div>"
+  );
+}
+```
+2. And assign this function to **template** field:
+```js
+customizedNotifsModule.pushNotif({
+  closeCond: false,
+  title: "Hey",
+  message: "I'm a custom notification",
+  template: customTemplateFunc
+});
+ ```
+
+In order to make the notification closable assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
+```js
+"<span class='mn-close-btn'>[x]</span>"
+```
+We prepared small but pretty awesome example of customized notifications, hope you will like it
+<img src="http://g.recordit.co/z1yhU4dDz2.gif" alt="Customized notifications preview" width="450px" />
+
+
+***
+For more examples see our [demo](https://github.com/vadimkorr/module-notification/tree/master/demo)

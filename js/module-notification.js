@@ -138,10 +138,11 @@
       var _defaultNotifOptions = {
         title: "",
         message: "",
-        icon: undefined,
-        closeCond: 5000,//ms
-        type: "notice",//"notice", "warning", "error", "success"
+        closeCond: 5000,//ms   
         group: "common",
+        template: undefined,//function(title, message) { return "<span>" + title + "</span>"; }
+        icon: undefined,
+        type: "notice",//"notice", "warning", "error", "success"
       }
       var _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
       
@@ -264,21 +265,37 @@
         return elId; 
       })();
       
-      var _getTemplate = function() {
+      var _getDefaultTemplate = function(title, message, type, icon) {
         var template = (
-          "<div role='mn-alert' id='" + _self.notificationElementId + "' class='mn-notification-container mn-alert mn-alert-" + _self.options.type + " mn-alert-dismissible'>" +
+          "<div role='mn-alert' id='" + _self.notificationElementId + "' class='mn-notification-container mn-alert mn-alert-" + type + " mn-alert-dismissible'>" +
             "<button type='button' class='mn-close-btn mn-close'><span aria-hidden='true'>&times;</span></button>" +
             "<div class='mn-notification-container-content'>"+ 
-              "<i class='glyphicon glyphicon-" + _self.options.icon + "'></i>" + 
-              "<span> <strong>" + _self.options.title + "</strong> " + _self.options.message + "</span>" + 
+              "<i class='glyphicon glyphicon-" + icon + "'></i>" + 
+              "<span> <strong>" + title + "</strong> " + message + "</span>" + 
             "</div>" +
           "</div>"
         ); 
         return template;
       }
+
+      var _getCustomTemplate = function(title, message) {
+        var template = (
+          "<div id='" + _self.notificationElementId + "'>" +
+            _self.options.template(title, message) + 
+          "</div>"
+        );
+        return template;
+      }
+
+      var _getTemplate = function() {
+        var template = typeof _self.options.template == "function" 
+          ? _getCustomTemplate(_self.options.title, _self.options.message)
+          : _getDefaultTemplate(_self.options.title, _self.options.message, _self.options.type, _self.options.icon);
+        return template;
+      }
       
       var _getCloseBtnSelector = function() {
-        var selector = "#" + _self.notificationElementId + " > .mn-close-btn";
+        var selector = "#" + _self.notificationElementId + " .mn-close-btn";
         return selector;
       };
 
