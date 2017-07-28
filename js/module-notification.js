@@ -27,7 +27,7 @@
       name: "common",
       greedy: false
     }
-    this.groupOptions = applyArgs(groupOptions, _defaultOptions);
+    this.options = applyArgs(groupOptions, _defaultOptions);
     this.notifs = [];
   }
 
@@ -66,7 +66,7 @@
       onNotifsNumberChange: (number) => { console.info("Number of notifications", number); },
 	    direction: "fromTop"//"fromTop", "fromBottom"
     }
-    this.moduleOptions = applyArgs(moduleOptions, _defaultModuleOptions);
+    this.options = applyArgs(moduleOptions, _defaultModuleOptions);
     
     this.numberOfNotifs = 0;
     this.groups = {};
@@ -75,8 +75,8 @@
     })();
 
     //append module container to the specified container
-    $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(this.moduleOptions.container);
-	  console.info("New notification module was registered", this.id, this.moduleOptions);
+    $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(this.options.container);
+	  console.info("New notification module was registered", this.id, this.options);
   }
 
   this.MNModule.prototype = {
@@ -163,7 +163,7 @@
         })();
         var additionalOptions = {
           moduleId: _self.id,
-          direction: _self.moduleOptions.direction,
+          direction: _self.options.direction,
           onBeforeRemove: _onBeforeRemove
         }
         var notif = new MNNotification(notifOptions);
@@ -180,7 +180,7 @@
       //group exists
       } else {
         //group is greedy
-        if (_self.groups[_notifOptions.group].groupOptions.greedy) {
+        if (_self.groups[_notifOptions.group].options.greedy) {
           //greedy group already has a member
           if (_self.groups[_notifOptions.group].notifs.length >= 1) {
             console.warn("Greedy group " + _notifOptions.group + " already has a member");
@@ -208,17 +208,17 @@
      * @param {Number} number - current number of notifications
      */
     callOnNotifsNumberChange(number) {
-      if (typeof this.moduleOptions.onNotifsNumberChange === "function") {
-        this.moduleOptions.onNotifsNumberChange(number);    
+      if (typeof this.options.onNotifsNumberChange === "function") {
+        this.options.onNotifsNumberChange(number);    
       }
     }
   }
 
   /**
    * @constructs MNNotification
-   * @param {Object} options - options of the new notification
+   * @param {Object} notifOptions - options of the new notification
    */
-  var MNNotification = function(options) {    
+  var MNNotification = function(notifOptions) {    
     var _self = this;
     function _getIcon() {
       var icons = {
@@ -227,14 +227,14 @@
         "warning": "warning-sign",
         "error": "remove"
       }
-      return ((options.icon == undefined) ? icons[options.type] : options.icon);
+      return ((notifOptions.icon == undefined) ? icons[notifOptions.type] : notifOptions.icon);
     }
 
     this.id = (() => {
       return (+new Date).toString(16);
     })();
     this.onBeforeRemove = () => {};
-    this.options = options;
+    this.options = notifOptions;
     this.options.icon = _getIcon();
     this.notificationElementId;
   }
