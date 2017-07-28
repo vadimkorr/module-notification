@@ -21,3 +21,7 @@ git push --force origin awesome_branch
 //push to npm
 npm version patch // minor, major
 npm publish
+
+//merge --no-ff
+git merge awesome_branch --no-ff
+

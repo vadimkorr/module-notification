@@ -63,7 +63,7 @@
   this.MNModule = function(moduleOptions) {
     var _defaultModuleOptions = {
       container: "#notifications",
-      onNotifsNumberChange: (number) => { console.info("Number of notifications", number); },
+      onNotifsNumberChange: undefined,//e.g. (number) => { console.info("Number of notifications", number); },
 	    direction: "fromTop"//"fromTop", "fromBottom"
     }
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
@@ -180,19 +180,11 @@
         _pushResult = _pushInner(_notifOptions);
       //group exists
       } else {
-        //group is greedy
-        if (_self.groups[_notifOptions.group].options.greedy) {
-          //greedy group already has a member
-          if (_self.groups[_notifOptions.group].notifs.length >= 1) {
-            console.warn("Greedy group " + _notifOptions.group + " already has a member");
-            _pushResult = null;      
-          //greedy group is empty
-          } else {
-            _pushResult = _pushInner(_notifOptions);
-          }
-        //group is not greedy
-        } else {
+        //group is not not greedy or is empty
+        if (!_self.groups[_notifOptions.group].options.greedy || _self.groups[_notifOptions.group].notifs.length < 1) {
           _pushResult = _pushInner(_notifOptions);
+        } else {
+          _pushResult = null;
         }
       }
 
