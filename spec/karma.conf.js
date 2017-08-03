@@ -7,16 +7,17 @@ module.exports = function(config) {
       basePath: '',
  
       // plugins starting with karma- are autoloaded
-      plugins: ['karma-chrome-launcher', 'karma-jasmine'],
+      plugins: ['karma-chrome-launcher', 'karma-jasmine', 'karma-browserify'],
  
       // frameworks to use
       // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-      frameworks: ['jasmine'],
- 
+      frameworks: ['browserify', 'jasmine'],
+
       // list of files / patterns to load in the browser
       files: [
+        '../node_modules/cuid/dist/browser-cuid.js',
         '../node_modules/jquery/dist/jquery.js',
-        '../js/module-notification.js',
+        '../src/js/module-notification.js',
         'spec/*.js'
       ],
  
@@ -26,7 +27,8 @@ module.exports = function(config) {
  
       // preprocess matching files before serving them to the browser
       // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-      preprocessors: {
+      preprocessors: {        
+        'spec/*.js': ['browserify']
       },
  
       // test results reporter to use

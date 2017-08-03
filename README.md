@@ -122,9 +122,14 @@ myMNModule.pullAll();
 
 ## <a name="customization">Customization</a>
 
+### Steps
 To add customized notidfications you have to:
 
-1. Specify function which will return custom template, e.g.
+<ol start="1">
+  <li>
+
+Specify function which will return custom template, e.g.
+
 ```js
 var customTemplateFunc = function(title, message) {
   return (
@@ -136,7 +141,11 @@ var customTemplateFunc = function(title, message) {
   );
 }
 ```
-2. And assign this function to **template** field:
+  </li>
+  <li>
+
+And assign this function to **template** field:
+
 ```js
 customizedNotifsModule.pushNotif({
   closeCond: false,
@@ -144,15 +153,17 @@ customizedNotifsModule.pushNotif({
   message: "I'm a custom notification",
   template: customTemplateFunc
 });
- ```
+```
+  </li>
+</ol>
 
-In order to make the notification closable assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
+In order to make the notification closable by user click assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
 ```js
 "<span class='mn-close-btn'>[x]</span>"
 ```
+
+### Example
 We prepared small but pretty awesome example of customized notifications, hope you will like it
 <img src="http://g.recordit.co/z1yhU4dDz2.gif" alt="Customized notifications preview" width="450px" />
-
-
 ***
 For more examples see our [demo](https://github.com/vadimkorr/module-notification/tree/master/demo)

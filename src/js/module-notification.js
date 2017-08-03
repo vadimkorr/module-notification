@@ -67,12 +67,10 @@
 	    direction: "fromTop"//"fromTop", "fromBottom"
     }
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
-    
+
     this.numberOfNotifs = 0;
     this.groups = {};
-    this.id = (() => {
-      return (+new Date).toString(16);
-    })();
+    this.id = cuid();
 
     //append module container to the specified container
     $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(this.options.container);
@@ -223,13 +221,10 @@
       return ((notifOptions.icon == undefined) ? icons[notifOptions.type] : notifOptions.icon);
     }
 
-    this.id = (() => {
-      return (+new Date).toString(16);
-    })();
+    this.id = cuid();
     this.onBeforeRemove = () => {};
     this.options = notifOptions;
     this.options.icon = _getIcon();
-    this.notificationElementId;
   }
 
   MNNotification.prototype = {
@@ -240,8 +235,8 @@
       var _self = this;
       if (typeof _self.onBeforeRemove === "function") {
         _self.onBeforeRemove(_self);   
-        $("#" + _self.notificationElementId).fadeOut(300, function() { 
-          $("#" + _self.notificationElementId).remove();
+        $("#" + _self.id).fadeOut(300, function() { 
+          $("#" + _self.id).remove();
         });
       }
     },
@@ -252,14 +247,10 @@
     appendToContainer: function(additionalOptions) {
       var _self = this;
       this.onBeforeRemove = additionalOptions.onBeforeRemove;
-      this.notificationElementId = (function getNotificationElementId() {
-        var elId = "mn-notification-" + additionalOptions.moduleId + "-" + _self.id;
-        return elId; 
-      })();
       
       var _getDefaultTemplate = function(title, message, type, icon) {
         var template = (
-          "<div role='mn-alert' id='" + _self.notificationElementId + "' class='mn-notification-container mn-alert mn-alert-" + type + " mn-alert-dismissible'>" +
+          "<div role='mn-alert' id='" + _self.id + "' class='mn-notification-container mn-alert mn-alert-" + type + " mn-alert-dismissible'>" +
             "<button type='button' class='mn-close-btn mn-close'><span aria-hidden='true'>&times;</span></button>" +
             "<div class='mn-notification-container-content'>"+ 
               "<i class='glyphicon glyphicon-" + icon + "'></i>" + 
@@ -272,7 +263,7 @@
 
       var _getCustomTemplate = function(title, message) {
         var template = (
-          "<div id='" + _self.notificationElementId + "'>" +
+          "<div id='" + _self.id + "'>" +
             _self.options.template(title, message) + 
           "</div>"
         );
@@ -287,7 +278,7 @@
       }
       
       var _getCloseBtnSelector = function() {
-        var selector = "#" + _self.notificationElementId + " .mn-close-btn";
+        var selector = "#" + _self.id + " .mn-close-btn";
         return selector;
       };
 

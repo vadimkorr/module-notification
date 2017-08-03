@@ -24,4 +24,3 @@ npm publish
 
 //merge --no-ff
 git merge awesome_branch --no-ff
-

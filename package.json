@@ -23,17 +23,21 @@
   },
   "homepage": "https://github.com/vadimkorr/module-notification#readme",
   "devDependencies": {
+    "browserify": "^14.4.0",
     "karma": "^1.7.0",
+    "karma-browserify": "^5.1.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4"
+    "karma-phantomjs-launcher": "^1.0.4",
+    "watchify": "^3.9.0"
   },
   "dependencies": {
+    "cuid": "^1.3.8",
     "jquery": "^3.2.1"
   },
   "browser": {
-    "module-notification": "./js/module-notification.js"
+    "module-notification": "./src/js/module-notification.js"
   },
   "style": [
     "./css/glyph.css",
