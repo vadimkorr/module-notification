@@ -158,5 +158,6 @@ In order to make the notification closable by user click assign class `.mn-close
 We prepared small but pretty awesome example of customized notifications, hope you will like it
 
 <img src="http://g.recordit.co/z1yhU4dDz2.gif" alt="Customized notifications preview" width="450px" />
+
 ***
 For more examples see our [demo](https://github.com/vadimkorr/module-notification/tree/master/demo)
