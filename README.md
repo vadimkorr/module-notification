@@ -49,14 +49,6 @@ define(
 </html>
 ```
 
-*** 
-If you have [jQuery](https://jquery.com/) installed use **module-notification.js** from **js** folder, e.g.
-```html
-<!-- reference script -->
-<script src="./node_modules/module-notification/js/module-notification.js"></script>
-```
-
-
 ## <a name="usage">Usage</a>
 ### Create html element where notifications will be pushed
 ```html
@@ -164,6 +156,7 @@ In order to make the notification closable by user click assign class `.mn-close
 
 ### Example
 We prepared small but pretty awesome example of customized notifications, hope you will like it
+
 <img src="http://g.recordit.co/z1yhU4dDz2.gif" alt="Customized notifications preview" width="450px" />
 ***
 For more examples see our [demo](https://github.com/vadimkorr/module-notification/tree/master/demo)
