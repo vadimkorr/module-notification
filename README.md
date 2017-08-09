@@ -24,6 +24,7 @@ You can check out the [demo playground](https://github.com/vadimkorr/module-noti
 ```
 npm install module-notification --save
 ```
+*needs jQuery to be installed
 
 ## <a name="referencing">Referencing</a>
 ### requirejs

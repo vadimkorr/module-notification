@@ -61,12 +61,12 @@ function addSuccessNotif() {
 }
 
 function addNoticeNotif() {
-  console.log(myMNModule.pushNotif({
+  myMNModule.pushNotif({
     closeCond: false,
     title: "Notice",
     message: "Notification",
     type: "notice"
-  }));
+  });
 }
 
 function addWarningNotif() {
@@ -186,7 +186,7 @@ document.onreadystatechange = () => {
     myMNModule = new MNModule({
       container: "#notifications",
       onNotifsNumberChange: function(number) {
-        console.info("Number of notifs = " + number);
+        console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromTop"
     });  
@@ -194,7 +194,7 @@ document.onreadystatechange = () => {
     dirFromTopMNModule = new MNModule({
       container: "#notifications-from-top",
       onNotifsNumberChange: function(number) {
-        console.info("Number of notifs = " + number);
+        console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromTop"
     });
@@ -202,7 +202,7 @@ document.onreadystatechange = () => {
     dirFromBottomMNModule = new MNModule({
       container: "#notifications-from-bottom",
       onNotifsNumberChange: function(number) {
-        console.info("Number of notifs = " + number);
+        console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromBottom"
     });

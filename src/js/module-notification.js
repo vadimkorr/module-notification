@@ -63,7 +63,7 @@
   this.MNModule = function(moduleOptions) {
     var _defaultModuleOptions = {
       container: "#notifications",
-      onNotifsNumberChange: undefined,//e.g. (number) => { console.info("Number of notifications", number); },
+      onNotifsNumberChange: undefined,//e.g. (number) => { console.debug("Number of notifications", number); },
 	    direction: "fromTop"//"fromTop", "fromBottom"
     }
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
@@ -74,7 +74,7 @@
 
     //append module container to the specified container
     $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(this.options.container);
-	  console.info("New notification module was registered", this.id, this.options);
+	  console.debug("New notification module was registered", this.id, this.options);
   }
 
   this.MNModule.prototype = {
@@ -93,11 +93,11 @@
      */
     createEmptyGroup: function(groupOptions) {
 	    if (this.isGroupExist(groupOptions.name)) {
-        console.warn("Group with name already exist:", groupOptions.name);
+        console.debug("Group with name already exist:", groupOptions.name);
         return false;
       } else {
         this.groups[groupOptions.name] = new MNGroup(groupOptions)
-        console.info("New group was created", groupOptions.name);
+        console.debug("New group was created", groupOptions.name);
         return true;
       }
     },
@@ -110,9 +110,9 @@
         for (var i = 0; i < this.groups[groupName].notifs.length;) {
           this.groups[groupName].notifs[i].pull();
         } 
-        console.info("Group notifications were removed:", groupName);
+        console.debug("Group notifications were removed:", groupName);
       } else {
-        console.warn("Group doesn't exist:", groupName);
+        console.debug("Group doesn't exist:", groupName);
       }
     },
     /**
@@ -123,7 +123,7 @@
         for (var i = 0; i < this.groups[groupName].notifs.length;) {
           this.groups[groupName].notifs[i].pull();
         } 
-        console.info("Group notifications were removed:", groupName);
+        console.debug("Group notifications were removed:", groupName);
       } 
     },
     /**
@@ -187,10 +187,10 @@
       }
 
       if (_pushResult) {
-        console.info("New notification was pushed", _pushResult, _notifOptions);
+        console.debug("New notification was pushed", _pushResult, _notifOptions);
         return _pushResult;
       } else {
-        console.warn("New notification wasn't pushed", _notifOptions);
+        console.debug("New notification wasn't pushed", _notifOptions);
         return null;
       }
     },    
