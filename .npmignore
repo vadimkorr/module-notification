@@ -1,4 +1,4 @@
-spec
-demo
-out
+config
+docs
+node_modules
 /dev.txt
