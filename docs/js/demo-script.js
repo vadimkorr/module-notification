@@ -156,12 +156,12 @@ function addTimeoutNotifFromBottomDir() {
 var customizedNotifsModule;
 
 //define function which will return custom template
-var customTemplateFunc = function(title, message) {
+var customTemplateFunc = function (title, message) {
   return (
     "<div class='custom-notification'>" +
-      "<span>" + title + "</span> " + 
-      "<span>" + message + "</span> " +
-      "<span class='mn-close-btn custom-close-btn'>[x]</span>" + 
+    "<span>" + title + "</span> " +
+    "<span>" + message + "</span> " +
+    "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
     "</div>"
   );
 }
@@ -185,15 +185,15 @@ document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
     myMNModule = new MNModule({
       container: "#notifications",
-      onNotifsNumberChange: function(number) {
+      onNotifsNumberChange: function (number) {
         console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromTop"
-    });  
-  
+    });
+
     dirFromTopMNModule = new MNModule({
       container: "#notifications-from-top",
-      onNotifsNumberChange: function(number) {
+      onNotifsNumberChange: function (number) {
         console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromTop"
@@ -201,7 +201,7 @@ document.onreadystatechange = () => {
 
     dirFromBottomMNModule = new MNModule({
       container: "#notifications-from-bottom",
-      onNotifsNumberChange: function(number) {
+      onNotifsNumberChange: function (number) {
         console.info("Number of notifs [" + this.container + "]: " + number);
       },
       direction: "fromBottom"

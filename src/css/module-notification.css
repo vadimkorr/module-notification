@@ -1,10 +1,10 @@
 .mn-notification-container {
-	width: 100%;
-	min-height: 50px;
+  width: 100%;
+  min-height: 50px;
 }
 
 .mn-notification-container-content {
-	width: 100%;
+  width: 100%;
 }
 
 .mn-module-container .mn-notification-container:not(:last-child) {
