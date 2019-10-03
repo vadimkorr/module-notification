@@ -8,7 +8,8 @@
     "build:dev": "webpack --config ./config/webpack.config.dev.js",
     "start:dev": "webpack --watch --config ./config/webpack.config.dev.js",
     "build:prod": "webpack --config ./config/webpack.config.prod.js",
-    "jsdoc": "jsdoc src/js/module-notification.js -d ./docs/jsdoc/"
+    "jsdoc": "jsdoc src/js/module-notification.js -d ./docs/jsdoc/",
+    "docs:serve": "docsify serve docs"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "browserify": "^14.4.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
+    "docsify-cli": "^4.3.0",
     "file-loader": "^4.2.0",
     "jquery": "3.4.1",
     "jsdoc": "^3.6.3",

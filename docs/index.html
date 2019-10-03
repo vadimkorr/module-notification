@@ -1,118 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Module notification demo</title>
-  <meta name="description" content=" ">
-  <meta name="Vadim">
-  <!-- Demo playground styles -->
-  <link rel="stylesheet" href="css/demo-styles.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-  <!-- Reference style -->
-  <link rel="stylesheet" href="dist/module-notification.css">
+  <meta charset="UTF-8">
+  <title>module-notification - Plugin for displaying notifications inside specified html element containers (modules)</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Plugin for displaying notifications inside specified html element containers (modules)">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
-
 <body>
-  <!-- Demo playground scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- Demo playground scripts -->
-  <script src="js/demo-script.js"></script>
-  
-  <!-- Reference script -->
-  <script src="dist/module-notification.js"></script>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">Basic stuff</div>
-    <div class="row">
-      <div class="col-md-8">
-        <div class="panel-content-unit">
-          <p>Notifications of default group</p>
-          <button type="button" class="btn btn-default" onclick="addCommonNotif()">Add "Common" notification</button>
-          <button type="button" class="btn btn-default" onclick="removeCommonGroup()">Remove "Common" Group</button>
-          <p>.. and of custom group (i.e. "test" group)</p>
-          <button type="button" class="btn btn-default" onclick="addTestGroup()">Add "Test" Group</button>
-          <button type="button" class="btn btn-default" onclick="addTestNotification()">Add "Test" Notification</button>
-          <button type="button" class="btn btn-default" onclick="removeTestGroup()">Remove "Test" Group</button>
-          <p>"greedy" group notifications</p>
-          <button type="button" class="btn btn-default" onclick="addGreedyGroup()">Add "Greedy" Group</button>
-          <button type="button" class="btn btn-default" onclick="addNotifToGreedyGroup()">Add Element To "Greedy" Group</button>
-          <button type="button" class="btn btn-default" onclick="removeGreedyGroup()">Remove "Greedy" Group</button>
-          <p>Notifications with different types</p>
-          <button type="button" class="btn btn-success" onclick="addSuccessNotif()">Add "Success" Notification</button>
-          <button type="button" class="btn btn-info" onclick="addNoticeNotif()">Add "Notice" Notification</button>
-          <button type="button" class="btn btn-warning" onclick="addWarningNotif()">Add "Warning" Notification</button>
-          <button type="button" class="btn btn-danger" onclick="addErrorNotif()">Add "Error" Notification</button>
-          <p>Notifications with different timeouts</p>
-          <button type="button" class="btn btn-default" onclick="addTimeoutNotif()">Add Notification with Timeout</button>
-          <p>Removing notification</p>
-          <button type="button" class="btn btn-default" onclick="removeAll()">Remove all notifications</button>
-          <button type="button" class="btn btn-info" onclick="addNoticeNotifToRemove()">Add Notification to remove</button>
-          <button type="button" class="btn btn-default" onclick="removeSpecificNotif()">Remove specific notification</button>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="panel-content-unit">
-          <div class="notifications-outer-container">
-            <div id="notifications"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- <div class="panel panel-primary">
-    <div class="panel-heading">Direction of notification occurances</div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel-content-unit">
-          <p>Let notifications occur from top</p>
-          <button type="button" class="btn btn-success" onclick="addSuccessNotifFromTopDir()">Add "Success" Notification</button>
-          <button type="button" class="btn btn-default" onclick="addTimeoutNotifFromTopDir()">Add Notification with Timeout</button>
-          <div class="notifications-outer-container">
-            <div id="notifications-from-top"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel-content-unit">
-          <p>Let notifications occur from bottom</p>
-          <button type="button" class="btn btn-success" onclick="addSuccessNotifFromBottomDir()">Add "Success" Notification</button>
-          <button type="button" class="btn btn-default" onclick="addTimeoutNotifFromBottomDir()">Add Notification with Timeout</button>
-          <div class="notifications-outer-container notifications-outer-container-from-bottom">
-            <div id="notifications-from-bottom"></div>
-          </div>
-        </div>  
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-primary">
-    <div class="panel-heading">Customization</div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel-content-unit">
-          <button type="button" class="btn btn-default" onclick="pushCustomNotif()">Push customized notification</button>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel-content-unit">
-          
-          <div class="cmd">
-            <div class="cmd-tool-panel">
-              <span>cmd</span>
-              <div class="cmd-tool-panel-btns">
-                <span onclick="pullCustomizedNotifs()" class="cmd-pull-all-btn">[X]</span>
-              </div>
-            </div>
-            <div class="cmd-canvas">
-              <div id="custom-notifications-container"></div>
-              <span>></span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'module-notification',
+      repo: 'https://github.com/vadimkorr/module-notification'
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 </body>
 </html>
