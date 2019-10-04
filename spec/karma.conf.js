@@ -20,7 +20,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       '../node_modules/cuid/dist/browser-cuid.js',
-      '../node_modules/jquery/dist/jquery.js',
       '../docs/dist/module-notification.js',
       'spec/*.js',
     ],

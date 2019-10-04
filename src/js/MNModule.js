@@ -1,7 +1,8 @@
-import * as $ from 'jquery';
 import { MNGroup } from './MNGroup';
 import { MNNotification } from './MNNotification';
 import { applyArgs, generateId } from './utils';
+import { getElement, appendElementToContainer } from './domUtils';
+import { ICONS, DIRECTION } from './const';
 
 /**
  * @constructs MNModule
@@ -11,8 +12,8 @@ export class MNModule {
   constructor(moduleOptions) {
     let _defaultModuleOptions = {
       container: '#notifications',
-      onNotifsNumberChange: undefined, //e.g. (number) => { console.debug("Number of notifications", number); },
-      direction: 'fromTop', //"fromTop", "fromBottom"
+      onNotifsNumberChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
+      direction: DIRECTION.FROM_TOP, // "fromTop", "fromBottom"
     };
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
 
@@ -21,13 +22,14 @@ export class MNModule {
     this.id = generateId();
 
     //append module container to the specified container
-    $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(
-      this.options.container,
+    appendElementToContainer(
+      getElement(this.options.container),
+      `<div id='${this.id}' class='mn-module-container'></div>`
     );
     console.debug(
       'New notification module was registered',
       this.id,
-      this.options,
+      this.options
     );
   }
 
@@ -93,17 +95,17 @@ export class MNModule {
     let _defaultNotifOptions = {
       title: '',
       message: '',
-      closeCond: 5000, //ms
+      closeCond: 5000, // ms
       group: 'common',
-      template: undefined, //function(title, message) { return "<span>" + title + "</span>"; }
+      template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
       icon: undefined,
-      type: 'notice', //"notice", "warning", "error", "success"
+      type: ICONS.INFO, // "notice", "warning", "error", "success"
     };
     let _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
 
     function _onBeforeRemove(mnNotification) {
       let hasInd = _self.groups[mnNotification.options.group].hasNotif(
-        mnNotification.id,
+        mnNotification.id
       );
       if (hasInd != -1) {
         (function _decCount() {

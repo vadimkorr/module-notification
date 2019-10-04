@@ -6,7 +6,7 @@ import { applyArgs } from './utils';
  */
 export class MNGroup {
   constructor(groupOptions) {
-    var _defaultOptions = {
+    let _defaultOptions = {
       name: 'common',
       greedy: false,
     };
@@ -29,7 +29,7 @@ export class MNGroup {
    */
   hasNotif(id) {
     let index = -1;
-    this.notifs.forEach(function(n, ind) {
+    this.notifs.forEach((n, ind) => {
       if (n.id == id) {
         index = ind;
         return;
