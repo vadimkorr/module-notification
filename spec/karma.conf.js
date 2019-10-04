@@ -16,7 +16,7 @@ module.exports = function(config) {
     files: [
       '../node_modules/cuid/dist/browser-cuid.js',
       '../node_modules/jquery/dist/jquery.js',
-      '../src/js/module-notification.js',
+      '../docs/dist/module-notification.js',
       'spec/*.js',
     ],
 
