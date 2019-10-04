@@ -1,18 +1,18 @@
-describe('Group', function () {
+describe('Group', function() {
   var mnModule;
 
-  beforeEach(function () {
+  beforeEach(function() {
     var testModuleOptions = {
       container: '#notifications-container',
       direction: 'fromTop',
-      onNotifsNumberChange: function (number) {
+      onNotifsNumberChange: function(number) {
         console.info('Number of notifs = ' + number);
       },
-    };;
+    };
     mnModule = new MNModule(testModuleOptions);
   });
 
-  it('should be able to detect existance of the group', function () {
+  it('should be able to detect existance of the group', function() {
     var testGroupsOptions = [
       {
         name: 'group1',
@@ -35,7 +35,7 @@ describe('Group', function () {
     expect(mnModule.isGroupExist(nonExustingGroup)).toBeFalsy();
   });
 
-  it('should be able to create groups', function () {
+  it('should be able to create groups', function() {
     var testGroupsOptions = [
       {
         name: 'group1',
@@ -67,14 +67,14 @@ describe('Group', function () {
       expect(result).toBeTruthy();
       //check if options were applied
       expect(mnModule.groups[testGroupOptions.name].options).toEqual(
-        testGroupOptions,
+        testGroupOptions
       );
       //check the amount of groups
       expect(Object.keys(mnModule.groups).length).toEqual(i + 1);
     }
   });
 
-  it('should not create groups with the same name', function () {
+  it('should not create groups with the same name', function() {
     var testGroupsOptions = [
       {
         name: 'group1',
@@ -113,7 +113,7 @@ describe('Group', function () {
       expect(result).toEqual(testGroupOptions.expectedResult);
       //check the amount of groups
       expect(Object.keys(mnModule.groups).length).toEqual(
-        testGroupOptions.expectedCount,
+        testGroupOptions.expectedCount
       );
     }
   });

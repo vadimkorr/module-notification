@@ -6,7 +6,12 @@ module.exports = function(config) {
     basePath: '',
 
     // plugins starting with karma- are autoloaded
-    plugins: ['karma-chrome-launcher', 'karma-jasmine', 'karma-browserify'],
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-jasmine',
+      'karma-browserify',
+    ],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -49,23 +54,25 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
     // e.g see https://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647
     customLaunchers: {
       Chrome_travis_ci: {
-        base: 'Chrome',
+        base: 'Firefox',
         flags: ['--no-sandbox'],
       },
     },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
+
+    failOnEmptyTestSuite: false,
   };
 
   if (process.env.TRAVIS) {
