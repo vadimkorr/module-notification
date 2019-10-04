@@ -5,9 +5,9 @@
   "main": "entry.js",
   "scripts": {
     "test": "karma start spec/karma.conf.js --single-run",
-    "build:dev": "webpack --config ./config/webpack.config.dev.js",
-    "start:dev": "webpack --watch --config ./config/webpack.config.dev.js",
-    "build:prod": "webpack --config ./config/webpack.config.prod.js",
+    "build:dev": "set NODE_ENV=dev && webpack --config ./config/webpack.config.js",
+    "start:dev": "set NODE_ENV=dev && webpack --watch --config ./config/webpack.config.js",
+    "build:prod": "set NODE_ENV=prod && webpack --config ./config/webpack.config.js",
     "jsdoc": "jsdoc src/js/module-notification.js -d ./docs/jsdoc/"
   },
   "repository": {
@@ -17,7 +17,6 @@
   "keywords": [
     "notifications",
     "notification",
-    "jQuery",
     "modules"
   ],
   "author": "Vadim Korr",
@@ -28,6 +27,7 @@
   "homepage": "https://github.com/vadimkorr/module-notification#readme",
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
     "browserify": "^16.5.0",
@@ -38,7 +38,6 @@
     "eslint-plugin-prettier": "^3.1.1",
     "file-loader": "^4.2.0",
     "jasmine-core": "^3.5.0",
-    "jquery": "3.4.1",
     "jsdoc": "^3.6.3",
     "karma": "^1.7.0",
     "karma-browserify": "^5.1.1",

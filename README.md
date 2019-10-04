@@ -29,15 +29,13 @@ You can check out the [Demo](https://vadimkorr.github.io/module-notification)
 npm install module-notification --save
 ```
 
-\*needs jQuery to be installed
-
 ## <a name="referencing">Referencing</a>
 
 ### requirejs
 
 ```js
 define([
-  "./node_modules/module-notification/dist/module-notification.js"
+  './node_modules/module-notification/dist/module-notification.js',
 ], function() {
   //...
 });
@@ -88,11 +86,11 @@ define([
 
 ```js
 var myMNModule = new MNModule({
-  container: "#notifications",
+  container: '#notifications',
   onNotifsNumberChange: function(number) {
-    console.info("Number of notifications", number);
+    console.info('Number of notifications', number);
   },
-  direction: "fromTop" //"fromTop" (by default), "fromBottom"
+  direction: 'fromTop', //"fromTop" (by default), "fromBottom"
 });
 ```
 
@@ -102,8 +100,8 @@ Group is like an id for the set of notifications. Group may have one or more ele
 
 ```js
 myMNModule.createEmptyGroup({
-  name: "test",
-  greedy: false
+  name: 'test',
+  greedy: false,
 });
 ```
 
@@ -111,12 +109,12 @@ myMNModule.createEmptyGroup({
 
 ```js
 var myNotif = myMNModule.pushNotif({
-  title: "Hello!",
+  title: 'Hello!',
   message: "I'm a notification",
-  icon: "ok-sign", //glyphicon icon name
+  icon: 'ok-sign', //glyphicon icon name
   closeCond: 5000, //ms, put false (by default) to prevent closing
-  type: "notice", //"notice" (by default), "warning", "error", "success"
-  group: "test" //"common" (by defalut)
+  type: 'notice', //"notice" (by default), "warning", "error", "success"
+  group: 'test', //"common" (by defalut)
 });
 ```
 
@@ -131,7 +129,7 @@ myNotif.pull();
 ### Pull all the notifications of the specified group
 
 ```js
-myMNModule.pullGroupNotifs("test");
+myMNModule.pullGroupNotifs('test');
 ```
 
 ### Pull all the notifications of the module
@@ -155,14 +153,14 @@ Specify function which will return custom template, e.g.
 var customTemplateFunc = function(title, message) {
   return (
     "<div class='custom-notification'>" +
-    "<span>" +
+    '<span>' +
     title +
-    "</span> " +
-    "<span>" +
+    '</span> ' +
+    '<span>' +
     message +
-    "</span> " +
+    '</span> ' +
     "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
-    "</div>"
+    '</div>'
   );
 };
 ```
@@ -175,9 +173,9 @@ And assign this function to **template** field:
 ```js
 customizedNotifsModule.pushNotif({
   closeCond: false,
-  title: "Hey",
+  title: 'Hey',
   message: "I'm a custom notification",
-  template: customTemplateFunc
+  template: customTemplateFunc,
 });
 ```
 

@@ -4,13 +4,16 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const buildDir = path.resolve(__dirname, '../dist');
+const IS_PROD = process.env.NODE_ENV === 'dev';
+const BUILD_DIR = IS_PROD
+  ? path.resolve(__dirname, '../dist')
+  : path.resolve(__dirname, '../docs/dist');
 
 module.exports = {
   entry: './src/index.js', // relative to root
   output: {
     filename: 'module-notification.js',
-    path: buildDir,
+    path: BUILD_DIR,
   },
   module: {
     rules: [
@@ -21,6 +24,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
@@ -33,6 +37,7 @@ module.exports = {
               // you can specify a publicPath here
               // by default it uses publicPath in webpackOptions.output
               // publicPath: '../',
+              // hmr: process.env.NODE_ENV === 'development',
             },
           },
           'css-loader',
@@ -62,7 +67,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimize: true,
+    minimize: IS_PROD,
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
 };

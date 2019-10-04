@@ -1,4 +1,5 @@
 import cuid from 'cuid';
+import { ICONS } from './const/icon';
 
 export const generateId = () => {
   return cuid();
@@ -24,18 +25,27 @@ export const applyArgs = (argum, defaults) => {
   }
 };
 
-export const templater = ({ id, title, message, type, icon }) => t => {
+export const templater = ({
+  id,
+  title = '',
+  message = '',
+  type = '',
+  icon = '',
+  content = '',
+}) => t => {
   const idPlaceholder = '{{id}}';
   const titlePlaceholder = '{{title}}';
   const messagePlaceholder = '{{message}}';
   const typePlaceholder = '{{type}}';
   const iconPlaceholder = '{{icon}}';
+  const contentPlaceholder = '{{content}}';
   return (t ? t[0] : '')
     .replace(idPlaceholder, id)
     .replace(titlePlaceholder, title)
     .replace(messagePlaceholder, message)
     .replace(typePlaceholder, type)
-    .replace(iconPlaceholder, icon);
+    .replace(iconPlaceholder, icon)
+    .replace(contentPlaceholder, content);
 };
 
 export const getDefaultTemplate = (id, title, message, type, icon) => {
@@ -59,6 +69,44 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
       <i class='glyphicon glyphicon-{{icon}}'></i>
       <span><strong>{{title}}</strong>{{message}}</span>
     </div>
-  </div>
-  `;
+  </div>`;
+};
+
+export const getCustomTemplate = (id, content) => {
+  return templater({ id, content })`<div id='{{id}}'>{{content}}</div>`;
+};
+
+export const getIconNameByType = type => {
+  switch (type) {
+    default:
+    case 'notice':
+      return ICONS.INFO;
+    case 'success':
+      return ICONS.SUCCESS;
+    case 'warning':
+      return ICONS.WARNING;
+    case 'ERROR':
+      return ICONS.ERROR;
+  }
+};
+
+export const getCloseButtonSelector = id => {
+  return `#${id} .mn-close-btn`;
+};
+
+export const msToSec = ms => {
+  return ms / 1000;
+};
+
+export const fadeOut = (ms, cb) => {
+  let opacity = 0;
+  const step = 50;
+  const opacityStep = step / ms;
+  let timer = setInterval(() => {
+    if (opacity >= 1.0) {
+      clearInterval(timer);
+    }
+    cb(opacity);
+    opacity += opacityStep;
+  }, step);
 };

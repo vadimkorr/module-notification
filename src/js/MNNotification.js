@@ -1,5 +1,21 @@
-import * as $ from 'jquery';
-import { generateId, getDefaultTemplate } from './utils';
+import {
+  generateId,
+  getDefaultTemplate,
+  getCustomTemplate,
+  getIconNameByType,
+  getCloseButtonSelector,
+} from './utils';
+import {
+  getElement,
+  addOnClick,
+  getElementFromHtmlString,
+  appendElementToContainerWithFadeIn,
+  prependElementToContainerWithFadeIn,
+  removeElementWithFadeOut,
+} from './domUtils';
+import { DIRECTION } from './const';
+
+const FADE_MS = 200;
 
 /**
  * @constructs MNNotification
@@ -7,23 +23,12 @@ import { generateId, getDefaultTemplate } from './utils';
  */
 export class MNNotification {
   constructor(notifOptions) {
-    let _self = this;
-    function _getIcon() {
-      let icons = {
-        notice: 'info-sign',
-        success: 'ok-sign',
-        warning: 'warning-sign',
-        error: 'remove',
-      };
-      return notifOptions.icon == undefined
-        ? icons[notifOptions.type]
-        : notifOptions.icon;
-    }
-
     this.id = generateId();
     this.onBeforeRemove = () => {};
     this.options = notifOptions;
-    this.options.icon = _getIcon();
+    this.options.icon = notifOptions.icon
+      ? notifOptions.icon
+      : getIconNameByType(notifOptions.type);
   }
 
   /**
@@ -33,9 +38,7 @@ export class MNNotification {
     let _self = this;
     if (typeof _self.onBeforeRemove === 'function') {
       _self.onBeforeRemove(_self);
-      $('#' + _self.id).fadeOut(300, function() {
-        $('#' + _self.id).remove();
-      });
+      removeElementWithFadeOut(`#${_self.id}`, FADE_MS);
     }
   }
 
@@ -47,57 +50,48 @@ export class MNNotification {
     let _self = this;
     this.onBeforeRemove = additionalOptions.onBeforeRemove;
 
-    let _getCustomTemplate = function(title, message) {
-      let template =
-        "<div id='" +
-        _self.id +
-        "'>" +
-        _self.options.template(title, message) +
-        '</div>';
-      return template;
-    };
-
     let _getTemplate = function() {
       let template =
         typeof _self.options.template == 'function'
-          ? _getCustomTemplate(_self.options.title, _self.options.message)
+          ? getCustomTemplate(
+              _self.id,
+              _self.options.template(_self.options.title, _self.options.message)
+            )
           : getDefaultTemplate(
               _self.id,
               _self.options.title,
               _self.options.message,
               _self.options.type,
-              _self.options.icon,
+              _self.options.icon
             );
       return template;
     };
 
-    let _getCloseBtnSelector = function() {
-      let selector = '#' + _self.id + ' .mn-close-btn';
-      return selector;
-    };
-
     (function append() {
-      if (additionalOptions.direction == 'fromTop') {
-        $(_getTemplate())
-          .appendTo('#' + additionalOptions.moduleId)
-          .hide()
-          .fadeIn(300);
+      const container = getElement(`#${additionalOptions.moduleId}`);
+      if (additionalOptions.direction == DIRECTION.FROM_TOP) {
+        appendElementToContainerWithFadeIn(
+          container,
+          getElementFromHtmlString(_getTemplate()),
+          FADE_MS
+        );
       } else {
-        $(_getTemplate())
-          .prependTo('#' + additionalOptions.moduleId)
-          .hide()
-          .fadeIn(300);
+        prependElementToContainerWithFadeIn(
+          container,
+          getElementFromHtmlString(_getTemplate()),
+          FADE_MS
+        );
       }
     })();
 
     (function setCloseConditions() {
-      $(_getCloseBtnSelector()).on('click', function() {
+      addOnClick(getCloseButtonSelector(_self.id), () => {
         _self.pull();
       });
       if (_self.options.closeCond !== false) {
         if (typeof _self.options.closeCond === 'function') {
         } else {
-          setTimeout(function() {
+          setTimeout(() => {
             _self.pull();
           }, _self.options.closeCond);
         }
