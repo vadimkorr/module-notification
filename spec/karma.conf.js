@@ -6,7 +6,12 @@ module.exports = function(config) {
     basePath: '',
 
     // plugins starting with karma- are autoloaded
-    plugins: ['karma-chrome-launcher', 'karma-jasmine', 'karma-browserify'],
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-jasmine',
+      'karma-browserify',
+    ],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -49,12 +54,12 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadless'],
+    browsers: ['Firefox'],
 
     // e.g see https://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647
     customLaunchers: {
       Chrome_travis_ci: {
-        base: 'ChromeHeadless',
+        base: 'Firefox',
         flags: ['--no-sandbox'],
       },
     },

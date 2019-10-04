@@ -9,9 +9,9 @@ node_js:
 
 sudo: required
 addons:
-  chrome: stable
+  firefox: '49.0'
 
 services:
   - xvfb
-before_install:
-  - export CHROME_BIN=chromium-browser
+# before_install:
+#   - export CHROME_BIN=chromium-browser
