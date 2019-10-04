@@ -1,5 +1,4 @@
-
-import { applyArgs } from './utils'
+import { applyArgs } from './utils';
 
 /**
  * @constructs MNGroup - Private class of the group
@@ -8,8 +7,8 @@ import { applyArgs } from './utils'
 export class MNGroup {
   constructor(groupOptions) {
     var _defaultOptions = {
-      name: "common",
-      greedy: false
+      name: 'common',
+      greedy: false,
     };
     this.options = applyArgs(groupOptions, _defaultOptions);
     this.notifs = [];
@@ -30,7 +29,7 @@ export class MNGroup {
    */
   hasNotif(id) {
     let index = -1;
-    this.notifs.forEach(function (n, ind) {
+    this.notifs.forEach(function(n, ind) {
       if (n.id == id) {
         index = ind;
         return;
@@ -39,4 +38,3 @@ export class MNGroup {
     return index;
   }
 }
-

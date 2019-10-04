@@ -1,7 +1,7 @@
-import * as $ from "jquery";
-import { MNGroup } from './MNGroup'
-import { MNNotification } from './MNNotification'
-import { applyArgs, generateId } from './utils'
+import * as $ from 'jquery';
+import { MNGroup } from './MNGroup';
+import { MNNotification } from './MNNotification';
+import { applyArgs, generateId } from './utils';
 
 /**
  * @constructs MNModule
@@ -10,9 +10,9 @@ import { applyArgs, generateId } from './utils'
 export class MNModule {
   constructor(moduleOptions) {
     let _defaultModuleOptions = {
-      container: "#notifications",
+      container: '#notifications',
       onNotifsNumberChange: undefined, //e.g. (number) => { console.debug("Number of notifications", number); },
-      direction: "fromTop" //"fromTop", "fromBottom"
+      direction: 'fromTop', //"fromTop", "fromBottom"
     };
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
 
@@ -22,14 +22,14 @@ export class MNModule {
 
     //append module container to the specified container
     $("<div id='" + this.id + "' class='mn-module-container'></div>").appendTo(
-      this.options.container
+      this.options.container,
     );
     console.debug(
-      "New notification module was registered",
+      'New notification module was registered',
       this.id,
-      this.options
+      this.options,
     );
-  };
+  }
 
   /**
    * Detects if group with specified name exist
@@ -47,11 +47,11 @@ export class MNModule {
    */
   createEmptyGroup(groupOptions) {
     if (this.isGroupExist(groupOptions.name)) {
-      console.debug("Group with name already exist:", groupOptions.name);
+      console.debug('Group with name already exist:', groupOptions.name);
       return false;
     } else {
       this.groups[groupOptions.name] = new MNGroup(groupOptions);
-      console.debug("New group was created", groupOptions.name);
+      console.debug('New group was created', groupOptions.name);
       return true;
     }
   }
@@ -62,10 +62,10 @@ export class MNModule {
    */
   pullGroupNotifs(groupName) {
     if (this.groups.hasOwnProperty(groupName)) {
-      for (let i = 0; i < this.groups[groupName].notifs.length;) {
+      for (let i = 0; i < this.groups[groupName].notifs.length; ) {
         this.groups[groupName].notifs[i].pull();
       }
-      console.debug("Group notifications were removed:", groupName);
+      console.debug('Group notifications were removed:', groupName);
     } else {
       console.debug("Group doesn't exist:", groupName);
     }
@@ -76,10 +76,10 @@ export class MNModule {
    */
   pullAll() {
     for (let groupName in this.groups) {
-      for (let i = 0; i < this.groups[groupName].notifs.length;) {
+      for (let i = 0; i < this.groups[groupName].notifs.length; ) {
         this.groups[groupName].notifs[i].pull();
       }
-      console.debug("Group notifications were removed:", groupName);
+      console.debug('Group notifications were removed:', groupName);
     }
   }
 
@@ -91,19 +91,19 @@ export class MNModule {
   pushNotif(notifOptions) {
     let _self = this;
     let _defaultNotifOptions = {
-      title: "",
-      message: "",
+      title: '',
+      message: '',
       closeCond: 5000, //ms
-      group: "common",
+      group: 'common',
       template: undefined, //function(title, message) { return "<span>" + title + "</span>"; }
       icon: undefined,
-      type: "notice" //"notice", "warning", "error", "success"
+      type: 'notice', //"notice", "warning", "error", "success"
     };
     let _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
 
     function _onBeforeRemove(mnNotification) {
       let hasInd = _self.groups[mnNotification.options.group].hasNotif(
-        mnNotification.id
+        mnNotification.id,
       );
       if (hasInd != -1) {
         (function _decCount() {
@@ -124,7 +124,7 @@ export class MNModule {
       let additionalOptions = {
         moduleId: _self.id,
         direction: _self.options.direction,
-        onBeforeRemove: _onBeforeRemove
+        onBeforeRemove: _onBeforeRemove,
       };
       let notif = new MNNotification(notifOptions);
       notif.appendToContainer(additionalOptions);
@@ -151,7 +151,7 @@ export class MNModule {
     }
 
     if (_pushResult) {
-      console.debug("New notification was pushed", _pushResult, _notifOptions);
+      console.debug('New notification was pushed', _pushResult, _notifOptions);
       return _pushResult;
     } else {
       console.debug("New notification wasn't pushed", _notifOptions);
@@ -164,7 +164,7 @@ export class MNModule {
    * @param {Number} number - current number of notifications
    */
   callOnNotifsNumberChange(number) {
-    if (typeof this.options.onNotifsNumberChange === "function") {
+    if (typeof this.options.onNotifsNumberChange === 'function') {
       this.options.onNotifsNumberChange(number);
     }
   }

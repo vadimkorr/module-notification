@@ -18,7 +18,7 @@
 .mn-module-container {
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -33,7 +33,7 @@
   cursor: pointer;
 }
 
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
 .mn-module-container .mn-alert {

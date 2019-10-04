@@ -1,43 +1,53 @@
-describe("Notification", function() {
-  beforeEach(function() {
+describe('Notification', function () {
+  beforeEach(function () {
     var testModuleOptions = {
-      container: "#notifications-container",
-      direction: "fromTop",
-      onNotifsNumberChange: function(number) {
-        console.info("Number of notifs = " + number);
-      }
-    }
-    mnModule = new MNModule(testModuleOptions);	
+      container: '#notifications-container',
+      direction: 'fromTop',
+      onNotifsNumberChange: function (number) {
+        console.info('Number of notifs = ' + number);
+      },
+    };;
+    mnModule = new MNModule(testModuleOptions);
   });
-  
-  it("should be able to be pushed to module", function() {
-    var testNotifsOptions = [{
-      title: "title1",
-      message: "message1",
-      icon: "music",
-      closeCond: 5000,
-      type: "notice",
-      group: "common",
-      template: () => { return "<div></div>" }
-    }, {
-      title: "title2",
-      message: "message2",
-      icon: "music",
-      closeCond: 6000,
-      type: "success",
-      group: "common",
-      template: () => { return "<div></div>" }
-    }, {
-      title: "title3",
-      message: "message3",
-      icon: "ok-sign",
-      closeCond: 7000,
-      type: "success",
-      group: "common",
-      template: () => { return "<div></div>" }
-    }];
 
-    for (var i=0; i<testNotifsOptions.length; i++) {
+  it('should be able to be pushed to module', function () {
+    var testNotifsOptions = [
+      {
+        title: 'title1',
+        message: 'message1',
+        icon: 'music',
+        closeCond: 5000,
+        type: 'notice',
+        group: 'common',
+        template: () => {
+          return '<div></div>';
+        },
+      },
+      {
+        title: 'title2',
+        message: 'message2',
+        icon: 'music',
+        closeCond: 6000,
+        type: 'success',
+        group: 'common',
+        template: () => {
+          return '<div></div>';
+        },
+      },
+      {
+        title: 'title3',
+        message: 'message3',
+        icon: 'ok-sign',
+        closeCond: 7000,
+        type: 'success',
+        group: 'common',
+        template: () => {
+          return '<div></div>';
+        },
+      },
+    ];
+
+    for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i];
       //push notif
       var notif = mnModule.pushNotif(testNotifOptions);
@@ -48,101 +58,124 @@ describe("Notification", function() {
     }
   });
 
-  it("should be able to be pushed to specified group", function() {
-    var testNotifsOptions = [{
-      group: "common1",
-      expectedNumberOfNotifsAfterPushing: 1
-    }, {
-      group: "common2",
-      expectedNumberOfNotifsAfterPushing: 1
-    }, {
-      group: "common2",
-      expectedNumberOfNotifsAfterPushing: 2
-    }, {
-      group: "common3",
-      expectedNumberOfNotifsAfterPushing: 1
-    }, {
-      group: "common3",
-      expectedNumberOfNotifsAfterPushing: 2
-    }];
+  it('should be able to be pushed to specified group', function () {
+    var testNotifsOptions = [
+      {
+        group: 'common1',
+        expectedNumberOfNotifsAfterPushing: 1,
+      },
+      {
+        group: 'common2',
+        expectedNumberOfNotifsAfterPushing: 1,
+      },
+      {
+        group: 'common2',
+        expectedNumberOfNotifsAfterPushing: 2,
+      },
+      {
+        group: 'common3',
+        expectedNumberOfNotifsAfterPushing: 1,
+      },
+      {
+        group: 'common3',
+        expectedNumberOfNotifsAfterPushing: 2,
+      },
+    ];
 
-    for (var i=0; i<testNotifsOptions.length; i++) {
+    for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i];
       //push notif
       var notif = mnModule.pushNotif(testNotifOptions);
       //check if notif was pushed to appropriate group
-      expect(mnModule.groups[testNotifOptions.group].notifs.length).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing);
+      expect(mnModule.groups[testNotifOptions.group].notifs.length).toEqual(
+        testNotifOptions.expectedNumberOfNotifsAfterPushing,
+      );
     }
   });
-  
-  it("should be able to be pushed to greedy group only ones", function() {
-    var greedyGroupName = "some greedy group";
+
+  it('should be able to be pushed to greedy group only ones', function () {
+    var greedyGroupName = 'some greedy group';
     var greedyGroupOptions = {
       name: greedyGroupName,
-      greedy: true
-    }
+      greedy: true,
+    };;
     mnModule.createEmptyGroup(greedyGroupOptions);
 
-    var testNotifsOptions = [{
-      group: greedyGroupName,
-      expectedNumberOfNotifsAfterPushing: 1,
-      isResultNull: false 
-    }, {
-      group: greedyGroupName,
-      expectedNumberOfNotifsAfterPushing: 1,
-      isResultNull: true 
-    }];
+    var testNotifsOptions = [
+      {
+        group: greedyGroupName,
+        expectedNumberOfNotifsAfterPushing: 1,
+        isResultNull: false,
+      },
+      {
+        group: greedyGroupName,
+        expectedNumberOfNotifsAfterPushing: 1,
+        isResultNull: true,
+      },
+    ];
 
-    for (var i=0; i<testNotifsOptions.length; i++) {
+    for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i];
       //push notif
       var notif = mnModule.pushNotif(testNotifOptions);
       //check the size of the group
-      expect(mnModule.groups[testNotifOptions.group].notifs.length).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing);
+      expect(mnModule.groups[testNotifOptions.group].notifs.length).toEqual(
+        testNotifOptions.expectedNumberOfNotifsAfterPushing,
+      );
       //check returned result
       expect(notif == null).toEqual(testNotifOptions.isResultNull);
     }
   });
 
-  it("should be able to be pulled", function() {
+  it('should be able to be pulled', function () {
     var numberOfNotifsToCreate = 10;
-    for (var i=0; i<numberOfNotifsToCreate.length; i++) {
+    for (var i = 0; i < numberOfNotifsToCreate.length; i++) {
       //push notif
       var notif = mnModule.pushNotif({ closeCond: false });
       //check the number of notifs after pushing
       var expectedNumberOfNotifsAfterPushing = 1;
-      expect(mnModule.numberOfNotifs).toEqual(expectedNumberOfNotifsAfterPushing);
+      expect(mnModule.numberOfNotifs).toEqual(
+        expectedNumberOfNotifsAfterPushing,
+      );
       //pull notif
       notif.pull();
       //check the number of notifs after pulling
       var expectedNumberOfNotifsAfterPulling = 0;
-      expect(mnModule.numberOfNotifs).toEqual(expectedNumberOfNotifsAfterPulling);
+      expect(mnModule.numberOfNotifs).toEqual(
+        expectedNumberOfNotifsAfterPulling,
+      );
     }
     expect(mnModule.numberOfNotifs).toEqual(0);
   });
 
   function pushNotifs(notifsCount, groupName, module) {
-    for (var i=0; i<notifsCount; i++) {
-      var notif = module.pushNotif({ 
-        group: groupName, 
-        closeCond: false 
+    for (var i = 0; i < notifsCount; i++) {
+      var notif = module.pushNotif({
+        group: groupName,
+        closeCond: false,
       });
     }
   }
 
-  it("should be able to be pulled from group", function() {
+  it('should be able to be pulled from group', function () {
     var numberOfNotifsInFirstGroup = 10;
     var numberOfNotifsInSecondGroup = 20;
-    var firstGroupName = "first group";
-    var secondGroupName = "second group";
+    var firstGroupName = 'first group';
+    var secondGroupName = 'second group';
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule);
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule);
     //check total number of notifs
-    expect(mnModule.numberOfNotifs).toEqual(numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup);
+    expect(mnModule.numberOfNotifs).toEqual(
+      numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup,
+    );
     //check number of notifs in first group
-    expect(mnModule.groups[firstGroupName].notifs.length).toEqual(numberOfNotifsInFirstGroup);
+    expect(mnModule.groups[firstGroupName].notifs.length).toEqual(
+      numberOfNotifsInFirstGroup,
+    );
     //check number of notifs in second group
-    expect(mnModule.groups[secondGroupName].notifs.length).toEqual(numberOfNotifsInSecondGroup);
+    expect(mnModule.groups[secondGroupName].notifs.length).toEqual(
+      numberOfNotifsInSecondGroup,
+    );
     //pull notifs of first group
     mnModule.pullGroupNotifs(firstGroupName);
     //check number of notifs of module
@@ -152,17 +185,17 @@ describe("Notification", function() {
     //check number of notifs of module
     expect(mnModule.numberOfNotifs).toEqual(0);
   });
-  
-  it("should be able to be pulled from module (all notifs)", function() {
+
+  it('should be able to be pulled from module (all notifs)', function () {
     var numberOfNotifsInFirstGroup = 10;
     var numberOfNotifsInSecondGroup = 20;
-    var firstGroupName = "first group";
-    var secondGroupName = "second group";
+    var firstGroupName = 'first group';
+    var secondGroupName = 'second group';
 
     var testModule2Options = {
-      container: "#notifications-container2"
-    }
-    mnModule2 = new MNModule(testModule2Options);	
+      container: '#notifications-container2',
+    };;
+    mnModule2 = new MNModule(testModule2Options);
 
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule);
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule);
@@ -173,8 +206,10 @@ describe("Notification", function() {
     mnModule.pullAll();
     expect(mnModule.numberOfNotifs).toEqual(0);
     //check if second group is ok
-    expect(mnModule2.numberOfNotifs).toEqual(numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup);
-    
+    expect(mnModule2.numberOfNotifs).toEqual(
+      numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup,
+    );
+
     //pull notifs from second group
     mnModule2.pullAll();
     expect(mnModule.numberOfNotifs).toEqual(0);
