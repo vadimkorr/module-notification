@@ -4,10 +4,13 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const IS_PROD = process.env.NODE_ENV === 'dev';
+const ENV = process.env.NODE_ENV.trim();
+const IS_PROD = ENV === 'prod'; // 'dev'
 const BUILD_DIR = IS_PROD
   ? path.resolve(__dirname, '../dist')
   : path.resolve(__dirname, '../docs/dist');
+
+console.log('ENVIRONMENT', ENV);
 
 module.exports = {
   entry: './src/index.js', // relative to root
