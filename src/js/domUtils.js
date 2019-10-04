@@ -11,6 +11,7 @@ export const getElementFromHtmlString = htmlString => {
 };
 
 export const appendElementToContainer = (container, element) => {
+  if (!container || !element) return;
   if (typeof element === 'string') {
     container.insertAdjacentHTML('beforeend', element);
   } else {
@@ -19,6 +20,7 @@ export const appendElementToContainer = (container, element) => {
 };
 
 export const prependElementToContainer = (container, element) => {
+  if (!container || !element) return;
   if (typeof element === 'string') {
     container.insertAdjacentHTML('afterbegin', element);
   } else {
