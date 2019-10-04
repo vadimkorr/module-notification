@@ -54,7 +54,7 @@ module.exports = function(config) {
     // e.g see https://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647
     customLaunchers: {
       Chrome_travis_ci: {
-        base: 'Chrome',
+        base: 'ChromeHeadless',
         flags: ['--no-sandbox'],
       },
     },
@@ -65,7 +65,7 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    // concurrency: Infinity,
+    concurrency: Infinity,
 
     failOnEmptyTestSuite: false,
   };

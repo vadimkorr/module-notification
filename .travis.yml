@@ -7,6 +7,10 @@ script: karma start spec/karma.conf.js
 node_js:
   - '10.16.2'
 
+sudo: required
+addons:
+  chrome: stable
+
 services:
   - xvfb
 before_install:
