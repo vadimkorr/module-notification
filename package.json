@@ -4,7 +4,7 @@
   "description": "Plugin for displaying notifications inside specified html element containers (modules)",
   "main": "entry.js",
   "scripts": {
-    "test": "karma start spec/karma.conf.js",
+    "test": "karma start spec/karma.conf.js --single-run",
     "build:dev": "webpack --config ./config/webpack.config.dev.js",
     "start:dev": "webpack --watch --config ./config/webpack.config.dev.js",
     "build:prod": "webpack --config ./config/webpack.config.prod.js",
