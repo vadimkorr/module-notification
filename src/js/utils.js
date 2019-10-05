@@ -67,7 +67,7 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
     </button>
     <div class='mn-notification-container-content'>
       <i class="fa fa-{{icon}}"></i>
-      <span><strong>{{title}}</strong>{{message}}</span>
+      <span><strong>{{title}}</strong> {{message}}</span>
     </div>
   </div>`;
 };

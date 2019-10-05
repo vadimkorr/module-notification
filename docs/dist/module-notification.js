@@ -255,7 +255,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  <div\n    role='mn-alert'\n    id='{{id}}'\n    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>\n    <button\n      type='button'\n      class='mn-close-btn mn-close'>\n      <span aria-hidden='true'>&times;</span>\n    </button>\n    <div class='mn-notification-container-content'>\n      <i class=\"fa fa-{{icon}}\"></i>\n      <span><strong>{{title}}</strong>{{message}}</span>\n    </div>\n  </div>"]);
+  var data = _taggedTemplateLiteral(["\n  <div\n    role='mn-alert'\n    id='{{id}}'\n    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>\n    <button\n      type='button'\n      class='mn-close-btn mn-close'>\n      <span aria-hidden='true'>&times;</span>\n    </button>\n    <div class='mn-notification-container-content'>\n      <i class=\"fa fa-{{icon}}\"></i>\n      <span><strong>{{title}}</strong> {{message}}</span>\n    </div>\n  </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
