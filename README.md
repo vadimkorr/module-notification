@@ -1,4 +1,4 @@
-# module-notification (v2.x.x)
+# module-notification
 
 [![npm](https://img.shields.io/npm/v/module-notification.svg)](https://www.npmjs.com/package/module-notification) [![npm](https://img.shields.io/npm/dm/module-notification.svg)](https://www.npmjs.com/package/module-notification)
 <br />
@@ -18,10 +18,15 @@ You can check out the [Demo](https://vadimkorr.github.io/module-notification)
 
 # Table of Contents
 
+1. <a href="#changelog">Change log</a>
 1. <a href="#installation">Installation</a>
 1. <a href="#referencing">Referencing</a>
 1. <a href="#usage">Usage</a>
 1. <a href="#customization">Customization</a>
+
+## <a name="installation">Change log</a>
+
+- v2.0.0 - Removed jQuery dependency, used Font Awesome for icons
 
 ## <a name="installation">Installation</a>
 
@@ -115,7 +120,7 @@ myMNModule.createEmptyGroup({
 let myNotif = myMNModule.pushNotif({
   title: 'Hello!',
   message: "I'm a notification",
-  icon: 'ok-sign', // Font Awesome icon name
+  icon: 'info-circle', // Font Awesome icon name
   closeCond: 5000, // ms, put false (by default) to prevent closing
   type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
   group: 'test', // 'common' (by defalut)
