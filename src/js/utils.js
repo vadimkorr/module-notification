@@ -66,7 +66,7 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
       <span aria-hidden='true'>&times;</span>
     </button>
     <div class='mn-notification-container-content'>
-      <i class='glyphicon glyphicon-{{icon}}'></i>
+      <i class="fa fa-{{icon}}"></i>
       <span><strong>{{title}}</strong>{{message}}</span>
     </div>
   </div>`;
@@ -85,7 +85,7 @@ export const getIconNameByType = type => {
       return ICONS.SUCCESS;
     case 'warning':
       return ICONS.WARNING;
-    case 'ERROR':
+    case 'error':
       return ICONS.ERROR;
   }
 };

@@ -1,4 +1,4 @@
-# module-notification
+# module-notification (v2.x.x)
 
 [![npm](https://img.shields.io/npm/v/module-notification.svg)](https://www.npmjs.com/package/module-notification) [![npm](https://img.shields.io/npm/dm/module-notification.svg)](https://www.npmjs.com/package/module-notification)
 <br />
@@ -115,14 +115,14 @@ myMNModule.createEmptyGroup({
 let myNotif = myMNModule.pushNotif({
   title: 'Hello!',
   message: "I'm a notification",
-  icon: 'ok-sign', // glyphicon icon name
+  icon: 'ok-sign', // Font Awesome icon name
   closeCond: 5000, // ms, put false (by default) to prevent closing
   type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
   group: 'test', // 'common' (by defalut)
 });
 ```
 
-see other [Glyphicon](http://getbootstrap.com/components/#glyphicons) icons
+see other [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons
 
 ### Pull notification
 

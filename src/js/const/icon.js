@@ -1,6 +1,6 @@
 export class ICONS {
-  static INFO = 'info-sign';
-  static SUCCESS = 'ok-sign';
-  static WARNING = 'warning-sign';
-  static ERROR = 'remove';
+  static INFO = 'info-circle';
+  static SUCCESS = 'check-circle';
+  static WARNING = 'exclamation-circle';
+  static ERROR = 'times-circle';
 }

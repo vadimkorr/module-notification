@@ -220,8 +220,8 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: ./src/css/module-notification.css
 var module_notification = __webpack_require__(1);
 
-// EXTERNAL MODULE: ./src/css/glyph.css
-var glyph = __webpack_require__(2);
+// EXTERNAL MODULE: ./node_modules/font-awesome/css/font-awesome.min.css
+var font_awesome_min = __webpack_require__(2);
 
 // EXTERNAL MODULE: ./node_modules/cuid/dist/browser-cuid.js
 var browser_cuid = __webpack_require__(0);
@@ -236,13 +236,13 @@ var ICONS = function ICONS() {
   _classCallCheck(this, ICONS);
 };
 
-_defineProperty(ICONS, "INFO", 'info-sign');
+_defineProperty(ICONS, "INFO", 'info-circle');
 
-_defineProperty(ICONS, "SUCCESS", 'ok-sign');
+_defineProperty(ICONS, "SUCCESS", 'check-circle');
 
-_defineProperty(ICONS, "WARNING", 'warning-sign');
+_defineProperty(ICONS, "WARNING", 'exclamation-circle');
 
-_defineProperty(ICONS, "ERROR", 'remove');
+_defineProperty(ICONS, "ERROR", 'times-circle');
 // CONCATENATED MODULE: ./src/js/utils.js
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["<div id='{{id}}'>{{content}}</div>"]);
@@ -255,7 +255,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  <div\n    role='mn-alert'\n    id='{{id}}'\n    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>\n    <button\n      type='button'\n      class='mn-close-btn mn-close'>\n      <span aria-hidden='true'>&times;</span>\n    </button>\n    <div class='mn-notification-container-content'>\n      <i class='glyphicon glyphicon-{{icon}}'></i>\n      <span><strong>{{title}}</strong>{{message}}</span>\n    </div>\n  </div>"]);
+  var data = _taggedTemplateLiteral(["\n  <div\n    role='mn-alert'\n    id='{{id}}'\n    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>\n    <button\n      type='button'\n      class='mn-close-btn mn-close'>\n      <span aria-hidden='true'>&times;</span>\n    </button>\n    <div class='mn-notification-container-content'>\n      <i class=\"fa fa-{{icon}}\"></i>\n      <span><strong>{{title}}</strong>{{message}}</span>\n    </div>\n  </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -344,7 +344,7 @@ var utils_getIconNameByType = function getIconNameByType(type) {
     case 'warning':
       return ICONS.WARNING;
 
-    case 'ERROR':
+    case 'error':
       return ICONS.ERROR;
   }
 };

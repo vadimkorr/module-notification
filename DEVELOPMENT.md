@@ -36,6 +36,8 @@ Output is in [`docs/jsdoc`]('/docs/jsdoc/index.html')
 
 ## Publishing
 
+Run `yarn build:prod` before publishing
+
 ```console
 npm version patch // minor, major
 ```
