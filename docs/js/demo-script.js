@@ -31,13 +31,6 @@ function removeTestGroup() {
   myMNModule.pullGroupNotifs('test');
 }
 
-function addGreedyGroup() {
-  myMNModule.createEmptyGroup({
-    name: 'greedy',
-    greedy: true,
-  });
-}
-
 function addNotifToGreedyGroup() {
   myMNModule.pushNotif({
     closeCond: false,
@@ -195,6 +188,25 @@ document.onreadystatechange = () => {
       direction: 'fromTop',
     });
 
+    // add greedy group
+    myMNModule.createEmptyGroup({
+      name: 'greedy',
+      greedy: true,
+    });
+
+    myMNModule.pushNotif({
+      title: 'Hello!',
+      message: 'and Welcome ;)',
+      type: 'notice',
+      closeCond: 5000,
+    });
+
+    myMNModule.pushNotif({
+      message: 'Click buttons to push/pull the notifications',
+      type: 'success',
+      closeCond: 7000,
+    });
+
     dirFromTopMNModule = new MNModule({
       container: '#notifications-from-top',
       onNotifsNumberChange: function(number) {
@@ -209,19 +221,6 @@ document.onreadystatechange = () => {
         console.info('Number of notifs [' + this.container + ']: ' + number);
       },
       direction: 'fromBottom',
-    });
-
-    myMNModule.pushNotif({
-      title: 'Hello!',
-      message: 'and Welcome ;)',
-      type: 'notice',
-      closeCond: 5000,
-    });
-
-    myMNModule.pushNotif({
-      message: 'Click buttons to push/pull the notifications',
-      type: 'success',
-      closeCond: 7000,
     });
 
     customizedNotifsModule = new MNModule({
