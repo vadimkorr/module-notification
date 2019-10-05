@@ -1,4 +1,26 @@
+# configs
 config
-docs
+.vsconfig
+
+# dependencies
 node_modules
-/dev.txt
+
+# test
+spec
+
+# linters
+.eslintrc.js
+.prettierrc.js
+
+# CI
+.travis.yml
+
+# git
+.gitignore
+
+# docs
+docs
+DEVELOPMENT.md
+
+# lock
+yarn.lock
