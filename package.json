@@ -1,8 +1,8 @@
 {
   "name": "module-notification",
-  "version": "1.1.4",
-  "description": "Plugin for displaying notifications inside specified html element containers (modules)",
-  "main": "entry.js",
+  "version": "2.0.0",
+  "description": "JS library for displaying Notifications inside specified html element containers (Modules). You can create multiple independent Modules which own separate set of Notifications.",
+  "main": "src/index.js",
   "scripts": {
     "test": "karma start spec/karma.conf.js --single-run",
     "build:dev": "set NODE_ENV=dev && webpack --config ./config/webpack.config.js",
