@@ -25,8 +25,12 @@ You can check out the [Demo](https://vadimkorr.github.io/module-notification)
 
 ## <a name="installation">Installation</a>
 
-```
+```console
 npm install module-notification --save
+```
+
+```console
+yarn add module-notification
 ```
 
 ## <a name="referencing">Referencing</a>
@@ -85,12 +89,12 @@ define([
 ### Create new module
 
 ```js
-var myMNModule = new MNModule({
+let myMNModule = new MNModule({
   container: '#notifications',
-  onNotifsNumberChange: function(number) {
+  onNotifsNumberChange: number => {
     console.info('Number of notifications', number);
   },
-  direction: 'fromTop', //"fromTop" (by default), "fromBottom"
+  direction: 'fromTop', // 'fromTop' (by default), 'fromBottom'
 });
 ```
 
@@ -108,13 +112,13 @@ myMNModule.createEmptyGroup({
 ### Push notification
 
 ```js
-var myNotif = myMNModule.pushNotif({
+let myNotif = myMNModule.pushNotif({
   title: 'Hello!',
   message: "I'm a notification",
-  icon: 'ok-sign', //glyphicon icon name
-  closeCond: 5000, //ms, put false (by default) to prevent closing
-  type: 'notice', //"notice" (by default), "warning", "error", "success"
-  group: 'test', //"common" (by defalut)
+  icon: 'ok-sign', // glyphicon icon name
+  closeCond: 5000, // ms, put false (by default) to prevent closing
+  type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
+  group: 'test', // 'common' (by defalut)
 });
 ```
 
@@ -151,17 +155,13 @@ Specify function which will return custom template, e.g.
 
 ```js
 var customTemplateFunc = function(title, message) {
-  return (
-    "<div class='custom-notification'>" +
-    '<span>' +
-    title +
-    '</span> ' +
-    '<span>' +
-    message +
-    '</span> ' +
-    "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
-    '</div>'
-  );
+  return `
+    <div class='custom-notification'>
+      <span>${title}</span>
+      <span>${message}</span>
+      <span class='mn-close-btn custom-close-btn'>[x]</span>
+    </div>
+  `;
 };
 ```
 
@@ -174,7 +174,7 @@ And assign this function to **template** field:
 customizedNotifsModule.pushNotif({
   closeCond: false,
   title: 'Hey',
-  message: "I'm a custom notification",
+  message: 'I`m a custom notification',
   template: customTemplateFunc,
 });
 ```
@@ -184,8 +184,8 @@ customizedNotifsModule.pushNotif({
 
 In order to make the notification closable by user click assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
 
-```js
-"<span class='mn-close-btn'>[x]</span>";
+```html
+<span class="mn-close-btn">[x]</span>
 ```
 
 ### Example
@@ -194,6 +194,4 @@ We prepared small but pretty awesome example of customized notifications, hope y
 
 <img src="http://g.recordit.co/z1yhU4dDz2.gif" alt="Customized notifications preview" width="450px" />
 
----
-
-For more examples see our [demo](https://github.com/vadimkorr/module-notification/tree/master/demo)
+For more examples see our [demo](https://vadimkorr.github.io/module-notification/)
