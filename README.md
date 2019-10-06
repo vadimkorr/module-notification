@@ -24,7 +24,7 @@ You can check out the [Demo](https://vadimkorr.github.io/module-notification)
 1. <a href="#usage">Usage</a>
 1. <a href="#customization">Customization</a>
 
-## <a name="installation">Change log</a>
+## <a name="changelog">Change log</a>
 
 - v2.0.0 - Removed jQuery dependency, used Font Awesome for icons
 
@@ -159,7 +159,7 @@ To add customized notidfications you have to:
 Specify function which will return custom template, e.g.
 
 ```js
-var customTemplateFunc = function(title, message) {
+let customTemplateFunc = (title, message) => {
   return `
     <div class='custom-notification'>
       <span>${title}</span>
