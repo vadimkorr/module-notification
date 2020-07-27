@@ -8,7 +8,8 @@
     "build:dev": "set NODE_ENV=dev && webpack --config ./config/webpack.config.js",
     "start:dev": "set NODE_ENV=dev && webpack --watch --config ./config/webpack.config.js",
     "build:prod": "set NODE_ENV=prod && webpack --config ./config/webpack.config.js",
-    "jsdoc": "jsdoc src/js/ -d ./docs/jsdoc/"
+    "jsdoc": "jsdoc src/js/ -d ./docs/jsdoc/",
+    "prepublishOnly": "npm run build:prod"
   },
   "repository": {
     "type": "git",
