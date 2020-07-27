@@ -1,5 +1,5 @@
 import cuid from 'cuid';
-import { ICONS } from './const/icon';
+import { ICONS } from '../const/icon';
 
 export const generateId = () => {
   return cuid();

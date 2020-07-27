@@ -18,11 +18,7 @@ module.exports = function(config) {
     frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
-    files: [
-      '../node_modules/cuid/dist/browser-cuid.js',
-      '../docs/dist/module-notification.js',
-      'spec/*.js',
-    ],
+    files: ['../docs/dist/module-notification.js', 'spec/*.spec.js'],
 
     // list of files to exclude
     exclude: [],

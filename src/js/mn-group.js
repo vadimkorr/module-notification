@@ -1,4 +1,4 @@
-import { applyArgs } from './utils';
+import { applyArgs } from './utils/utils';
 
 /**
  * @constructs MNGroup - Private class of the group

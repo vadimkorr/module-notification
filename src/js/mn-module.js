@@ -1,7 +1,7 @@
-import { MNGroup } from './MNGroup';
-import { MNNotification } from './MNNotification';
-import { applyArgs, generateId } from './utils';
-import { getElement, appendElementToContainer } from './domUtils';
+import { MNGroup } from './mn-group';
+import { MNNotification } from './mn-notification';
+import { applyArgs, generateId } from './utils/utils';
+import { getElement, appendElementToContainer } from './utils/domUtils';
 import { ICONS, DIRECTION } from './const';
 
 /**

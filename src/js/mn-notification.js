@@ -4,7 +4,7 @@ import {
   getCustomTemplate,
   getIconNameByType,
   getCloseButtonSelector,
-} from './utils';
+} from './utils/utils';
 import {
   getElement,
   addOnClick,
@@ -12,7 +12,7 @@ import {
   appendElementToContainerWithFadeIn,
   prependElementToContainerWithFadeIn,
   removeElementWithFadeOut,
-} from './domUtils';
+} from './utils/domUtils';
 import { DIRECTION } from './const';
 
 const FADE_MS = 200;
