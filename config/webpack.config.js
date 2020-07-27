@@ -17,6 +17,9 @@ module.exports = {
   output: {
     filename: 'module-notification.js',
     path: BUILD_DIR,
+    library: 'MNModule',
+    libraryExport: 'default',
+    libraryTarget: 'window',
   },
   module: {
     rules: [
@@ -26,8 +29,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-class-properties'],
+            configFile: './babel.config.js',
           },
         },
       },
@@ -71,6 +73,6 @@ module.exports = {
   ],
   optimization: {
     minimize: IS_PROD,
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
   },
 };
