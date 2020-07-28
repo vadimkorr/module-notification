@@ -1,7 +1,12 @@
 import { msToSec, fadeOut } from './utils';
 
-export const getElement = query => {
-  return document.querySelector(`${query}`);
+export const getElement = query => document.querySelector(`${query}`);
+export const getElementById = id => getElement(`#${id}`);
+
+export const removeClass = (el, className) => {
+  if (el) {
+    el.classList.remove(className);
+  }
 };
 
 export const getElementFromHtmlString = htmlString => {
@@ -33,10 +38,10 @@ export const appendElementToContainerWithFadeIn = (
   element,
   ms = 300
 ) => {
-  element.style.opacity = 0;
-  fadeOut(ms, opacity => {
-    element.style.opacity = opacity;
-  });
+  // element.style.opacity = 0;
+  //fadeOut(ms, opacity => {
+  // element.style.opacity = opacity;
+  //});
   appendElementToContainer(container, element);
 };
 
@@ -52,14 +57,14 @@ export const prependElementToContainerWithFadeIn = (
   prependElementToContainer(container, element);
 };
 
-const _removeElement = element => {
+export const removeElement = element => {
   element.parentNode.removeChild(element);
 };
 
-export const removeElement = query => {
-  const element = getElement(query);
-  if (element) {
-    _removeElement(element);
+export const removeElementById = id => {
+  const el = getElementById(id);
+  if (el) {
+    removeElement(el);
   }
 };
 
@@ -70,7 +75,7 @@ export const removeElementWithFadeOut = (query, ms = 300) => {
     element.style.transition = `opacity ${sec}s ease`;
     element.style.opacity = 0;
     setTimeout(() => {
-      _removeElement(element);
+      removeElement(element);
     }, ms);
   }
 };

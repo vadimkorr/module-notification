@@ -57,17 +57,19 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
     icon,
   })`
   <div
-    role='mn-alert'
+    class="mn-notification"
     id='{{id}}'
-    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>
-    <button
-      type='button'
-      class='mn-close-btn mn-close'>
-      <span aria-hidden='true'>&times;</span>
-    </button>
-    <div class='mn-notification-container-content'>
-      <i class="fa fa-{{icon}}"></i>
-      <span><strong>{{title}}</strong> {{message}}</span>
+  >
+    <div class="mn-alert mn-alert-{{type}} mn-alert-dismissible">
+      <button
+        type='button'
+        class='mn-close-btn mn-close'>
+        <span aria-hidden='true'>&times;</span>
+      </button>
+      <div class='mn-notification-container__content'>
+        <i class="fa fa-{{icon}}"></i>
+        <span><strong>{{title}}</strong> {{message}}</span>
+      </div>
     </div>
   </div>`;
 };

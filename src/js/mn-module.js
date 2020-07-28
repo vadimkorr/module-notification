@@ -24,7 +24,7 @@ export class MNModule {
     //append module container to the specified container
     appendElementToContainer(
       getElement(this.options.container),
-      `<div id='${this.id}' class='mn-module-container'></div>`
+      `<div id='${this.id}' class='mn-module-container mn-fade'></div>`
     );
     console.debug(
       'New notification module was registered',
@@ -123,15 +123,14 @@ export class MNModule {
         _self.numberOfNotifs++;
         _self.callOnNotifsNumberChange(_self.numberOfNotifs);
       })();
-      let additionalOptions = {
+      let notification = new MNNotification(notifOptions);
+      notification.appendToContainer({
         moduleId: _self.id,
         direction: _self.options.direction,
         onBeforeRemove: _onBeforeRemove,
-      };
-      let notif = new MNNotification(notifOptions);
-      notif.appendToContainer(additionalOptions);
-      _self.groups[notifOptions.group].pushNotif(notif);
-      return notif;
+      });
+      _self.groups[notifOptions.group].pushNotif(notification);
+      return notification;
     }
 
     let _pushResult = null;

@@ -12,90 +12,104 @@ import {
   appendElementToContainerWithFadeIn,
   prependElementToContainerWithFadeIn,
   removeElementWithFadeOut,
+  appendElementToContainer,
+  removeElementById,
+  getElementById,
+  removeClass,
 } from './utils/domUtils';
 import { DIRECTION } from './const';
 
-const FADE_MS = 200;
+const FADE_MS = 500;
 
 /**
  * @constructs MNNotification
  * @param {Object} notifOptions - options of the new notification
  */
-export class MNNotification {
-  constructor(notifOptions) {
-    this.id = generateId();
-    this.onBeforeRemove = () => {};
-    this.options = notifOptions;
-    this.options.icon = notifOptions.icon
-      ? notifOptions.icon
-      : getIconNameByType(notifOptions.type);
-  }
 
-  /**
-   * Pulls notification
-   */
-  pull() {
-    let _self = this;
-    if (typeof _self.onBeforeRemove === 'function') {
-      _self.onBeforeRemove(_self);
-      removeElementWithFadeOut(`#${_self.id}`, FADE_MS);
-    }
-  }
-
-  /**
-   * Appends notification element to specified container
-   * @param {Object} additionalOptions - Options of the appending
-   */
-  appendToContainer(additionalOptions) {
-    let _self = this;
-    this.onBeforeRemove = additionalOptions.onBeforeRemove;
-
-    let _getTemplate = function() {
-      let template =
-        typeof _self.options.template == 'function'
-          ? getCustomTemplate(
-              _self.id,
-              _self.options.template(_self.options.title, _self.options.message)
-            )
-          : getDefaultTemplate(
-              _self.id,
-              _self.options.title,
-              _self.options.message,
-              _self.options.type,
-              _self.options.icon
-            );
-      return template;
-    };
-
-    (function append() {
-      const container = getElement(`#${additionalOptions.moduleId}`);
-      if (additionalOptions.direction == DIRECTION.FROM_TOP) {
-        appendElementToContainerWithFadeIn(
-          container,
-          getElementFromHtmlString(_getTemplate()),
-          FADE_MS
-        );
-      } else {
-        prependElementToContainerWithFadeIn(
-          container,
-          getElementFromHtmlString(_getTemplate()),
-          FADE_MS
-        );
-      }
-    })();
-
-    (function setCloseConditions() {
-      addOnClick(getCloseButtonSelector(_self.id), () => {
-        _self.pull();
-      });
-      if (_self.options.closeCond !== false) {
-        if (typeof _self.options.closeCond === 'function') {
-        } else {
-          setTimeout(() => {
-            _self.pull();
-          }, _self.options.closeCond);
-        }
-      }
-    })();
-  }
+export function MNNotification(notifOptions) {
+  this.id = generateId();
+  this.onBeforeRemove = () => {};
+  this.options = notifOptions;
+  this.options.icon = notifOptions.icon
+    ? notifOptions.icon
+    : getIconNameByType(notifOptions.type);
 }
+
+/**
+ * Pulls notification
+ */
+MNNotification.prototype.pull = function() {
+  if (typeof this.onBeforeRemove === 'function') {
+    this.onBeforeRemove(this);
+    const el = getElementById(this.id);
+    removeClass(el, 'show');
+    setTimeout(() => {
+      removeElementById(this.id);
+    }, FADE_MS);
+    // removeElementWithFadeOut(`#${this.id}`, FADE_MS);
+  }
+};
+
+/**
+ * Appends notification element to specified container
+ * @param {Object} additionalOptions - Options of the appending
+ */
+MNNotification.prototype.appendToContainer = function(options) {
+  this.onBeforeRemove = options.onBeforeRemove;
+
+  const _getTemplate = () => {
+    let template =
+      typeof this.options.template == 'function'
+        ? getCustomTemplate(
+            this.id,
+            this.options.template(this.options.title, this.options.message)
+          )
+        : getDefaultTemplate(
+            this.id,
+            this.options.title,
+            this.options.message,
+            this.options.type,
+            this.options.icon
+          );
+    return template;
+  };
+
+  const append = () => {
+    const container = getElement(`#${options.moduleId}`);
+    // if (options.direction == DIRECTION.FROM_TOP) {
+    const el = getElementFromHtmlString(_getTemplate());
+    appendElementToContainer(container, el);
+    console.log('===>', el);
+    setTimeout(function() {
+      el.className = el.className + ' show';
+    }, 10);
+    // appendElementToContainerWithFadeIn(
+    //   container,
+    //   getElementFromHtmlString(_getTemplate()),
+    //   FADE_MS
+    // );
+    // } else {
+    //   prependElementToContainerWithFadeIn(
+    //     container,
+    //     getElementFromHtmlString(_getTemplate()),
+    //     FADE_MS
+    //   );
+    // }
+  };
+  append();
+
+  const setCloseConditions = () => {
+    addOnClick(getCloseButtonSelector(this.id), () => {
+      this.pull();
+    });
+    if (this.options.closeCond !== false) {
+      if (typeof this.options.closeCond === 'function') {
+      } else {
+        setTimeout(() => {
+          this.pull();
+        }, this.options.closeCond);
+      }
+    }
+  };
+  setCloseConditions();
+};
