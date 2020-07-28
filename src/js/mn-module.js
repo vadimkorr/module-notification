@@ -24,7 +24,7 @@ export class MNModule {
     //append module container to the specified container
     appendElementToContainer(
       getElement(this.options.container),
-      `<div id='${this.id}' class='mn-module-container mn-fade'></div>`
+      `<div id='${this.id}' class='mn-module-container'></div>`
     );
     console.debug(
       'New notification module was registered',

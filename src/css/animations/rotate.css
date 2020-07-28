@@ -1,0 +1,11 @@
+.mn-rotate {
+  /* opacity: 0; */
+  transform: scale(0) rotateX(180deg) rotateY(180deg);
+  transition: all 0.5s linear;
+}
+
+.mn-rotate.show {
+  /* opacity: 1; */
+  transform: scale(1) rotateX(0deg) rotateY(0deg);
+  transition: all 0.5s linear;
+}

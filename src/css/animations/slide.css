@@ -1,0 +1,11 @@
+.mn-slide {
+  opacity: 0;
+  transform: translateX(-200%);
+  transition: all 0.5s linear;
+}
+
+.mn-slide.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.5s linear;
+}

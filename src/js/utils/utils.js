@@ -95,20 +95,3 @@ export const getIconNameByType = type => {
 export const getCloseButtonSelector = id => {
   return `#${id} .mn-close-btn`;
 };
-
-export const msToSec = ms => {
-  return ms / 1000;
-};
-
-export const fadeOut = (ms, cb) => {
-  let opacity = 0;
-  const step = 50;
-  const opacityStep = step / ms;
-  let timer = setInterval(() => {
-    if (opacity >= 1.0) {
-      clearInterval(timer);
-    }
-    cb(opacity);
-    opacity += opacityStep;
-  }, step);
-};

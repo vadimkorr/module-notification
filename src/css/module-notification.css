@@ -1,22 +1,15 @@
 .mn-notification {
-  margin-bottom: 0;
-  max-height: 0;
   width: 100%;
+  max-height: 0;
+  margin-bottom: 0;
 }
 .mn-notification.show {
   /* value on max-height is something bigger than container will ever get */
   max-height: 100px;
-}
-.mn-notification.show:not(:last-child) {
   margin-bottom: 10px;
 }
-
-.mn-fade .mn-notification {
-  transition: all 0.4s ease;
-  opacity: 0;
-}
-.mn-fade .mn-notification.show {
-  opacity: 1;
+.mn-notification.show:last-child {
+  margin-bottom: 0;
 }
 
 .mn-notification-container__content {

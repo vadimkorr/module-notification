@@ -9,13 +9,12 @@ import {
   getElement,
   addOnClick,
   getElementFromHtmlString,
-  appendElementToContainerWithFadeIn,
-  prependElementToContainerWithFadeIn,
-  removeElementWithFadeOut,
+  prependElementToContainer,
   appendElementToContainer,
   removeElementById,
   getElementById,
   removeClass,
+  addClass,
 } from './utils/domUtils';
 import { DIRECTION } from './const';
 
@@ -46,7 +45,6 @@ MNNotification.prototype.pull = function() {
     setTimeout(() => {
       removeElementById(this.id);
     }, FADE_MS);
-    // removeElementWithFadeOut(`#${this.id}`, FADE_MS);
   }
 };
 
@@ -75,26 +73,19 @@ MNNotification.prototype.appendToContainer = function(options) {
   };
 
   const append = () => {
-    const container = getElement(`#${options.moduleId}`);
-    // if (options.direction == DIRECTION.FROM_TOP) {
+    const animation = options.animation || 'slide'; // 'fade', 'swing', 'rotate', 'slide'
+
     const el = getElementFromHtmlString(_getTemplate());
-    appendElementToContainer(container, el);
-    console.log('===>', el);
-    setTimeout(function() {
-      el.className = el.className + ' show';
+    addClass(el, `mn-${animation}`);
+
+    const fns = {
+      [DIRECTION.FROM_TOP]: appendElementToContainer,
+      [DIRECTION.FROM_BOTTOM]: prependElementToContainer,
+    };
+    fns[options.direction](getElement(`#${options.moduleId}`), el);
+    setTimeout(() => {
+      addClass(el, 'show');
     }, 10);
-    // appendElementToContainerWithFadeIn(
-    //   container,
-    //   getElementFromHtmlString(_getTemplate()),
-    //   FADE_MS
-    // );
-    // } else {
-    //   prependElementToContainerWithFadeIn(
-    //     container,
-    //     getElementFromHtmlString(_getTemplate()),
-    //     FADE_MS
-    //   );
-    // }
   };
   append();
 
