@@ -18,7 +18,7 @@ export class MNModule {
     this.options = applyArgs(moduleOptions, _defaultModuleOptions);
 
     this.numberOfNotifs = 0;
-    this.groups = {};
+    this.groups = new Map();
     this.id = generateId();
 
     //append module container to the specified container
@@ -39,7 +39,7 @@ export class MNModule {
    * @returns Boolean value
    */
   isGroupExist(groupName) {
-    return this.groups.hasOwnProperty(groupName);
+    return this.groups.has(groupName);
   }
 
   /**
@@ -52,7 +52,7 @@ export class MNModule {
       console.debug('Group with name already exist:', groupOptions.name);
       return false;
     } else {
-      this.groups[groupOptions.name] = new MNGroup(groupOptions);
+      this.groups.set(groupOptions.name, new MNGroup(groupOptions));
       console.debug('New group was created', groupOptions.name);
       return true;
     }
@@ -63,14 +63,15 @@ export class MNModule {
    * @param {String} groupName - Name of the group
    */
   pullGroupNotifs(groupName) {
-    if (this.groups.hasOwnProperty(groupName)) {
-      for (let i = 0; i < this.groups[groupName].notifs.length; ) {
-        this.groups[groupName].notifs[i].pull();
-      }
-      console.debug('Group notifications were removed:', groupName);
-    } else {
-      console.debug("Group doesn't exist:", groupName);
+    if (!this.groups.has(groupName))
+      throw new Error(`Group with id ${groupName} does not exist`);
+    const notifications = this.groups.get(groupName).getNotifications();
+    while (true) {
+      const { value, done } = notifications.next();
+      if (done) break;
+      value.pull();
     }
+    console.debug('Group notifications were removed:', groupName);
   }
 
   /**
@@ -78,8 +79,12 @@ export class MNModule {
    */
   pullAll() {
     for (let groupName in this.groups) {
-      for (let i = 0; i < this.groups[groupName].notifs.length; ) {
-        this.groups[groupName].notifs[i].pull();
+      for (let i = 0; i < this.groups.get(groupName).getLength(); i++) {
+        this.groups
+          .get(groupName)
+          .getNotifications()
+          [i].pull();
+        console.log(this.groups.get(groupName).getNotifications());
       }
       console.debug('Group notifications were removed:', groupName);
     }
@@ -104,9 +109,9 @@ export class MNModule {
     let _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
 
     function _onBeforeRemove(mnNotification) {
-      let hasInd = _self.groups[mnNotification.options.group].hasNotif(
-        mnNotification.id
-      );
+      let hasInd = _self.groups
+        .get(mnNotification.options.group)
+        .hasNotif(mnNotification.id);
       if (hasInd != -1) {
         (function _decCount() {
           _self.numberOfNotifs > 0
@@ -114,7 +119,9 @@ export class MNModule {
             : (_self.numberOfNotifs = 0);
           _self.callOnNotifsNumberChange(_self.numberOfNotifs);
         })();
-        _self.groups[mnNotification.options.group].notifs.splice(hasInd, 1);
+        _self.groups
+          .get(mnNotification.options.group)
+          .removeNotification(mnNotification.id);
       }
     }
 
@@ -129,7 +136,7 @@ export class MNModule {
         direction: _self.options.direction,
         onBeforeRemove: _onBeforeRemove,
       });
-      _self.groups[notifOptions.group].pushNotif(notification);
+      _self.groups.get(notifOptions.group).pushNotif(notification);
       return notification;
     }
 
@@ -142,8 +149,8 @@ export class MNModule {
     } else {
       //group is not not greedy or is empty
       if (
-        !_self.groups[_notifOptions.group].options.greedy ||
-        _self.groups[_notifOptions.group].notifs.length < 1
+        !_self.groups.get(_notifOptions.group).options.greedy ||
+        _self.groups.get(_notifOptions.group).getLength() < 1
       ) {
         _pushResult = _pushInner(_notifOptions);
       } else {
