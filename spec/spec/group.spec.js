@@ -15,11 +15,11 @@ describe('Group', function() {
   it('should be able to detect existance of the group', function() {
     var testGroupsOptions = [
       {
-        name: 'group1',
+        id: 'group1',
         greedy: false,
       },
       {
-        name: 'group2',
+        id: 'group2',
         greedy: false,
       },
     ];
@@ -29,7 +29,7 @@ describe('Group', function() {
       //create group
       mnModule.createEmptyGroup(testGroupOptions);
       //check if group exist
-      expect(mnModule.getGroup(testGroupOptions.name)).toBeTruthy();
+      expect(mnModule.getGroup(testGroupOptions.id)).toBeTruthy();
     }
     //check if non existing group is not exist
     expect(mnModule.getGroup(nonExustingGroup)).toBeFalsy();
@@ -38,23 +38,23 @@ describe('Group', function() {
   it('should be able to create groups', function() {
     var testGroupsOptions = [
       {
-        name: 'group1',
+        id: 'group1',
         greedy: false,
       },
       {
-        name: 'group2',
+        id: 'group2',
         greedy: false,
       },
       {
-        name: 'group3',
+        id: 'group3',
         greedy: false,
       },
       {
-        name: 'group4',
+        id: 'group4',
         greedy: true,
       },
       {
-        name: 'group5',
+        id: 'group5',
         greedy: true,
       },
     ];
@@ -66,7 +66,7 @@ describe('Group', function() {
       //check result
       expect(result).toBeTruthy();
       //check if options were applied
-      expect(mnModule.getGroup(testGroupOptions.name).options).toEqual(
+      expect(mnModule.getGroup(testGroupOptions.id).options).toEqual(
         testGroupOptions
       );
       //check the amount of groups
@@ -74,28 +74,28 @@ describe('Group', function() {
     }
   });
 
-  it('should not create groups with the same name', function() {
+  it('should not create groups with the same id', function() {
     var testGroupsOptions = [
       {
-        name: 'group1',
+        id: 'group1',
         greedy: false,
         expectedResult: true,
         expectedCount: 1,
       },
       {
-        name: 'oneName',
+        id: 'oneName',
         greedy: false,
         expectedResult: true,
         expectedCount: 2,
       },
       {
-        name: 'oneName',
+        id: 'oneName',
         greedy: false,
         expectedResult: false,
         expectedCount: 2,
       },
       {
-        name: 'oneMoreGroup',
+        id: 'oneMoreGroup',
         greedy: false,
         expectedResult: true,
         expectedCount: 3,
@@ -106,7 +106,7 @@ describe('Group', function() {
       var testGroupOptions = testGroupsOptions[i];
       //create group
       var result = mnModule.createEmptyGroup({
-        name: testGroupOptions.name,
+        id: testGroupOptions.id,
         greedy: testGroupOptions.greedy,
       });
       //check result

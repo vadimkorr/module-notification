@@ -49,7 +49,7 @@ MNModule.prototype.setNotificationsCount = function(count) {
 };
 
 /**
- * Detects if group with specified name exist
+ * Detects if group with specified id exist
  * @param {String} groupName - Name of the group
  * @returns Boolean value
  */
@@ -72,12 +72,12 @@ MNModule.prototype.getGroupsCount = function() {
  * @returns Boolean value of result
  */
 MNModule.prototype.createEmptyGroup = function(groupOptions) {
-  if (this.groups.has(groupOptions.name)) {
-    console.debug('Group with name already exist:', groupOptions.name);
+  if (this.groups.has(groupOptions.id)) {
+    console.debug('Group with id already exist:', groupOptions.id);
     return false;
   }
-  this.groups.set(groupOptions.name, new MNGroup(groupOptions));
-  console.debug('New group was created', groupOptions.name);
+  this.groups.set(groupOptions.id, new MNGroup(groupOptions));
+  console.debug('New group was created', groupOptions.id);
   return true;
 };
 
@@ -126,7 +126,7 @@ MNModule.prototype._createNotification = function(options) {
 MNModule.prototype._addNotification = function(options) {
   const _options = applyArgs(options, _defaultNotifOptions);
 
-  this.createEmptyGroup({ name: _options.group });
+  this.createEmptyGroup({ id: _options.group });
   const group = this.groups.get(_options.group);
   const _pushResult =
     !group.options.greedy || group.isEmpty()

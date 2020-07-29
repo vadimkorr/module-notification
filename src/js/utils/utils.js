@@ -6,13 +6,13 @@ export const generateId = () => {
 
 /* extends default config and returns extended one */
 export const extendDefaults = (source, properties) => {
-  var property;
-  for (property in properties) {
+  const _source = { ...source };
+  for (let property in properties) {
     if (properties.hasOwnProperty(property)) {
-      source[property] = properties[property];
+      _source[property] = properties[property];
     }
   }
-  return source;
+  return _source;
 };
 
 /* return options if specified or default options otherwise */
@@ -34,14 +34,13 @@ export const templater = ({
   content = '',
 }) => t => {
   let str = t ? t[0] : '';
-  const replacer = [
+  [
     { find: '{{id}}', by: id },
     { find: '{{title}}', by: title },
     { find: '{{message}}', by: message },
     { find: '{{type}}', by: type },
     { find: '{{content}}', by: content },
-  ];
-  replacer.forEach(({ find, by }) => {
+  ].forEach(({ find, by }) => {
     str = replace(str, find, by);
   });
   return str;

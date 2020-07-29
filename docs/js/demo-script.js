@@ -14,7 +14,7 @@ function removeCommonGroup() {
 
 function addTestGroup() {
   myMNModule.createEmptyGroup({
-    name: 'test',
+    id: 'test',
   });
 }
 
@@ -190,7 +190,7 @@ document.onreadystatechange = () => {
 
     // add greedy group
     myMNModule.createEmptyGroup({
-      name: 'greedy',
+      id: 'greedy',
       greedy: true,
     });
 

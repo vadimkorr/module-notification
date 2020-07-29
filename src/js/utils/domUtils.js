@@ -1,16 +1,13 @@
 export const getElement = query => document.querySelector(`${query}`);
+
 export const getElementById = id => getElement(`#${id}`);
 
 export const removeClass = (el, className) => {
-  if (el) {
-    el.classList.remove(className);
-  }
+  el && el.classList.remove(className);
 };
 
 export const addClass = (el, className) => {
-  if (el) {
-    el.className = `${el.className} ${className}`;
-  }
+  el && (el.className = `${el.className} ${className}`);
 };
 
 export const getElementFromHtmlString = htmlString => {
@@ -19,38 +16,34 @@ export const getElementFromHtmlString = htmlString => {
   return div.firstChild;
 };
 
-export const appendElementToContainer = (container, element) => {
-  if (!container || !element) return;
-  if (typeof element === 'string') {
-    container.insertAdjacentHTML('beforeend', element);
+export const appendElementToContainer = (container, el) => {
+  if (!container || !el) return;
+  if (typeof el === 'string') {
+    container.insertAdjacentHTML('beforeend', el);
   } else {
-    container.append(element);
+    container.append(el);
   }
 };
 
-export const prependElementToContainer = (container, element) => {
-  if (!container || !element) return;
-  if (typeof element === 'string') {
-    container.insertAdjacentHTML('afterbegin', element);
+export const prependElementToContainer = (container, el) => {
+  if (!container || !el) return;
+  if (typeof el === 'string') {
+    container.insertAdjacentHTML('afterbegin', el);
   } else {
-    container.prepend(element);
+    container.prepend(el);
   }
 };
 
-export const removeElement = element => {
-  element.parentNode.removeChild(element);
+export const removeElement = el => {
+  el && el.parentNode.removeChild(el);
 };
 
 export const removeElementById = id => {
   const el = getElementById(id);
-  if (el) {
-    removeElement(el);
-  }
+  el && removeElement(el);
 };
 
 export const addOnClick = (query, cb) => {
-  const element = getElement(query);
-  if (element) {
-    element.addEventListener('click', cb, false);
-  }
+  const el = getElement(query);
+  el && el.addEventListener('click', cb, false);
 };

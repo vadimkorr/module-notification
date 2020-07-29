@@ -31,19 +31,14 @@ const fns = {
 export function MNNotification(notifOptions) {
   this.id = generateId();
   this.options = notifOptions;
-  this.onBeforeRemove = [];
+  this.onBeforeRemove = null;
 }
 
 /**
  * Pulls notification
  */
 MNNotification.prototype.pull = function() {
-  this.onBeforeRemove.forEach(fn => {
-    if (typeof fn === 'function') {
-      fn(this);
-    }
-  });
-
+  typeof this.onBeforeRemove === 'function' && this.onBeforeRemove(this);
   const el = getElementById(this.id);
   removeClass(el, 'show');
   setTimeout(() => {
@@ -56,7 +51,7 @@ MNNotification.prototype.pull = function() {
  * @param {Object} additionalOptions - Options of the appending
  */
 MNNotification.prototype.addToContainer = function(options) {
-  options.onBeforeRemove && this.onBeforeRemove.push(options.onBeforeRemove);
+  this.onBeforeRemove = options.onBeforeRemove;
 
   let template =
     typeof this.options.template == 'function'

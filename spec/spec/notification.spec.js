@@ -96,7 +96,7 @@ describe('Notification', function() {
   it('should be able to be pushed to greedy group only ones', function() {
     var greedyGroupName = 'some greedy group';
     var greedyGroupOptions = {
-      name: greedyGroupName,
+      id: greedyGroupName,
       greedy: true,
     };
     mnModule.createEmptyGroup(greedyGroupOptions);
@@ -180,7 +180,7 @@ describe('Notification', function() {
 
     //check number of notifs in first group
     for (let group of mnModule.getGroups()) {
-      expect(group.getLength()).toEqual(groups[group._getId()].count);
+      expect(group.getLength()).toEqual(groups[group.getId()].count);
     }
 
     //pull notifs of first group
