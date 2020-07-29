@@ -15,9 +15,9 @@ describe('Notification', function() {
         title: 'title1',
         message: 'message1',
         icon: 'music',
-        closeCond: 5000,
+        closeInMS: 5000,
         type: 'info',
-        group: 'common',
+        groupId: 'common',
         template: () => {
           return '<div></div>';
         },
@@ -26,9 +26,9 @@ describe('Notification', function() {
         title: 'title2',
         message: 'message2',
         icon: 'music',
-        closeCond: 6000,
+        closeInMS: 6000,
         type: 'success',
-        group: 'common',
+        groupId: 'common',
         template: () => {
           return '<div></div>';
         },
@@ -37,9 +37,9 @@ describe('Notification', function() {
         title: 'title3',
         message: 'message3',
         icon: 'ok-sign',
-        closeCond: 7000,
+        closeInMS: 7000,
         type: 'success',
-        group: 'common',
+        groupId: 'common',
         template: () => {
           return '<div></div>';
         },
@@ -61,23 +61,23 @@ describe('Notification', function() {
   it('should be able to be pushed to specified group', function() {
     var testNotifsOptions = [
       {
-        group: 'common1',
+        groupId: 'common1',
         expectedNumberOfNotifsAfterPushing: 1,
       },
       {
-        group: 'common2',
+        groupId: 'common2',
         expectedNumberOfNotifsAfterPushing: 1,
       },
       {
-        group: 'common2',
+        groupId: 'common2',
         expectedNumberOfNotifsAfterPushing: 2,
       },
       {
-        group: 'common3',
+        groupId: 'common3',
         expectedNumberOfNotifsAfterPushing: 1,
       },
       {
-        group: 'common3',
+        groupId: 'common3',
         expectedNumberOfNotifsAfterPushing: 2,
       },
     ];
@@ -87,7 +87,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotification(testNotifOptions);
       //check if notif was pushed to appropriate group
-      expect(mnModule.getGroup(testNotifOptions.group).getLength()).toEqual(
+      expect(mnModule.getGroup(testNotifOptions.groupId).getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       );
     }
@@ -103,12 +103,12 @@ describe('Notification', function() {
 
     var testNotifsOptions = [
       {
-        group: greedyGroupName,
+        groupId: greedyGroupName,
         expectedNumberOfNotifsAfterPushing: 1,
         isResultNull: false,
       },
       {
-        group: greedyGroupName,
+        groupId: greedyGroupName,
         expectedNumberOfNotifsAfterPushing: 1,
         isResultNull: true,
       },
@@ -119,7 +119,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotification(testNotifOptions);
       //check the size of the group
-      expect(mnModule.getGroup(testNotifOptions.group).getLength()).toEqual(
+      expect(mnModule.getGroup(testNotifOptions.groupId).getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       );
       //check returned result
@@ -131,7 +131,7 @@ describe('Notification', function() {
     var numberOfNotifsToCreate = 10;
     for (var i = 0; i < numberOfNotifsToCreate.length; i++) {
       //push notif
-      var notif = mnModule.pushNotification({ closeCond: false });
+      var notif = mnModule.pushNotification({ closeInMS: false });
       //check the number of notifs after pushing
       var expectedNumberOfNotifsAfterPushing = 1;
       expect(mnModule.numberOfNotifs).toEqual(
@@ -148,11 +148,11 @@ describe('Notification', function() {
     expect(mnModule.numberOfNotifs).toEqual(0);
   });
 
-  function pushNotifs(notifsCount, groupName, module) {
+  function pushNotifs(notifsCount, groupId, module) {
     for (var i = 0; i < notifsCount; i++) {
       module.pushNotification({
-        group: groupName,
-        closeCond: false,
+        groupId: groupId,
+        closeInMS: false,
       });
     }
   }
@@ -162,7 +162,6 @@ describe('Notification', function() {
     var numberOfNotifsInSecondGroup = 20;
     var firstGroupName = 'first group';
     var secondGroupName = 'second group';
-    // const groupIds = [firstGroupName, ]
     const groups = {
       [firstGroupName]: {
         count: numberOfNotifsInFirstGroup,

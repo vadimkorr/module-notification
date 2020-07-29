@@ -4,14 +4,18 @@ import { applyArgs, generateId } from './utils/utils';
 import { getElement, appendElementToContainer } from './utils/domUtils';
 import { ICONS, ADD_ELEMENT_MODE } from './const';
 
-const _defaultNotifOptions = {
+const defaultNotificationOptions = {
   title: '',
   message: '',
-  closeCond: 5000, // ms
-  group: 'common',
-  template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
-  icon: undefined, // deprecated
+  groupId: null, // required
+  closeInMS: 5000,
   type: ICONS.INFO, // "info", "warning", "error", "success"
+  template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
+};
+
+const defaultModuleOptions = {
+  container: null, // required
+  onNotifsNumberChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
 };
 
 /**
@@ -19,11 +23,7 @@ const _defaultNotifOptions = {
  * @param {Object} moduleOptions - Options of the new module
  */
 export const MNModule = function(moduleOptions) {
-  let _defaultModuleOptions = {
-    container: '#notifications',
-    onNotifsNumberChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
-  };
-  this.options = applyArgs(moduleOptions, _defaultModuleOptions);
+  this.options = applyArgs(moduleOptions, defaultModuleOptions);
 
   this.numberOfNotifs = 0;
   this.groups = new Map();
@@ -103,7 +103,7 @@ MNModule.prototype.pullAll = function() {
 };
 
 MNModule.prototype._onBeforeRemove = function(mnNotification) {
-  const group = this.groups.get(mnNotification.options.group);
+  const group = this.groups.get(mnNotification.options.groupId);
   if (group.hasNotification(mnNotification.id)) {
     group.removeNotification(mnNotification.id);
   }
@@ -119,15 +119,15 @@ MNModule.prototype._createNotification = function(options) {
     mode: options.mode,
     onBeforeRemove: n => this._onBeforeRemove(n),
   });
-  this.groups.get(options.group).addNotification(notification);
+  this.groups.get(options.groupId).addNotification(notification);
   return notification;
 };
 
 MNModule.prototype._addNotification = function(options) {
-  const _options = applyArgs(options, _defaultNotifOptions);
+  const _options = applyArgs(options, defaultNotificationOptions);
 
-  this.createEmptyGroup({ id: _options.group });
-  const group = this.groups.get(_options.group);
+  this.createEmptyGroup({ id: _options.groupId });
+  const group = this.groups.get(_options.groupId);
   const _pushResult =
     !group.options.greedy || group.isEmpty()
       ? this._createNotification(_options)

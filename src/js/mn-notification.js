@@ -80,12 +80,12 @@ MNNotification.prototype.addToContainer = function(options) {
     addOnClick(getCloseButtonSelector(this.id), () => {
       this.pull();
     });
-    if (this.options.closeCond !== false) {
-      if (typeof this.options.closeCond === 'function') {
+    if (this.options.closeInMS !== false) {
+      if (typeof this.options.closeInMS === 'function') {
       } else {
         setTimeout(() => {
           this.pull();
-        }, this.options.closeCond);
+        }, this.options.closeInMS);
       }
     }
   };

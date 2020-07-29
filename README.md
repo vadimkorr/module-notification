@@ -121,7 +121,7 @@ let myNotif = myMNModule.pushNotif({
   title: 'Hello!',
   message: "I'm a notification",
   icon: 'info-circle', // Font Awesome icon name
-  closeCond: 5000, // ms, put false (by default) to prevent closing
+  closeInMS: 5000, // ms, put false (by default) to prevent closing
   type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
   group: 'test', // 'common' (by defalut)
 });
@@ -177,7 +177,7 @@ And assign this function to **template** field:
 
 ```js
 customizedNotifsModule.pushNotif({
-  closeCond: false,
+  closeInMS: false,
   title: 'Hey',
   message: 'I`m a custom notification',
   template: customTemplateFunc,
