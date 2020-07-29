@@ -5,6 +5,7 @@ function addCommonNotif() {
     closeInMS: false,
     title: 'Common Group notification',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -23,7 +24,7 @@ function addTestNotification() {
     closeInMS: false,
     title: 'Test Group notification',
     type: 'success',
-    group: 'test',
+    groupId: 'test',
   });
 }
 
@@ -36,7 +37,7 @@ function addNotifToGreedyGroup() {
     closeInMS: false,
     title: 'Greedy Group notification',
     type: 'warning',
-    group: 'greedy',
+    groupId: 'greedy',
   });
 }
 
@@ -50,6 +51,7 @@ function addSuccessNotif() {
     title: 'Success',
     message: 'Notification',
     type: 'success',
+    groupId: 'common',
   });
 }
 
@@ -59,6 +61,7 @@ function addNoticeNotif() {
     title: 'Notice',
     message: 'Notification',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -68,6 +71,7 @@ function addWarningNotif() {
     title: 'Warning',
     message: 'Notification',
     type: 'warning',
+    groupId: 'common',
   });
 }
 
@@ -77,6 +81,7 @@ function addErrorNotif() {
     title: 'Error',
     message: 'Notification',
     type: 'error',
+    groupId: 'common',
   });
 }
 
@@ -86,6 +91,7 @@ function addTimeoutNotif() {
     title: 'Notice',
     message: 'Notification with Timeout',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -102,6 +108,7 @@ function addNoticeNotifToRemove() {
     title: 'Add notification',
     message: 'to remove it',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -118,6 +125,7 @@ function addSuccessNotifFromTopDir() {
     closeInMS: false,
     message: 'Success',
     type: 'success',
+    groupId: 'common',
   });
 }
 
@@ -126,6 +134,7 @@ function addTimeoutNotifFromTopDir() {
     closeInMS: 2000,
     message: 'Notice',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -134,6 +143,7 @@ function addSuccessNotifFromBottomDir() {
     closeInMS: false,
     message: 'Success',
     type: 'success',
+    groupId: 'common',
   });
 }
 
@@ -142,6 +152,7 @@ function addTimeoutNotifFromBottomDir() {
     closeInMS: 2000,
     message: 'Notice',
     type: 'info',
+    groupId: 'common',
   });
 }
 
@@ -198,6 +209,7 @@ document.onreadystatechange = () => {
       title: 'Hello!',
       message: 'and Welcome ;)',
       type: 'info',
+      groupId: 'common',
       closeInMS: 5000,
     });
 
@@ -205,6 +217,7 @@ document.onreadystatechange = () => {
       message: 'Click buttons to push/pull the notifications',
       type: 'success',
       closeInMS: 7000,
+      groupId: 'common',
     });
 
     dirFromTopMNModule = new MNModule({
