@@ -87,7 +87,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotif(testNotifOptions);
       //check if notif was pushed to appropriate group
-      expect(mnModule.groups[testNotifOptions.group].getLength()).toEqual(
+      expect(mnModule.getGroup(testNotifOptions.group).getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       );
     }
@@ -119,7 +119,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotif(testNotifOptions);
       //check the size of the group
-      expect(mnModule.groups[testNotifOptions.group].getLength()).toEqual(
+      expect(mnModule.getGroup(testNotifOptions.group).getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       );
       //check returned result
@@ -162,20 +162,27 @@ describe('Notification', function() {
     var numberOfNotifsInSecondGroup = 20;
     var firstGroupName = 'first group';
     var secondGroupName = 'second group';
+    // const groupIds = [firstGroupName, ]
+    const groups = {
+      [firstGroupName]: {
+        count: numberOfNotifsInFirstGroup,
+      },
+      [secondGroupName]: {
+        count: numberOfNotifsInSecondGroup,
+      },
+    };
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule);
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule);
     //check total number of notifs
     expect(mnModule.numberOfNotifs).toEqual(
       numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
     );
+
     //check number of notifs in first group
-    expect(mnModule.groups[firstGroupName].getLength()).toEqual(
-      numberOfNotifsInFirstGroup
-    );
-    //check number of notifs in second group
-    expect(mnModule.groups[secondGroupName].getLength()).toEqual(
-      numberOfNotifsInSecondGroup
-    );
+    for (let group of mnModule.getGroups()) {
+      expect(group.getLength()).toEqual(groups[group._getId()].count);
+    }
+
     //pull notifs of first group
     mnModule.pullGroupNotifs(firstGroupName);
     //check number of notifs of module
