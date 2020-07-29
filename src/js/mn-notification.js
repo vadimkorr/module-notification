@@ -16,9 +16,13 @@ import {
   removeClass,
   addClass,
 } from './utils/domUtils';
-import { DIRECTION } from './const';
+import { ADD_ELEMENT_MODE } from './const';
 
 const FADE_MS = 500;
+const fns = {
+  [ADD_ELEMENT_MODE.PUSH]: appendElementToContainer,
+  [ADD_ELEMENT_MODE.UNSHIFT]: prependElementToContainer,
+};
 
 /**
  * @constructs MNNotification
@@ -27,8 +31,8 @@ const FADE_MS = 500;
 
 export function MNNotification(notifOptions) {
   this.id = generateId();
-  this.onBeforeRemove = () => {};
   this.options = notifOptions;
+  this.onBeforeRemove = [];
   this.options.icon = notifOptions.icon
     ? notifOptions.icon
     : getIconNameByType(notifOptions.type);
@@ -38,56 +42,49 @@ export function MNNotification(notifOptions) {
  * Pulls notification
  */
 MNNotification.prototype.pull = function() {
-  if (typeof this.onBeforeRemove === 'function') {
-    this.onBeforeRemove(this);
-    const el = getElementById(this.id);
-    removeClass(el, 'show');
-    setTimeout(() => {
-      removeElementById(this.id);
-    }, FADE_MS);
-  }
+  this.onBeforeRemove.forEach(fn => {
+    if (typeof fn === 'function') {
+      fn(this);
+    }
+  });
+
+  const el = getElementById(this.id);
+  removeClass(el, 'show');
+  setTimeout(() => {
+    removeElementById(this.id);
+  }, FADE_MS);
 };
 
 /**
  * Appends notification element to specified container
  * @param {Object} additionalOptions - Options of the appending
  */
-MNNotification.prototype.appendToContainer = function(options) {
-  this.onBeforeRemove = options.onBeforeRemove;
+MNNotification.prototype.addToContainer = function(options) {
+  options.onBeforeRemove && this.onBeforeRemove.push(options.onBeforeRemove);
 
-  const _getTemplate = () => {
-    let template =
-      typeof this.options.template == 'function'
-        ? getCustomTemplate(
-            this.id,
-            this.options.template(this.options.title, this.options.message)
-          )
-        : getDefaultTemplate(
-            this.id,
-            this.options.title,
-            this.options.message,
-            this.options.type,
-            this.options.icon
-          );
-    return template;
-  };
+  let template =
+    typeof this.options.template == 'function'
+      ? getCustomTemplate(
+          this.id,
+          this.options.template(this.options.title, this.options.message)
+        )
+      : getDefaultTemplate(
+          this.id,
+          this.options.title,
+          this.options.message,
+          this.options.type,
+          this.options.icon
+        );
 
-  const append = () => {
-    const animation = options.animation || 'slide'; // 'fade', 'swing', 'rotate', 'slide'
+  const animation = options.animation || 'slide'; // 'fade', 'swing', 'rotate', 'slide'
 
-    const el = getElementFromHtmlString(_getTemplate());
-    addClass(el, `mn-${animation}`);
+  const el = getElementFromHtmlString(template);
+  addClass(el, `mn-${animation}`);
 
-    const fns = {
-      [DIRECTION.FROM_TOP]: appendElementToContainer,
-      [DIRECTION.FROM_BOTTOM]: prependElementToContainer,
-    };
-    fns[options.direction](getElement(`#${options.moduleId}`), el);
-    setTimeout(() => {
-      addClass(el, 'show');
-    }, 10);
-  };
-  append();
+  fns[options.mode](getElement(`#${options.moduleId}`), el);
+  setTimeout(() => {
+    addClass(el, 'show');
+  }, 10);
 
   const setCloseConditions = () => {
     addOnClick(getCloseButtonSelector(this.id), () => {

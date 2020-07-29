@@ -2,7 +2,17 @@ import { MNGroup } from './mn-group';
 import { MNNotification } from './mn-notification';
 import { applyArgs, generateId } from './utils/utils';
 import { getElement, appendElementToContainer } from './utils/domUtils';
-import { ICONS, DIRECTION } from './const';
+import { ICONS, ADD_ELEMENT_MODE } from './const';
+
+const _defaultNotifOptions = {
+  title: '',
+  message: '',
+  closeCond: 5000, // ms
+  group: 'common',
+  template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
+  icon: undefined,
+  type: ICONS.INFO, // "notice", "warning", "error", "success"
+};
 
 /**
  * @constructs MNModule
@@ -12,7 +22,6 @@ export const MNModule = function(moduleOptions) {
   let _defaultModuleOptions = {
     container: '#notifications',
     onNotifsNumberChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
-    direction: DIRECTION.FROM_TOP, // "fromTop", "fromBottom"
   };
   this.options = applyArgs(moduleOptions, _defaultModuleOptions);
 
@@ -34,6 +43,7 @@ export const MNModule = function(moduleOptions) {
 
 MNModule.prototype.setNotificationsCount = function(count) {
   this.numberOfNotifs = Math.max(count, 0);
+  console.log('======>', this.numberOfNotifs);
   if (typeof this.options.onNotifsNumberChange === 'function') {
     this.options.onNotifsNumberChange(this.numberOfNotifs);
   }
@@ -44,12 +54,15 @@ MNModule.prototype.setNotificationsCount = function(count) {
  * @param {String} groupName - Name of the group
  * @returns Boolean value
  */
+// used in tests only
 MNModule.prototype.getGroup = function(id) {
   return this.groups.get(id);
 };
+// used in tests only
 MNModule.prototype.getGroups = function() {
   return this.groups.values();
 };
+// used in tests only
 MNModule.prototype.getGroupsCount = function() {
   return this.groups.size;
 };
@@ -73,52 +86,56 @@ MNModule.prototype.createEmptyGroup = function(groupOptions) {
  * Pulls notifications of the specified group
  * @param {String} groupName - Name of the group
  */
-MNModule.prototype.pullGroupNotifs = function(groupName) {
-  if (!this.groups.has(groupName))
-    throw new Error(`Group with id ${groupName} does not exist`);
+MNModule.prototype.pullGroupNotifs = function(id) {
+  if (!this.groups.has(id))
+    throw new Error(`Group with id ${id} does not exist`);
   this.groups
-    .get(groupName)
+    .get(id)
     .getNotifications()
-    .forEach(notification => {
-      notification.pull();
-    });
-  console.debug('Group notifications were removed:', groupName);
+    .forEach(notification => notification.pull());
+  console.debug('Group notifications were removed:', id);
 };
 
 /**
  * Pulls all notifications from current module
  */
 MNModule.prototype.pullAll = function() {
-  this.groups.forEach((_, groupId) => {
-    this.pullGroupNotifs(groupId);
-    console.debug('Group notifications were removed:', groupId);
-  });
+  this.groups.forEach((_, groupId) => this.pullGroupNotifs(groupId));
 };
 
 MNModule.prototype._onBeforeRemove = function(mnNotification) {
-  if (
-    this.groups
-      .get(mnNotification.options.group)
-      .hasNotification(mnNotification.id)
-  ) {
-    this.setNotificationsCount(this.numberOfNotifs - 1);
-    this.groups
-      .get(mnNotification.options.group)
-      .removeNotification(mnNotification.id);
+  const group = this.groups.get(mnNotification.options.group);
+  if (group.hasNotification(mnNotification.id)) {
+    group.removeNotification(mnNotification.id);
   }
+  this.setNotificationsCount(this.numberOfNotifs - 1);
 };
 
-MNModule.prototype.createNotification = function(notifOptions) {
+MNModule.prototype._createNotification = function(options) {
   this.setNotificationsCount(this.numberOfNotifs + 1);
 
-  const notification = new MNNotification(notifOptions);
-  notification.appendToContainer({
+  const notification = new MNNotification(options);
+  notification.addToContainer({
     moduleId: this.id,
-    direction: this.options.direction, // deprecated
+    mode: options.mode,
     onBeforeRemove: n => this._onBeforeRemove(n),
   });
-  this.groups.get(notifOptions.group).pushNotif(notification);
+  this.groups.get(options.group).addNotification(notification);
   return notification;
+};
+
+MNModule.prototype._addNotification = function(options) {
+  const _options = applyArgs(options, _defaultNotifOptions);
+
+  this.createEmptyGroup({ name: _options.group });
+  const group = this.groups.get(_options.group);
+  const _pushResult =
+    !group.options.greedy || group.isEmpty()
+      ? this._createNotification(_options)
+      : null;
+
+  console.debug('New notification', _pushResult, _options);
+  return _pushResult;
 };
 
 /**
@@ -126,26 +143,10 @@ MNModule.prototype.createNotification = function(notifOptions) {
  * @param {Object} options - Options of the notification
  * @returns {Object} notif instance
  */
-MNModule.prototype.pushNotif = function(notifOptions) {
-  let _defaultNotifOptions = {
-    title: '',
-    message: '',
-    closeCond: 5000, // ms
-    group: 'common',
-    template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
-    icon: undefined,
-    type: ICONS.INFO, // "notice", "warning", "error", "success"
-  };
-  let _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
+MNModule.prototype.pushNotification = function(options) {
+  return this._addNotification({ ...options, mode: ADD_ELEMENT_MODE.PUSH });
+};
 
-  this.createEmptyGroup({ name: _notifOptions.group });
-
-  const _pushResult =
-    !this.groups.get(_notifOptions.group).options.greedy ||
-    this.groups.get(_notifOptions.group).getLength() < 1
-      ? this.createNotification(_notifOptions)
-      : null;
-
-  console.debug('New notification', _pushResult, _notifOptions);
-  return _pushResult;
+MNModule.prototype.unshiftNotification = function(options) {
+  return this._addNotification({ ...options, mode: ADD_ELEMENT_MODE.UNSHIFT });
 };

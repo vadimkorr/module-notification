@@ -21,7 +21,7 @@ MNGroup.prototype._getId = function() {
  * Pushes new notification to the group
  * @param {Object} notif - Instance of the notification
  */
-MNGroup.prototype.pushNotif = function(notification) {
+MNGroup.prototype.addNotification = function(notification) {
   this._notifications.set(notification.id, notification);
 };
 
@@ -46,9 +46,6 @@ MNGroup.prototype.getLength = function() {
   return this._notifications.size;
 };
 
-MNGroup.prototype.removeNotifications = function() {
-  this._notifications.forEach(notification => {
-    notification.pull();
-  });
-  this._notifications = new Map();
+MNGroup.prototype.isEmpty = function() {
+  return this._notifications.size === 0;
 };

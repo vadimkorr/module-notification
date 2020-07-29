@@ -1,2 +1,2 @@
 export * from './icon';
-export * from './direction';
+export * from './add-element-mode';
