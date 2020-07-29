@@ -10,8 +10,8 @@ const _defaultNotifOptions = {
   closeCond: 5000, // ms
   group: 'common',
   template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
-  icon: undefined,
-  type: ICONS.INFO, // "notice", "warning", "error", "success"
+  icon: undefined, // deprecated
+  type: ICONS.INFO, // "info", "warning", "error", "success"
 };
 
 /**
@@ -43,7 +43,6 @@ export const MNModule = function(moduleOptions) {
 
 MNModule.prototype.setNotificationsCount = function(count) {
   this.numberOfNotifs = Math.max(count, 0);
-  console.log('======>', this.numberOfNotifs);
   if (typeof this.options.onNotifsNumberChange === 'function') {
     this.options.onNotifsNumberChange(this.numberOfNotifs);
   }

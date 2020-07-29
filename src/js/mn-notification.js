@@ -2,7 +2,6 @@ import {
   generateId,
   getDefaultTemplate,
   getCustomTemplate,
-  getIconNameByType,
   getCloseButtonSelector,
 } from './utils/utils';
 import {
@@ -33,9 +32,6 @@ export function MNNotification(notifOptions) {
   this.id = generateId();
   this.options = notifOptions;
   this.onBeforeRemove = [];
-  this.options.icon = notifOptions.icon
-    ? notifOptions.icon
-    : getIconNameByType(notifOptions.type);
 }
 
 /**
@@ -72,8 +68,7 @@ MNNotification.prototype.addToContainer = function(options) {
           this.id,
           this.options.title,
           this.options.message,
-          this.options.type,
-          this.options.icon
+          this.options.type
         );
 
   const animation = options.animation || 'slide'; // 'fade', 'swing', 'rotate', 'slide'

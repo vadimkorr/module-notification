@@ -1,3 +1,4 @@
+window["MNModule"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,11 +82,72 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+module.exports = _taggedTemplateLiteral;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -199,53 +261,79 @@
 
 
 /***/ }),
-/* 1 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 2 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
-/* 3 */
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./src/css/module-notification.css
-var module_notification = __webpack_require__(1);
+var module_notification = __webpack_require__(4);
 
-// EXTERNAL MODULE: ./node_modules/font-awesome/css/font-awesome.min.css
-var font_awesome_min = __webpack_require__(2);
+// EXTERNAL MODULE: ./src/css/animations/fade.css
+var fade = __webpack_require__(5);
+
+// EXTERNAL MODULE: ./src/css/animations/swing.css
+var swing = __webpack_require__(6);
+
+// EXTERNAL MODULE: ./src/css/animations/rotate.css
+var rotate = __webpack_require__(7);
+
+// EXTERNAL MODULE: ./src/css/animations/slide.css
+var slide = __webpack_require__(8);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(0);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/taggedTemplateLiteral.js
+var taggedTemplateLiteral = __webpack_require__(1);
+var taggedTemplateLiteral_default = /*#__PURE__*/__webpack_require__.n(taggedTemplateLiteral);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
+var helpers_typeof = __webpack_require__(2);
+var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // EXTERNAL MODULE: ./node_modules/cuid/dist/browser-cuid.js
-var browser_cuid = __webpack_require__(0);
+var browser_cuid = __webpack_require__(3);
 var browser_cuid_default = /*#__PURE__*/__webpack_require__.n(browser_cuid);
 
-// CONCATENATED MODULE: ./src/js/const/icon.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/js/utils/utils.js
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var ICONS = function ICONS() {
-  _classCallCheck(this, ICONS);
-};
 
-_defineProperty(ICONS, "INFO", 'info-circle');
-
-_defineProperty(ICONS, "SUCCESS", 'check-circle');
-
-_defineProperty(ICONS, "WARNING", 'exclamation-circle');
-
-_defineProperty(ICONS, "ERROR", 'times-circle');
-// CONCATENATED MODULE: ./src/js/utils.js
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["<div id='{{id}}'>{{content}}</div>"]);
+  var data = taggedTemplateLiteral_default()(["<div id='{{id}}'>{{content}}</div>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -255,7 +343,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  <div\n    role='mn-alert'\n    id='{{id}}'\n    class='mn-notification-container mn-alert mn-alert-{{type}} mn-alert-dismissible'>\n    <button\n      type='button'\n      class='mn-close-btn mn-close'>\n      <span aria-hidden='true'>&times;</span>\n    </button>\n    <div class='mn-notification-container-content'>\n      <i class=\"fa fa-{{icon}}\"></i>\n      <span><strong>{{title}}</strong> {{message}}</span>\n    </div>\n  </div>"]);
+  var data = taggedTemplateLiteral_default()(["\n  <div\n    class=\"mn-notification\"\n    id='{{id}}'\n  >\n    <div class=\"mn-alert mn-alert-{{type}} mn-alert-dismissible\">\n      <button\n        type='button'\n        class='mn-close-btn mn-close'>\n        <span aria-hidden='true'>&times;</span>\n      </button>\n      <div class='mn-notification-container__content'>\n        <i class=\"mn-icon mn-icon-{{type}}\"></i>\n        <span><strong>{{title}}</strong> {{message}}</span>\n      </div>\n    </div>\n  </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -263,11 +351,6 @@ function _templateObject() {
 
   return data;
 }
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 var utils_generateId = function generateId() {
@@ -288,13 +371,18 @@ var extendDefaults = function extendDefaults(source, properties) {
 };
 /* return options if specified or default options otherwise */
 
-var applyArgs = function applyArgs(argum, defaults) {
-  if (argum && _typeof(argum) === 'object') {
+var utils_applyArgs = function applyArgs(argum, defaults) {
+  if (argum && typeof_default()(argum) === 'object') {
     return extendDefaults(defaults, argum);
   } else {
     return defaults;
   }
 };
+
+var replace = function replace(str, find, by) {
+  return str.replace(new RegExp(find, 'g'), by);
+};
+
 var templater = function templater(_ref) {
   var id = _ref.id,
       _ref$title = _ref.title,
@@ -303,27 +391,40 @@ var templater = function templater(_ref) {
       message = _ref$message === void 0 ? '' : _ref$message,
       _ref$type = _ref.type,
       type = _ref$type === void 0 ? '' : _ref$type,
-      _ref$icon = _ref.icon,
-      icon = _ref$icon === void 0 ? '' : _ref$icon,
       _ref$content = _ref.content,
       content = _ref$content === void 0 ? '' : _ref$content;
   return function (t) {
-    var idPlaceholder = '{{id}}';
-    var titlePlaceholder = '{{title}}';
-    var messagePlaceholder = '{{message}}';
-    var typePlaceholder = '{{type}}';
-    var iconPlaceholder = '{{icon}}';
-    var contentPlaceholder = '{{content}}';
-    return (t ? t[0] : '').replace(idPlaceholder, id).replace(titlePlaceholder, title).replace(messagePlaceholder, message).replace(typePlaceholder, type).replace(iconPlaceholder, icon).replace(contentPlaceholder, content);
+    var str = t ? t[0] : '';
+    var replacer = [{
+      find: '{{id}}',
+      by: id
+    }, {
+      find: '{{title}}',
+      by: title
+    }, {
+      find: '{{message}}',
+      by: message
+    }, {
+      find: '{{type}}',
+      by: type
+    }, {
+      find: '{{content}}',
+      by: content
+    }];
+    replacer.forEach(function (_ref2) {
+      var find = _ref2.find,
+          by = _ref2.by;
+      str = replace(str, find, by);
+    });
+    return str;
   };
 };
-var getDefaultTemplate = function getDefaultTemplate(id, title, message, type, icon) {
+var getDefaultTemplate = function getDefaultTemplate(id, title, message, type) {
   return templater({
     id: id,
     title: title,
     message: message,
-    type: type,
-    icon: icon
+    type: type
   })(_templateObject());
 };
 var getCustomTemplate = function getCustomTemplate(id, content) {
@@ -332,112 +433,79 @@ var getCustomTemplate = function getCustomTemplate(id, content) {
     content: content
   })(_templateObject2());
 };
-var utils_getIconNameByType = function getIconNameByType(type) {
-  switch (type) {
-    default:
-    case 'notice':
-      return ICONS.INFO;
-
-    case 'success':
-      return ICONS.SUCCESS;
-
-    case 'warning':
-      return ICONS.WARNING;
-
-    case 'error':
-      return ICONS.ERROR;
-  }
-};
 var getCloseButtonSelector = function getCloseButtonSelector(id) {
   return "#".concat(id, " .mn-close-btn");
 };
-var msToSec = function msToSec(ms) {
-  return ms / 1000;
-};
-var fadeOut = function fadeOut(ms, cb) {
-  var opacity = 0;
-  var step = 50;
-  var opacityStep = step / ms;
-  var timer = setInterval(function () {
-    if (opacity >= 1.0) {
-      clearInterval(timer);
-    }
-
-    cb(opacity);
-    opacity += opacityStep;
-  }, step);
-};
-// CONCATENATED MODULE: ./src/js/MNGroup.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function MNGroup_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+// CONCATENATED MODULE: ./src/js/mn-group.js
 
 /**
  * @constructs MNGroup - Private class of the group
  * @param {Object} groupOptions - Options of the new group
  */
 
-var MNGroup_MNGroup =
-/*#__PURE__*/
-function () {
-  function MNGroup(groupOptions) {
-    MNGroup_classCallCheck(this, MNGroup);
+function MNGroup(groupOptions) {
+  var _defaultOptions = {
+    name: 'common',
+    greedy: false
+  };
+  this.options = utils_applyArgs(groupOptions, _defaultOptions);
+  this._notifications = new Map();
+}
 
-    var _defaultOptions = {
-      name: 'common',
-      greedy: false
-    };
-    this.options = applyArgs(groupOptions, _defaultOptions);
-    this.notifs = [];
-  }
-  /**
-   * Pushes new notification to the group
-   * @param {Object} notif - Instance of the notification
-   */
+MNGroup.prototype._getId = function () {
+  return this.options.name;
+};
+/**
+ * Pushes new notification to the group
+ * @param {Object} notif - Instance of the notification
+ */
 
 
-  _createClass(MNGroup, [{
-    key: "pushNotif",
-    value: function pushNotif(notif) {
-      this.notifs = [].concat(_toConsumableArray(this.notifs), [notif]);
-    }
-    /**
-     * Detects if group has a notification with id
-     * @param {String} id - Id of the notification
-     * @returns Index of the notification in the array
-     */
+MNGroup.prototype.addNotification = function (notification) {
+  this._notifications.set(notification.id, notification);
+};
+/**
+ * Detects if group has a notification with id
+ * @param {String} id - Id of the notification
+ * @returns Index of the notification in the array
+ */
 
-  }, {
-    key: "hasNotif",
-    value: function hasNotif(id) {
-      var index = -1;
-      this.notifs.forEach(function (n, ind) {
-        if (n.id == id) {
-          index = ind;
-          return;
-        }
-      });
-      return index;
-    }
-  }]);
 
-  return MNGroup;
-}();
-// CONCATENATED MODULE: ./src/js/domUtils.js
+MNGroup.prototype.hasNotification = function (id) {
+  return this._notifications.has(id);
+};
 
+MNGroup.prototype.removeNotification = function (id) {
+  this._notifications.delete(id);
+};
+
+MNGroup.prototype.getNotifications = function () {
+  return this._notifications;
+};
+
+MNGroup.prototype.getLength = function () {
+  return this._notifications.size;
+};
+
+MNGroup.prototype.isEmpty = function () {
+  return this._notifications.size === 0;
+};
+// CONCATENATED MODULE: ./src/js/utils/domUtils.js
 var getElement = function getElement(query) {
   return document.querySelector("".concat(query));
+};
+var getElementById = function getElementById(id) {
+  return getElement("#".concat(id));
+};
+var removeClass = function removeClass(el, className) {
+  if (el) {
+    el.classList.remove(className);
+  }
+};
+var addClass = function addClass(el, className) {
+  if (el) {
+    el.className = "".concat(el.className, " ").concat(className);
+  }
 };
 var getElementFromHtmlString = function getElementFromHtmlString(htmlString) {
   var div = document.createElement('div');
@@ -462,45 +530,14 @@ var prependElementToContainer = function prependElementToContainer(container, el
     container.prepend(element);
   }
 };
-var domUtils_appendElementToContainerWithFadeIn = function appendElementToContainerWithFadeIn(container, element) {
-  var ms = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 300;
-  element.style.opacity = 0;
-  fadeOut(ms, function (opacity) {
-    element.style.opacity = opacity;
-  });
-  appendElementToContainer(container, element);
-};
-var domUtils_prependElementToContainerWithFadeIn = function prependElementToContainerWithFadeIn(container, element) {
-  var ms = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 300;
-  element.style.opacity = 0;
-  fadeOut(ms, function (opacity) {
-    element.style.opacity = opacity;
-  });
-  prependElementToContainer(container, element);
-};
-
-var _removeElement = function _removeElement(element) {
+var removeElement = function removeElement(element) {
   element.parentNode.removeChild(element);
 };
+var removeElementById = function removeElementById(id) {
+  var el = getElementById(id);
 
-var removeElement = function removeElement(query) {
-  var element = getElement(query);
-
-  if (element) {
-    _removeElement(element);
-  }
-};
-var domUtils_removeElementWithFadeOut = function removeElementWithFadeOut(query) {
-  var ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 300;
-  var element = getElement(query);
-
-  if (element) {
-    var sec = msToSec(ms);
-    element.style.transition = "opacity ".concat(sec, "s ease");
-    element.style.opacity = 0;
-    setTimeout(function () {
-      _removeElement(element);
-    }, ms);
+  if (el) {
+    removeElement(el);
   }
 };
 var addOnClick = function addOnClick(query, cb) {
@@ -510,313 +547,265 @@ var addOnClick = function addOnClick(query, cb) {
     element.addEventListener('click', cb, false);
   }
 };
-// CONCATENATED MODULE: ./src/js/const/direction.js
-function direction_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function direction_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var DIRECTION = function DIRECTION() {
-  direction_classCallCheck(this, DIRECTION);
+// CONCATENATED MODULE: ./src/js/const/icon.js
+var ICONS = {
+  INFO: 'info'
 };
-
-direction_defineProperty(DIRECTION, "FROM_TOP", 'fromTop');
-
-direction_defineProperty(DIRECTION, "FROM_BOTTOM", 'fromBottom');
+// CONCATENATED MODULE: ./src/js/const/add-element-mode.js
+var ADD_ELEMENT_MODE = {
+  PUSH: 'push',
+  UNSHIFT: 'unshift'
+};
 // CONCATENATED MODULE: ./src/js/const/index.js
 
 
-// CONCATENATED MODULE: ./src/js/MNNotification.js
-function MNNotification_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/js/mn-notification.js
 
-function MNNotification_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function MNNotification_createClass(Constructor, protoProps, staticProps) { if (protoProps) MNNotification_defineProperties(Constructor.prototype, protoProps); if (staticProps) MNNotification_defineProperties(Constructor, staticProps); return Constructor; }
+var _fns;
 
 
 
 
-var FADE_MS = 200;
+var FADE_MS = 500;
+var fns = (_fns = {}, defineProperty_default()(_fns, ADD_ELEMENT_MODE.PUSH, appendElementToContainer), defineProperty_default()(_fns, ADD_ELEMENT_MODE.UNSHIFT, prependElementToContainer), _fns);
 /**
  * @constructs MNNotification
  * @param {Object} notifOptions - options of the new notification
  */
 
-var MNNotification_MNNotification =
-/*#__PURE__*/
-function () {
-  function MNNotification(notifOptions) {
-    MNNotification_classCallCheck(this, MNNotification);
+function MNNotification(notifOptions) {
+  this.id = utils_generateId();
+  this.options = notifOptions;
+  this.onBeforeRemove = [];
+}
+/**
+ * Pulls notification
+ */
 
-    this.id = utils_generateId();
+MNNotification.prototype.pull = function () {
+  var _this = this;
 
-    this.onBeforeRemove = function () {};
+  this.onBeforeRemove.forEach(function (fn) {
+    if (typeof fn === 'function') {
+      fn(_this);
+    }
+  });
+  var el = getElementById(this.id);
+  removeClass(el, 'show');
+  setTimeout(function () {
+    removeElementById(_this.id);
+  }, FADE_MS);
+};
+/**
+ * Appends notification element to specified container
+ * @param {Object} additionalOptions - Options of the appending
+ */
 
-    this.options = notifOptions;
-    this.options.icon = notifOptions.icon ? notifOptions.icon : utils_getIconNameByType(notifOptions.type);
-  }
-  /**
-   * Pulls notification
-   */
 
+MNNotification.prototype.addToContainer = function (options) {
+  var _this2 = this;
 
-  MNNotification_createClass(MNNotification, [{
-    key: "pull",
-    value: function pull() {
-      var _self = this;
+  options.onBeforeRemove && this.onBeforeRemove.push(options.onBeforeRemove);
+  var template = typeof this.options.template == 'function' ? getCustomTemplate(this.id, this.options.template(this.options.title, this.options.message)) : getDefaultTemplate(this.id, this.options.title, this.options.message, this.options.type);
+  var animation = options.animation || 'slide'; // 'fade', 'swing', 'rotate', 'slide'
 
-      if (typeof _self.onBeforeRemove === 'function') {
-        _self.onBeforeRemove(_self);
+  var el = getElementFromHtmlString(template);
+  addClass(el, "mn-".concat(animation));
+  fns[options.mode](getElement("#".concat(options.moduleId)), el);
+  setTimeout(function () {
+    addClass(el, 'show');
+  }, 10);
 
-        domUtils_removeElementWithFadeOut("#".concat(_self.id), FADE_MS);
+  var setCloseConditions = function setCloseConditions() {
+    addOnClick(getCloseButtonSelector(_this2.id), function () {
+      _this2.pull();
+    });
+
+    if (_this2.options.closeCond !== false) {
+      if (typeof _this2.options.closeCond === 'function') {} else {
+        setTimeout(function () {
+          _this2.pull();
+        }, _this2.options.closeCond);
       }
     }
-    /**
-     * Appends notification element to specified container
-     * @param {Object} additionalOptions - Options of the appending
-     */
+  };
 
-  }, {
-    key: "appendToContainer",
-    value: function appendToContainer(additionalOptions) {
-      var _self = this;
+  setCloseConditions();
+};
+// CONCATENATED MODULE: ./src/js/mn-module.js
 
-      this.onBeforeRemove = additionalOptions.onBeforeRemove;
 
-      var _getTemplate = function _getTemplate() {
-        var template = typeof _self.options.template == 'function' ? getCustomTemplate(_self.id, _self.options.template(_self.options.title, _self.options.message)) : getDefaultTemplate(_self.id, _self.options.title, _self.options.message, _self.options.type, _self.options.icon);
-        return template;
-      };
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-      (function append() {
-        var container = getElement("#".concat(additionalOptions.moduleId));
-
-        if (additionalOptions.direction == DIRECTION.FROM_TOP) {
-          domUtils_appendElementToContainerWithFadeIn(container, getElementFromHtmlString(_getTemplate()), FADE_MS);
-        } else {
-          domUtils_prependElementToContainerWithFadeIn(container, getElementFromHtmlString(_getTemplate()), FADE_MS);
-        }
-      })();
-
-      (function setCloseConditions() {
-        addOnClick(getCloseButtonSelector(_self.id), function () {
-          _self.pull();
-        });
-
-        if (_self.options.closeCond !== false) {
-          if (typeof _self.options.closeCond === 'function') {} else {
-            setTimeout(function () {
-              _self.pull();
-            }, _self.options.closeCond);
-          }
-        }
-      })();
-    }
-  }]);
-
-  return MNNotification;
-}();
-// CONCATENATED MODULE: ./src/js/MNModule.js
-function MNModule_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function MNModule_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function MNModule_createClass(Constructor, protoProps, staticProps) { if (protoProps) MNModule_defineProperties(Constructor.prototype, protoProps); if (staticProps) MNModule_defineProperties(Constructor, staticProps); return Constructor; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
 
 
 
+var _defaultNotifOptions = {
+  title: '',
+  message: '',
+  closeCond: 5000,
+  // ms
+  group: 'common',
+  template: undefined,
+  // function(title, message) { return "<span>" + title + "</span>"; }
+  icon: undefined,
+  // deprecated
+  type: ICONS.INFO // "info", "warning", "error", "success"
+
+};
 /**
  * @constructs MNModule
  * @param {Object} moduleOptions - Options of the new module
  */
 
-var MNModule_MNModule =
-/*#__PURE__*/
-function () {
-  function MNModule(moduleOptions) {
-    MNModule_classCallCheck(this, MNModule);
+var mn_module_MNModule = function MNModule(moduleOptions) {
+  var _defaultModuleOptions = {
+    container: '#notifications',
+    onNotifsNumberChange: undefined // e.g. (number) => { console.debug("Number of notifications", number); },
 
-    var _defaultModuleOptions = {
-      container: '#notifications',
-      onNotifsNumberChange: undefined,
-      // e.g. (number) => { console.debug("Number of notifications", number); },
-      direction: DIRECTION.FROM_TOP // "fromTop", "fromBottom"
+  };
+  this.options = utils_applyArgs(moduleOptions, _defaultModuleOptions);
+  this.numberOfNotifs = 0;
+  this.groups = new Map();
+  this.id = utils_generateId(); //append module container to the specified container
 
-    };
-    this.options = applyArgs(moduleOptions, _defaultModuleOptions);
-    this.numberOfNotifs = 0;
-    this.groups = {};
-    this.id = utils_generateId(); //append module container to the specified container
+  appendElementToContainer(getElement(this.options.container), "<div id='".concat(this.id, "' class='mn-module-container'></div>"));
+  console.debug('New notification module was registered', this.id, this.options);
+};
 
-    appendElementToContainer(getElement(this.options.container), "<div id='".concat(this.id, "' class='mn-module-container'></div>"));
-    console.debug('New notification module was registered', this.id, this.options);
+mn_module_MNModule.prototype.setNotificationsCount = function (count) {
+  this.numberOfNotifs = Math.max(count, 0);
+
+  if (typeof this.options.onNotifsNumberChange === 'function') {
+    this.options.onNotifsNumberChange(this.numberOfNotifs);
   }
-  /**
-   * Detects if group with specified name exist
-   * @param {String} groupName - Name of the group
-   * @returns Boolean value
-   */
+};
+/**
+ * Detects if group with specified name exist
+ * @param {String} groupName - Name of the group
+ * @returns Boolean value
+ */
+// used in tests only
 
 
-  MNModule_createClass(MNModule, [{
-    key: "isGroupExist",
-    value: function isGroupExist(groupName) {
-      return this.groups.hasOwnProperty(groupName);
+mn_module_MNModule.prototype.getGroup = function (id) {
+  return this.groups.get(id);
+}; // used in tests only
+
+
+mn_module_MNModule.prototype.getGroups = function () {
+  return this.groups.values();
+}; // used in tests only
+
+
+mn_module_MNModule.prototype.getGroupsCount = function () {
+  return this.groups.size;
+};
+/**
+ * Creates an empty group
+ * @param {Object} groupOptions - Options of the group
+ * @returns Boolean value of result
+ */
+
+
+mn_module_MNModule.prototype.createEmptyGroup = function (groupOptions) {
+  if (this.groups.has(groupOptions.name)) {
+    console.debug('Group with name already exist:', groupOptions.name);
+    return false;
+  }
+
+  this.groups.set(groupOptions.name, new MNGroup(groupOptions));
+  console.debug('New group was created', groupOptions.name);
+  return true;
+};
+/**
+ * Pulls notifications of the specified group
+ * @param {String} groupName - Name of the group
+ */
+
+
+mn_module_MNModule.prototype.pullGroupNotifs = function (id) {
+  if (!this.groups.has(id)) throw new Error("Group with id ".concat(id, " does not exist"));
+  this.groups.get(id).getNotifications().forEach(function (notification) {
+    return notification.pull();
+  });
+  console.debug('Group notifications were removed:', id);
+};
+/**
+ * Pulls all notifications from current module
+ */
+
+
+mn_module_MNModule.prototype.pullAll = function () {
+  var _this = this;
+
+  this.groups.forEach(function (_, groupId) {
+    return _this.pullGroupNotifs(groupId);
+  });
+};
+
+mn_module_MNModule.prototype._onBeforeRemove = function (mnNotification) {
+  var group = this.groups.get(mnNotification.options.group);
+
+  if (group.hasNotification(mnNotification.id)) {
+    group.removeNotification(mnNotification.id);
+  }
+
+  this.setNotificationsCount(this.numberOfNotifs - 1);
+};
+
+mn_module_MNModule.prototype._createNotification = function (options) {
+  var _this2 = this;
+
+  this.setNotificationsCount(this.numberOfNotifs + 1);
+  var notification = new MNNotification(options);
+  notification.addToContainer({
+    moduleId: this.id,
+    mode: options.mode,
+    onBeforeRemove: function onBeforeRemove(n) {
+      return _this2._onBeforeRemove(n);
     }
-    /**
-     * Creates an empty group
-     * @param {Object} groupOptions - Options of the group
-     * @returns Boolean value of result
-     */
+  });
+  this.groups.get(options.group).addNotification(notification);
+  return notification;
+};
 
-  }, {
-    key: "createEmptyGroup",
-    value: function createEmptyGroup(groupOptions) {
-      if (this.isGroupExist(groupOptions.name)) {
-        console.debug('Group with name already exist:', groupOptions.name);
-        return false;
-      } else {
-        this.groups[groupOptions.name] = new MNGroup_MNGroup(groupOptions);
-        console.debug('New group was created', groupOptions.name);
-        return true;
-      }
-    }
-    /**
-     * Pulls notifications of the specified group
-     * @param {String} groupName - Name of the group
-     */
+mn_module_MNModule.prototype._addNotification = function (options) {
+  var _options = utils_applyArgs(options, _defaultNotifOptions);
 
-  }, {
-    key: "pullGroupNotifs",
-    value: function pullGroupNotifs(groupName) {
-      if (this.groups.hasOwnProperty(groupName)) {
-        for (var i = 0; i < this.groups[groupName].notifs.length;) {
-          this.groups[groupName].notifs[i].pull();
-        }
+  this.createEmptyGroup({
+    name: _options.group
+  });
+  var group = this.groups.get(_options.group);
 
-        console.debug('Group notifications were removed:', groupName);
-      } else {
-        console.debug("Group doesn't exist:", groupName);
-      }
-    }
-    /**
-     * Pulls all notifications from current module
-     */
+  var _pushResult = !group.options.greedy || group.isEmpty() ? this._createNotification(_options) : null;
 
-  }, {
-    key: "pullAll",
-    value: function pullAll() {
-      for (var groupName in this.groups) {
-        for (var i = 0; i < this.groups[groupName].notifs.length;) {
-          this.groups[groupName].notifs[i].pull();
-        }
+  console.debug('New notification', _pushResult, _options);
+  return _pushResult;
+};
+/**
+ * Pushes the new notification
+ * @param {Object} options - Options of the notification
+ * @returns {Object} notif instance
+ */
 
-        console.debug('Group notifications were removed:', groupName);
-      }
-    }
-    /**
-     * Pushes the new notification
-     * @param {Object} options - Options of the notification
-     * @returns {Object} notif instance
-     */
 
-  }, {
-    key: "pushNotif",
-    value: function pushNotif(notifOptions) {
-      var _self = this;
+mn_module_MNModule.prototype.pushNotification = function (options) {
+  return this._addNotification(_objectSpread({}, options, {
+    mode: ADD_ELEMENT_MODE.PUSH
+  }));
+};
 
-      var _defaultNotifOptions = {
-        title: '',
-        message: '',
-        closeCond: 5000,
-        // ms
-        group: 'common',
-        template: undefined,
-        // function(title, message) { return "<span>" + title + "</span>"; }
-        icon: undefined,
-        type: ICONS.INFO // "notice", "warning", "error", "success"
-
-      };
-
-      var _notifOptions = applyArgs(notifOptions, _defaultNotifOptions);
-
-      function _onBeforeRemove(mnNotification) {
-        var hasInd = _self.groups[mnNotification.options.group].hasNotif(mnNotification.id);
-
-        if (hasInd != -1) {
-          (function _decCount() {
-            _self.numberOfNotifs > 0 ? _self.numberOfNotifs-- : _self.numberOfNotifs = 0;
-
-            _self.callOnNotifsNumberChange(_self.numberOfNotifs);
-          })();
-
-          _self.groups[mnNotification.options.group].notifs.splice(hasInd, 1);
-        }
-      }
-
-      function _pushInner(notifOptions) {
-        (function incCount() {
-          _self.numberOfNotifs++;
-
-          _self.callOnNotifsNumberChange(_self.numberOfNotifs);
-        })();
-
-        var additionalOptions = {
-          moduleId: _self.id,
-          direction: _self.options.direction,
-          onBeforeRemove: _onBeforeRemove
-        };
-        var notif = new MNNotification_MNNotification(notifOptions);
-        notif.appendToContainer(additionalOptions);
-
-        _self.groups[notifOptions.group].pushNotif(notif);
-
-        return notif;
-      }
-
-      var _pushResult = null; //group is not exist yet
-
-      if (!_self.isGroupExist(_notifOptions.group)) {
-        _self.createEmptyGroup({
-          name: _notifOptions.group
-        });
-
-        _pushResult = _pushInner(_notifOptions); //group exists
-      } else {
-        //group is not not greedy or is empty
-        if (!_self.groups[_notifOptions.group].options.greedy || _self.groups[_notifOptions.group].notifs.length < 1) {
-          _pushResult = _pushInner(_notifOptions);
-        } else {
-          _pushResult = null;
-        }
-      }
-
-      if (_pushResult) {
-        console.debug('New notification was pushed', _pushResult, _notifOptions);
-        return _pushResult;
-      } else {
-        console.debug("New notification wasn't pushed", _notifOptions);
-        return null;
-      }
-    }
-    /**
-     * Callback function rises on changin the number of notifications
-     * @param {Number} number - current number of notifications
-     */
-
-  }, {
-    key: "callOnNotifsNumberChange",
-    value: function callOnNotifsNumberChange(number) {
-      if (typeof this.options.onNotifsNumberChange === 'function') {
-        this.options.onNotifsNumberChange(number);
-      }
-    }
-  }]);
-
-  return MNModule;
-}();
+mn_module_MNModule.prototype.unshiftNotification = function (options) {
+  return this._addNotification(_objectSpread({}, options, {
+    mode: ADD_ELEMENT_MODE.UNSHIFT
+  }));
+};
 // CONCATENATED MODULE: ./src/js/index.js
 
 // CONCATENATED MODULE: ./src/index.js
@@ -824,9 +813,9 @@ function () {
 
 
 
-(function (window) {
-  window.MNModule = MNModule_MNModule;
-})(window);
+
+
+/* harmony default export */ var src = __webpack_exports__["default"] = (mn_module_MNModule);
 
 /***/ })
-/******/ ]);
+/******/ ])["default"];

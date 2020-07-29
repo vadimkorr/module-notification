@@ -12,8 +12,33 @@
   margin-bottom: 0;
 }
 
+/* default icons */
+.mn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.mn-icon-success {
+  background-image: url(../assets/check-circle.svg);
+}
+
+.mn-icon-info {
+  background-image: url(../assets/info-circle.svg);
+}
+
+.mn-icon-warning {
+  background-image: url(../assets/exclamation-circle.svg);
+}
+
+.mn-icon-error {
+  background-image: url(../assets/times-circle.svg);
+}
+
 .mn-notification-container__content {
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .mn-module-container {
@@ -63,9 +88,9 @@
 }
 
 .mn-module-container .mn-alert-dismissible .mn-close {
-  position: relative;
-  top: -2px;
-  right: -21px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   color: inherit;
 }
 
@@ -78,21 +103,15 @@
 .mn-module-container .mn-alert-success hr {
   border-top-color: #c9e2b3;
 }
-.mn-module-container .mn-alert-success .mn-alert-link {
-  color: #2b542c;
-}
 
-/* notice */
-.mn-module-container .mn-alert-notice {
+/* info */
+.mn-module-container .mn-alert-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
   color: #31708f;
 }
-.mn-module-container .mn-alert-notice hr {
+.mn-module-container .mn-alert-info hr {
   border-top-color: #a6e1ec;
-}
-.mn-module-container .mn-alert-notice .mn-alert-link {
-  color: #245269;
 }
 
 /* warning */
@@ -104,11 +123,8 @@
 .mn-module-container .mn-alert-warning hr {
   border-top-color: #f7e1b5;
 }
-.mn-module-container .mn-alert-warning .mn-alert-link {
-  color: #66512c;
-}
 
-/* danger */
+/* error */
 .mn-module-container .mn-alert-error {
   background-color: #f2dede;
   border-color: #ebccd1;
@@ -116,9 +132,6 @@
 }
 .mn-module-container .mn-alert-error hr {
   border-top-color: #e4b9c0;
-}
-.mn-module-container .mn-alert-error .mn-alert-link {
-  color: #843534;
 }
 
 .mn-module-container .mn-close {

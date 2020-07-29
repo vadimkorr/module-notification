@@ -16,7 +16,7 @@ describe('Notification', function() {
         message: 'message1',
         icon: 'music',
         closeCond: 5000,
-        type: 'notice',
+        type: 'info',
         group: 'common',
         template: () => {
           return '<div></div>';

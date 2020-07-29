@@ -4,7 +4,7 @@ function addCommonNotif() {
   myMNModule.pushNotification({
     closeCond: false,
     title: 'Common Group notification',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -58,7 +58,7 @@ function addNoticeNotif() {
     closeCond: false,
     title: 'Notice',
     message: 'Notification',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -85,7 +85,7 @@ function addTimeoutNotif() {
     closeCond: 2000,
     title: 'Notice',
     message: 'Notification with Timeout',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -101,7 +101,7 @@ function addNoticeNotifToRemove() {
     closeCond: false,
     title: 'Add notification',
     message: 'to remove it',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -125,7 +125,7 @@ function addTimeoutNotifFromTopDir() {
   dirFromTopMNModule.unshiftNotification({
     closeCond: 2000,
     message: 'Notice',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -141,7 +141,7 @@ function addTimeoutNotifFromBottomDir() {
   dirFromBottomMNModule.pushNotification({
     closeCond: 2000,
     message: 'Notice',
-    type: 'notice',
+    type: 'info',
   });
 }
 
@@ -197,7 +197,7 @@ document.onreadystatechange = () => {
     myMNModule.pushNotification({
       title: 'Hello!',
       message: 'and Welcome ;)',
-      type: 'notice',
+      type: 'info',
       closeCond: 5000,
     });
 

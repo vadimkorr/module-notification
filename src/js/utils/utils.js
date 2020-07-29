@@ -1,5 +1,4 @@
 import cuid from 'cuid';
-import { ICONS } from '../const/icon';
 
 export const generateId = () => {
   return cuid();
@@ -25,36 +24,35 @@ export const applyArgs = (argum, defaults) => {
   }
 };
 
+const replace = (str, find, by) => str.replace(new RegExp(find, 'g'), by);
+
 export const templater = ({
   id,
   title = '',
   message = '',
   type = '',
-  icon = '',
   content = '',
 }) => t => {
-  const idPlaceholder = '{{id}}';
-  const titlePlaceholder = '{{title}}';
-  const messagePlaceholder = '{{message}}';
-  const typePlaceholder = '{{type}}';
-  const iconPlaceholder = '{{icon}}';
-  const contentPlaceholder = '{{content}}';
-  return (t ? t[0] : '')
-    .replace(idPlaceholder, id)
-    .replace(titlePlaceholder, title)
-    .replace(messagePlaceholder, message)
-    .replace(typePlaceholder, type)
-    .replace(iconPlaceholder, icon)
-    .replace(contentPlaceholder, content);
+  let str = t ? t[0] : '';
+  const replacer = [
+    { find: '{{id}}', by: id },
+    { find: '{{title}}', by: title },
+    { find: '{{message}}', by: message },
+    { find: '{{type}}', by: type },
+    { find: '{{content}}', by: content },
+  ];
+  replacer.forEach(({ find, by }) => {
+    str = replace(str, find, by);
+  });
+  return str;
 };
 
-export const getDefaultTemplate = (id, title, message, type, icon) => {
+export const getDefaultTemplate = (id, title, message, type) => {
   return templater({
     id,
     title,
     message,
     type,
-    icon,
   })`
   <div
     class="mn-notification"
@@ -67,7 +65,7 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
         <span aria-hidden='true'>&times;</span>
       </button>
       <div class='mn-notification-container__content'>
-        <i class="fa fa-{{icon}}"></i>
+        <i class="mn-icon mn-icon-{{type}}"></i>
         <span><strong>{{title}}</strong> {{message}}</span>
       </div>
     </div>
@@ -76,20 +74,6 @@ export const getDefaultTemplate = (id, title, message, type, icon) => {
 
 export const getCustomTemplate = (id, content) => {
   return templater({ id, content })`<div id='{{id}}'>{{content}}</div>`;
-};
-
-export const getIconNameByType = type => {
-  switch (type) {
-    default:
-    case 'notice':
-      return ICONS.INFO;
-    case 'success':
-      return ICONS.SUCCESS;
-    case 'warning':
-      return ICONS.WARNING;
-    case 'error':
-      return ICONS.ERROR;
-  }
 };
 
 export const getCloseButtonSelector = id => {
