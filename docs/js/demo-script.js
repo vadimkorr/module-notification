@@ -1,7 +1,7 @@
 var myMNModule;
 
 function addCommonNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Common Group notification',
     type: 'notice',
@@ -19,7 +19,7 @@ function addTestGroup() {
 }
 
 function addTestNotification() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Test Group notification',
     type: 'success',
@@ -32,7 +32,7 @@ function removeTestGroup() {
 }
 
 function addNotifToGreedyGroup() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Greedy Group notification',
     type: 'warning',
@@ -45,7 +45,7 @@ function removeGreedyGroup() {
 }
 
 function addSuccessNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Success',
     message: 'Notification',
@@ -54,7 +54,7 @@ function addSuccessNotif() {
 }
 
 function addNoticeNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Notice',
     message: 'Notification',
@@ -63,7 +63,7 @@ function addNoticeNotif() {
 }
 
 function addWarningNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Warning',
     message: 'Notification',
@@ -72,7 +72,7 @@ function addWarningNotif() {
 }
 
 function addErrorNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: false,
     title: 'Error',
     message: 'Notification',
@@ -81,7 +81,7 @@ function addErrorNotif() {
 }
 
 function addTimeoutNotif() {
-  myMNModule.pushNotif({
+  myMNModule.pushNotification({
     closeCond: 2000,
     title: 'Notice',
     message: 'Notification with Timeout',
@@ -97,7 +97,7 @@ function removeAll() {
 
 var notifToRemove;
 function addNoticeNotifToRemove() {
-  notifToRemove = myMNModule.pushNotif({
+  notifToRemove = myMNModule.pushNotification({
     closeCond: false,
     title: 'Add notification',
     message: 'to remove it',
@@ -114,7 +114,7 @@ var dirFromBottomMNModule;
 var dirFromTopMNModule;
 
 function addSuccessNotifFromTopDir() {
-  dirFromTopMNModule.pushNotif({
+  dirFromTopMNModule.unshiftNotification({
     closeCond: false,
     message: 'Success',
     type: 'success',
@@ -122,7 +122,7 @@ function addSuccessNotifFromTopDir() {
 }
 
 function addTimeoutNotifFromTopDir() {
-  dirFromTopMNModule.pushNotif({
+  dirFromTopMNModule.unshiftNotification({
     closeCond: 2000,
     message: 'Notice',
     type: 'notice',
@@ -130,7 +130,7 @@ function addTimeoutNotifFromTopDir() {
 }
 
 function addSuccessNotifFromBottomDir() {
-  dirFromBottomMNModule.pushNotif({
+  dirFromBottomMNModule.pushNotification({
     closeCond: false,
     message: 'Success',
     type: 'success',
@@ -138,7 +138,7 @@ function addSuccessNotifFromBottomDir() {
 }
 
 function addTimeoutNotifFromBottomDir() {
-  dirFromBottomMNModule.pushNotif({
+  dirFromBottomMNModule.pushNotification({
     closeCond: 2000,
     message: 'Notice',
     type: 'notice',
@@ -164,7 +164,7 @@ var customTemplateFunc = function(title, message) {
 };
 
 function pushCustomNotif() {
-  customizedNotifsModule.pushNotif({
+  customizedNotifsModule.pushNotification({
     closeCond: false,
     title: 'Hey',
     message: "I'm a custom notification",
@@ -194,14 +194,14 @@ document.onreadystatechange = () => {
       greedy: true,
     });
 
-    myMNModule.pushNotif({
+    myMNModule.pushNotification({
       title: 'Hello!',
       message: 'and Welcome ;)',
       type: 'notice',
       closeCond: 5000,
     });
 
-    myMNModule.pushNotif({
+    myMNModule.pushNotification({
       message: 'Click buttons to push/pull the notifications',
       type: 'success',
       closeCond: 7000,

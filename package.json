@@ -28,7 +28,6 @@
   "homepage": "https://github.com/vadimkorr/module-notification#readme",
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.6.2",
     "@babel/runtime": "^7.10.5",
