@@ -18,7 +18,11 @@ module.exports = function(config) {
     frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
-    files: ['../docs/dist/module-notification.js', 'spec/*.spec.js'],
+    files: [
+      'https://cdn.jsdelivr.net/npm/module-notification@3.0.0-rc.1/dist/index.js',
+      'spec/*.spec.js',
+      // '../dist/index.js', // uncomment fore development
+    ],
 
     // list of files to exclude
     exclude: [],
