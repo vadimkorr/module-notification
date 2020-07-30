@@ -20,19 +20,19 @@
   margin-right: 5px;
 }
 .mn-icon-success {
-  background-image: url(../assets/check-circle.svg);
+  background-image: svg-load('../assets/check-circle.svg', fill=#3c763d);
 }
 
 .mn-icon-info {
-  background-image: url(../assets/info-circle.svg);
+  background-image: svg-load('../assets/info-circle.svg', fill=#31708f);
 }
 
 .mn-icon-warning {
-  background-image: url(../assets/exclamation-circle.svg);
+  background-image: svg-load('../assets/exclamation-circle.svg', fill=#8a6d3b);
 }
 
 .mn-icon-error {
-  background-image: url(../assets/times-circle.svg);
+  background-image: svg-load('../assets/times-circle.svg', fill=#a94442);
 }
 
 .mn-notification-container__content {

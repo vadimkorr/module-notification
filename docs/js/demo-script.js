@@ -180,6 +180,7 @@ function pushCustomNotif() {
     title: 'Hey',
     message: "I'm a custom notification",
     template: customTemplateFunc,
+    groupId: 'common',
   });
 }
 

@@ -1,8 +1,8 @@
-import './css/module-notification.css';
-import './css/animations/fade.css';
-import './css/animations/swing.css';
-import './css/animations/rotate.css';
-import './css/animations/slide.css';
+import './css/module-notification.scss';
+import './css/animations/fade.scss';
+import './css/animations/swing.scss';
+import './css/animations/rotate.scss';
+import './css/animations/slide.scss';
 
 import { MNModule } from './js';
 
