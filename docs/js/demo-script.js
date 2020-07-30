@@ -1,4 +1,4 @@
-var myMNModule;
+var myMNModule
 
 function addCommonNotif() {
   myMNModule.pushNotification({
@@ -6,17 +6,17 @@ function addCommonNotif() {
     title: 'Common Group notification',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 function removeCommonGroup() {
-  myMNModule.pullGroupNotifs('common');
+  myMNModule.pullGroupNotifs('common')
 }
 
 function addTestGroup() {
   myMNModule.createEmptyGroup({
     id: 'test',
-  });
+  })
 }
 
 function addTestNotification() {
@@ -25,11 +25,11 @@ function addTestNotification() {
     title: 'Test Group notification',
     type: 'success',
     groupId: 'test',
-  });
+  })
 }
 
 function removeTestGroup() {
-  myMNModule.pullGroupNotifs('test');
+  myMNModule.pullGroupNotifs('test')
 }
 
 function addNotifToGreedyGroup() {
@@ -38,11 +38,11 @@ function addNotifToGreedyGroup() {
     title: 'Greedy Group notification',
     type: 'warning',
     groupId: 'greedy',
-  });
+  })
 }
 
 function removeGreedyGroup() {
-  myMNModule.pullGroupNotifs('greedy');
+  myMNModule.pullGroupNotifs('greedy')
 }
 
 function addSuccessNotif() {
@@ -52,7 +52,7 @@ function addSuccessNotif() {
     message: 'Notification',
     type: 'success',
     groupId: 'common',
-  });
+  })
 }
 
 function addNoticeNotif() {
@@ -62,7 +62,7 @@ function addNoticeNotif() {
     message: 'Notification',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 function addWarningNotif() {
@@ -72,7 +72,7 @@ function addWarningNotif() {
     message: 'Notification',
     type: 'warning',
     groupId: 'common',
-  });
+  })
 }
 
 function addErrorNotif() {
@@ -82,7 +82,7 @@ function addErrorNotif() {
     message: 'Notification',
     type: 'error',
     groupId: 'common',
-  });
+  })
 }
 
 function addTimeoutNotif() {
@@ -92,16 +92,16 @@ function addTimeoutNotif() {
     message: 'Notification with Timeout',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 /* <p>Removing notification</p> */
 
 function removeAll() {
-  myMNModule.pullAll();
+  myMNModule.pullAll()
 }
 
-var notifToRemove;
+var notifToRemove
 function addNoticeNotifToRemove() {
   notifToRemove = myMNModule.pushNotification({
     closeInMS: false,
@@ -109,16 +109,16 @@ function addNoticeNotifToRemove() {
     message: 'to remove it',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 function removeSpecificNotif() {
-  notifToRemove.pull();
+  notifToRemove.pull()
 }
 
 /* DEMONSTRAING THE DIRECTIONS */
-var dirFromBottomMNModule;
-var dirFromTopMNModule;
+var dirFromBottomMNModule
+var dirFromTopMNModule
 
 function addSuccessNotifFromTopDir() {
   dirFromTopMNModule.unshiftNotification({
@@ -126,7 +126,7 @@ function addSuccessNotifFromTopDir() {
     message: 'Success',
     type: 'success',
     groupId: 'common',
-  });
+  })
 }
 
 function addTimeoutNotifFromTopDir() {
@@ -135,7 +135,7 @@ function addTimeoutNotifFromTopDir() {
     message: 'Notice',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 function addSuccessNotifFromBottomDir() {
@@ -144,7 +144,7 @@ function addSuccessNotifFromBottomDir() {
     message: 'Success',
     type: 'success',
     groupId: 'common',
-  });
+  })
 }
 
 function addTimeoutNotifFromBottomDir() {
@@ -153,11 +153,11 @@ function addTimeoutNotifFromBottomDir() {
     message: 'Notice',
     type: 'info',
     groupId: 'common',
-  });
+  })
 }
 
 /* DEMONSTRATING CUSTOMIZED NOTIFICATIONS */
-var customizedNotifsModule;
+var customizedNotifsModule
 
 // define function which will return custom template
 var customTemplateFunc = function(title, message) {
@@ -171,8 +171,8 @@ var customTemplateFunc = function(title, message) {
     '</span> ' +
     "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
     '</div>'
-  );
-};
+  )
+}
 
 function pushCustomNotif() {
   customizedNotifsModule.pushNotification({
@@ -181,11 +181,11 @@ function pushCustomNotif() {
     message: "I'm a custom notification",
     template: customTemplateFunc,
     groupId: 'common',
-  });
+  })
 }
 
 function pullCustomizedNotifs() {
-  customizedNotifsModule.pullAll();
+  customizedNotifsModule.pullAll()
 }
 
 /*  */
@@ -195,16 +195,16 @@ document.onreadystatechange = () => {
     myMNModule = new MNModule({
       container: '#notifications',
       onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
-    });
+    })
 
     // add greedy group
     myMNModule.createEmptyGroup({
       id: 'greedy',
       greedy: true,
-    });
+    })
 
     myMNModule.pushNotification({
       title: 'Hello!',
@@ -212,34 +212,34 @@ document.onreadystatechange = () => {
       type: 'info',
       groupId: 'common',
       closeInMS: 5000,
-    });
+    })
 
     myMNModule.pushNotification({
       message: 'Click buttons to push/pull the notifications',
       type: 'success',
       closeInMS: 7000,
       groupId: 'common',
-    });
+    })
 
     dirFromTopMNModule = new MNModule({
       container: '#notifications-from-top',
       onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
-    });
+    })
 
     dirFromBottomMNModule = new MNModule({
       container: '#notifications-from-bottom',
       onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromBottom',
-    });
+    })
 
     customizedNotifsModule = new MNModule({
       container: '#custom-notifications-container',
       direction: 'fromTop',
-    });
+    })
   }
-};
+}

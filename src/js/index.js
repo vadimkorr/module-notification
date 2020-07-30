@@ -1,1 +1,1 @@
-export { MNModule } from './mn-module';
+export { MNModule } from './mn-module'

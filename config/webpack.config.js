@@ -1,7 +1,5 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js', // relative to root
@@ -42,18 +40,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // all options are optional
-    //   filename: 'module-notification.css',
-    //   chunkFilename: '[id].css',
-    //   ignoreOrder: false, // Enable to remove warnings about conflicting order
-    // }),
-  ],
-  // optimization: {
-  //   minimize: IS_PROD,
-  //   minimizer: [new OptimizeCSSAssetsPlugin({})],
-  // },
-};
+  plugins: [new CleanWebpackPlugin()],
+}

@@ -1,16 +1,16 @@
 describe('Group', function() {
-  var mnModule;
+  var mnModule
 
   beforeEach(function() {
     var testModuleOptions = {
       container: '#notifications-container',
       direction: 'fromTop',
       onNotifsNumberChange: function(number) {
-        console.info('Number of notifs = ' + number);
+        console.info('Number of notifs = ' + number)
       },
-    };
-    mnModule = new MNModule(testModuleOptions);
-  });
+    }
+    mnModule = new MNModule(testModuleOptions)
+  })
 
   it('should be able to detect existance of the group', function() {
     var testGroupsOptions = [
@@ -22,18 +22,18 @@ describe('Group', function() {
         id: 'group2',
         greedy: false,
       },
-    ];
-    var nonExustingGroup = 'non_existing_group';
+    ]
+    var nonExustingGroup = 'non_existing_group'
     for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i];
+      var testGroupOptions = testGroupsOptions[i]
       //create group
-      mnModule.createEmptyGroup(testGroupOptions);
+      mnModule.createEmptyGroup(testGroupOptions)
       //check if group exist
-      expect(mnModule.getGroup(testGroupOptions.id)).toBeTruthy();
+      expect(mnModule.getGroup(testGroupOptions.id)).toBeTruthy()
     }
     //check if non existing group is not exist
-    expect(mnModule.getGroup(nonExustingGroup)).toBeFalsy();
-  });
+    expect(mnModule.getGroup(nonExustingGroup)).toBeFalsy()
+  })
 
   it('should be able to create groups', function() {
     var testGroupsOptions = [
@@ -57,22 +57,22 @@ describe('Group', function() {
         id: 'group5',
         greedy: true,
       },
-    ];
+    ]
 
     for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i];
+      var testGroupOptions = testGroupsOptions[i]
       //create group
-      var result = mnModule.createEmptyGroup(testGroupOptions);
+      var result = mnModule.createEmptyGroup(testGroupOptions)
       //check result
-      expect(result).toBeTruthy();
+      expect(result).toBeTruthy()
       //check if options were applied
       expect(mnModule.getGroup(testGroupOptions.id).options).toEqual(
         testGroupOptions
-      );
+      )
       //check the amount of groups
-      expect(mnModule.getGroupsCount()).toEqual(i + 1);
+      expect(mnModule.getGroupsCount()).toEqual(i + 1)
     }
-  });
+  })
 
   it('should not create groups with the same id', function() {
     var testGroupsOptions = [
@@ -100,19 +100,19 @@ describe('Group', function() {
         expectedResult: true,
         expectedCount: 3,
       },
-    ];
+    ]
 
     for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i];
+      var testGroupOptions = testGroupsOptions[i]
       //create group
       var result = mnModule.createEmptyGroup({
         id: testGroupOptions.id,
         greedy: testGroupOptions.greedy,
-      });
+      })
       //check result
-      expect(result).toEqual(testGroupOptions.expectedResult);
+      expect(result).toEqual(testGroupOptions.expectedResult)
       //check the amount of groups
-      expect(mnModule.getGroupsCount()).toEqual(testGroupOptions.expectedCount);
+      expect(mnModule.getGroupsCount()).toEqual(testGroupOptions.expectedCount)
     }
-  });
-});
+  })
+})

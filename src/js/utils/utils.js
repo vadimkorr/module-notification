@@ -1,30 +1,30 @@
-import cuid from 'cuid';
+import cuid from 'cuid'
 
 export const generateId = () => {
-  return cuid();
-};
+  return cuid()
+}
 
 /* extends default config and returns extended one */
 export const extendDefaults = (source, properties) => {
-  const _source = { ...source };
+  const _source = { ...source }
   for (let property in properties) {
     if (properties.hasOwnProperty(property)) {
-      _source[property] = properties[property];
+      _source[property] = properties[property]
     }
   }
-  return _source;
-};
+  return _source
+}
 
 /* return options if specified or default options otherwise */
 export const applyArgs = (argum, defaults) => {
   if (argum && typeof argum === 'object') {
-    return extendDefaults(defaults, argum);
+    return extendDefaults(defaults, argum)
   } else {
-    return defaults;
+    return defaults
   }
-};
+}
 
-const replace = (str, find, by) => str.replace(new RegExp(find, 'g'), by);
+const replace = (str, find, by) => str.replace(new RegExp(find, 'g'), by)
 
 export const templater = ({
   id,
@@ -33,18 +33,18 @@ export const templater = ({
   type = '',
   content = '',
 }) => t => {
-  let str = t ? t[0] : '';
-  [
+  let str = t ? t[0] : ''
+  ;[
     { find: '{{id}}', by: id },
     { find: '{{title}}', by: title },
     { find: '{{message}}', by: message },
     { find: '{{type}}', by: type },
     { find: '{{content}}', by: content },
   ].forEach(({ find, by }) => {
-    str = replace(str, find, by);
-  });
-  return str;
-};
+    str = replace(str, find, by)
+  })
+  return str
+}
 
 export const getDefaultTemplate = (id, title, message, type) => {
   return templater({
@@ -68,13 +68,13 @@ export const getDefaultTemplate = (id, title, message, type) => {
         <span><strong>{{title}}</strong> {{message}}</span>
       </div>
     </div>
-  </div>`;
-};
+  </div>`
+}
 
 export const getCustomTemplate = (id, content) => {
-  return templater({ id, content })`<div id='{{id}}'>{{content}}</div>`;
-};
+  return templater({ id, content })`<div id='{{id}}'>{{content}}</div>`
+}
 
 export const getCloseButtonSelector = id => {
-  return `#${id} .mn-close-btn`;
-};
+  return `#${id} .mn-close-btn`
+}

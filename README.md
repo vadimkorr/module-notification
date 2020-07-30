@@ -47,7 +47,7 @@ define([
   './node_modules/module-notification/dist/module-notification.js',
 ], function() {
   //...
-});
+})
 ```
 
 ### index.html
@@ -97,10 +97,10 @@ define([
 let myMNModule = new MNModule({
   container: '#notifications',
   onNotifsNumberChange: number => {
-    console.info('Number of notifications', number);
+    console.info('Number of notifications', number)
   },
   direction: 'fromTop', // 'fromTop' (by default), 'fromBottom'
-});
+})
 ```
 
 ### Create group (optional)
@@ -111,7 +111,7 @@ Group is like an id for the set of notifications. Group may have one or more ele
 myMNModule.createEmptyGroup({
   name: 'test',
   greedy: false,
-});
+})
 ```
 
 ### Push notification
@@ -124,7 +124,7 @@ let myNotif = myMNModule.pushNotif({
   closeInMS: 5000, // ms, put false (by default) to prevent closing
   type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
   group: 'test', // 'common' (by defalut)
-});
+})
 ```
 
 see other [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons
@@ -132,19 +132,19 @@ see other [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons
 ### Pull notification
 
 ```js
-myNotif.pull();
+myNotif.pull()
 ```
 
 ### Pull all the notifications of the specified group
 
 ```js
-myMNModule.pullGroupNotifs('test');
+myMNModule.pullGroupNotifs('test')
 ```
 
 ### Pull all the notifications of the module
 
 ```js
-myMNModule.pullAll();
+myMNModule.pullAll()
 ```
 
 ## <a name="customization">Customization</a>
@@ -166,8 +166,8 @@ let customTemplateFunc = (title, message) => {
       <span>${message}</span>
       <span class='mn-close-btn custom-close-btn'>[x]</span>
     </div>
-  `;
-};
+  `
+}
 ```
 
   </li>
@@ -181,7 +181,7 @@ customizedNotifsModule.pushNotif({
   title: 'Hey',
   message: 'I`m a custom notification',
   template: customTemplateFunc,
-});
+})
 ```
 
   </li>

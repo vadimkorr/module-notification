@@ -2,14 +2,15 @@
   width: 100%;
   max-height: 0;
   margin-bottom: 0;
-}
-.mn-notification.show {
-  /* value on max-height is something bigger than container will ever get */
-  max-height: 100px;
-  margin-bottom: 10px;
-}
-.mn-notification.show:last-child {
-  margin-bottom: 0;
+
+  &.show {
+    /* value on max-height is something bigger than container will ever get */
+    max-height: 100px;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 /* default icons */
