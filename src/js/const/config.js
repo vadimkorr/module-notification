@@ -1,0 +1,1 @@
+export const REMOVE_NOTIFICATION_DELAY_MS = 100

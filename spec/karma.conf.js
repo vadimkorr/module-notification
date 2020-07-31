@@ -19,9 +19,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../node_modules/cuid/dist/browser-cuid.js',
-      '../docs/dist/module-notification.js',
-      'spec/*.js',
+      'https://cdn.jsdelivr.net/npm/module-notification@3.0.0-rc.1/dist/index.js',
+      'spec/*.spec.js',
+      // '../dist/index.js', // uncomment fore development
     ],
 
     // list of files to exclude
@@ -72,11 +72,11 @@ module.exports = function(config) {
     concurrency: Infinity,
 
     failOnEmptyTestSuite: false,
-  };
-
-  if (process.env.TRAVIS) {
-    configuration.browsers = ['Chrome_travis_ci'];
   }
 
-  config.set(configuration);
-};
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Chrome_travis_ci']
+  }
+
+  config.set(configuration)
+}

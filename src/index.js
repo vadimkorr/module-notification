@@ -1,7 +1,6 @@
-import './css/module-notification.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
-import { MNModule } from './js';
+import './css/module-notification.scss'
+import './css/animations.scss'
 
-(function(window) {
-  window.MNModule = MNModule;
-})(window);
+import { MNModule } from './js'
+
+export default MNModule
