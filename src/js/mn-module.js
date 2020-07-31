@@ -16,7 +16,7 @@ const defaultNotificationOptions = {
 
 const defaultModuleOptions = {
   container: null, // required
-  onNotificationsCountChange: null, // e.g. (number) => { console.debug("Number of notifications", number); },
+  onNotificationsCountChange: null, // e.g. (number) => { console.log("Number of notifications", number); },
 }
 
 /**
@@ -35,7 +35,7 @@ export const MNModule = function(moduleOptions) {
     getElement(this.options.container),
     `<div id='${this.id}' class='mn-module-container'></div>`
   )
-  console.debug('New notification module was registered', this.id, this.options)
+  // console.debug('New notification module was registered', this.id, this.options)
 }
 
 MNModule.prototype._setNotificationsCount = function(count) {
@@ -70,11 +70,11 @@ MNModule.prototype._getGroupsCount = function() {
  */
 MNModule.prototype.createEmptyGroup = function(groupOptions) {
   if (this.groups.has(groupOptions.id)) {
-    console.debug('Group with id already exist:', groupOptions.id)
+    // console.debug('Group with id already exist:', groupOptions.id)
     return false
   }
   this.groups.set(groupOptions.id, new MNGroup(groupOptions))
-  console.debug('New group was created', groupOptions.id)
+  // console.debug('New group was created', groupOptions.id)
   return true
 }
 
@@ -95,7 +95,7 @@ MNModule.prototype._removeGroupNotifications = function(
       index++
     })
 
-  console.debug('Group notifications were removed:', id)
+  // console.debug('Group notifications were removed:', id)
 }
 
 /**
@@ -145,7 +145,7 @@ MNModule.prototype._addNotification = function(options) {
       ? this._createNotification(_options)
       : null
 
-  console.debug('New notification', _pushResult, _options)
+  // console.debug('New notification', _pushResult, _options)
   return _pushResult
 }
 
