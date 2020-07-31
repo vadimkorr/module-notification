@@ -17,6 +17,10 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['browserify', 'jasmine'],
 
+    browserify: {
+      debug: true,
+    },
+
     // list of files / patterns to load in the browser
     files: [
       'https://cdn.jsdelivr.net/npm/module-notification@3.0.0-rc.2/dist/index.js',
