@@ -218,41 +218,41 @@ describe('Notification', function() {
     })
   })
 
-  // it('should be able to be pulled from module (all notifs)', async function() {
-  //   var numberOfNotifsInFirstGroup = 10
-  //   var numberOfNotifsInSecondGroup = 20
-  //   var firstGroupName = 'first group'
-  //   var secondGroupName = 'second group'
+  it('should be able to be pulled from module (all notifs)', async function() {
+    var numberOfNotifsInFirstGroup = 10
+    var numberOfNotifsInSecondGroup = 20
+    var firstGroupName = 'first group'
+    var secondGroupName = 'second group'
 
-  //   var testModule2Options = {
-  //     container: '#notifications-container2',
-  //   }
-  //   mnModule2 = new MNModule(testModule2Options)
+    var testModule2Options = {
+      container: '#notifications-container2',
+    }
+    mnModule2 = new MNModule(testModule2Options)
 
-  //   pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule)
-  //   pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule)
-  //   pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule2)
-  //   pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule2)
+    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule)
+    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule)
+    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule2)
+    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule2)
 
-  //   //remove notifs from first group
-  //   mnModule.removeNotifications()
+    //remove notifs from first group
+    mnModule.removeNotifications()
 
-  //   //check if second group is ok
-  //   expect(mnModule2.notificationsCount).toEqual(
-  //     numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
-  //   )
+    //check if second group is ok
+    expect(mnModule2.notificationsCount).toEqual(
+      numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
+    )
 
-  //   //remove notifs from second group
-  //   mnModule2.removeNotifications()
+    //remove notifs from second group
+    mnModule2.removeNotifications()
 
-  //   await wait(
-  //     Math.max(
-  //       getRemoveWaitingTimeMS(mnModule),
-  //       getRemoveWaitingTimeMS(mnModule2)
-  //     )
-  //   )
+    await wait(
+      Math.max(
+        getRemoveWaitingTimeMS(mnModule),
+        getRemoveWaitingTimeMS(mnModule2)
+      )
+    )
 
-  //   expect(mnModule.notificationsCount).toEqual(0)
-  //   expect(mnModule2.notificationsCount).toEqual(0)
-  // })
+    expect(mnModule.notificationsCount).toEqual(0)
+    expect(mnModule2.notificationsCount).toEqual(0)
+  })
 })
