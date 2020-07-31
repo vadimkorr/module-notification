@@ -1,6 +1,6 @@
 const REMOVE_NOTIFICATION_DELAY_MS = 100
 
-const getRemoveWaitingTimeMS = module => {
+function getRemoveWaitingTimeMS(module) {
   let allNotificationsCount = 0
   for (let group of module._getGroups()) {
     allNotificationsCount += group._getLength()
@@ -8,11 +8,15 @@ const getRemoveWaitingTimeMS = module => {
   return allNotificationsCount * REMOVE_NOTIFICATION_DELAY_MS
 }
 
-const getRemoveWaitingTimeMSByGroupId = (module, groupId) => {
+function getRemoveWaitingTimeMSByGroupId(module, groupId) {
   return module._getGroup(groupId)._getLength() * REMOVE_NOTIFICATION_DELAY_MS
 }
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
+function wait(ms) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, ms)
+  })
+}
 
 describe('Notification', function() {
   beforeEach(function() {
@@ -173,7 +177,7 @@ describe('Notification', function() {
     }
   }
 
-  it('should be able to be pulled from group', async () => {
+  it('should be able to be pulled from group', async function() {
     var numberOfNotifsInFirstGroup = 10
     var numberOfNotifsInSecondGroup = 20
     var firstGroupName = 'first group'
@@ -211,7 +215,7 @@ describe('Notification', function() {
     expect(mnModule.notificationsCount).toEqual(0)
   })
 
-  it('should be able to be pulled from module (all notifs)', async () => {
+  it('should be able to be pulled from module (all notifs)', async function() {
     var numberOfNotifsInFirstGroup = 10
     var numberOfNotifsInSecondGroup = 20
     var firstGroupName = 'first group'

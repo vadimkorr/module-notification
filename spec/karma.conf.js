@@ -19,7 +19,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'https://cdn.jsdelivr.net/npm/module-notification@latest/dist/index.js',
+      'https://cdn.jsdelivr.net/npm/module-notification/dist/index.js',
       'spec/*.spec.js',
       // '../dist/index.js', // uncomment fore development
     ],

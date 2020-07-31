@@ -55,7 +55,7 @@ define(['./node_modules/module-notification/dist/index.js'], function() {
 <html>
   <head> </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/module-notification@latest/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/module-notification/dist/index.js"></script>
   </body>
 </html>
 ```
