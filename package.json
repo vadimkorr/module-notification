@@ -1,6 +1,6 @@
 {
   "name": "module-notification",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.2",
   "description": "JS library for displaying Notifications inside specified html element containers (Modules). You can create multiple independent Modules which own separate set of Notifications.",
   "main": "src/index.js",
   "scripts": {
