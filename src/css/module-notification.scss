@@ -4,7 +4,7 @@
   margin-bottom: 0;
 
   &.show {
-    /* value on max-height is something bigger than container will ever get */
+    // value on max-height is something bigger than container will ever get
     max-height: 100px;
     margin-bottom: 10px;
     &:last-child {
@@ -13,150 +13,64 @@
   }
 }
 
-/* default icons */
+.mn-notification-inner {
+  padding: 15px 35px 15px 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  font-size: 14px;
+}
+
 .mn-icon {
   display: block;
   width: 20px;
   height: 20px;
   margin-right: 5px;
-}
-.mn-icon-success {
-  background-image: svg-load('../assets/check-circle.svg', fill=#3c763d);
+  background-repeat: no-repeat;
 }
 
-.mn-icon-info {
-  background-image: svg-load('../assets/info-circle.svg', fill=#31708f);
+@mixin type-theme($theme, $colorLighter, $colorLight, $colorDark, $icon) {
+  .mn-notification-inner-#{$theme} {
+    background-color: #{$colorLighter};
+    border-color: #{$colorLight};
+    color: #{$colorDark};
+  }
+  .mn-icon-#{$theme} {
+    background-image: svg-load('../assets/#{$icon}.svg', fill=#{$colorDark});
+  }
 }
+@include type-theme('info', #d9edf7, #bce8f1, #31708f, 'info-circle');
+@include type-theme('success', #dff0d8, #d6e9c6, #3c763d, 'check-circle');
+@include type-theme('warning', #fcf8e3, #faebcc, #8a6d3b, 'exclamation-circle');
+@include type-theme('error', #f2dede, #ebccd1, #a94442, 'times-circle');
 
-.mn-icon-warning {
-  background-image: svg-load('../assets/exclamation-circle.svg', fill=#8a6d3b);
-}
-
-.mn-icon-error {
-  background-image: svg-load('../assets/times-circle.svg', fill=#a94442);
-}
-
-.mn-notification-container__content {
+// payload content
+.mn-notification-content {
   width: 100%;
   display: flex;
   align-items: center;
 }
 
-.mn-module-container {
-  font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.mn-button {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-  overflow: visible;
-  text-transform: none;
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-
-.mn-module-container [role='button'] {
-  cursor: pointer;
-}
-
-.mn-module-container .mn-alert {
-  padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.mn-module-container .mn-alert h4 {
-  margin-top: 0;
-  color: inherit;
-}
-.mn-module-container .mn-alert .mn-alert-link {
-  font-weight: bold;
-}
-.mn-module-container .mn-alert > p,
-.mn-module-container .mn-alert > ul {
-  margin-bottom: 0;
-}
-.mn-module-container .mn-alert > p + p {
-  margin-top: 5px;
-}
-
-.mn-module-container .mn-alert-dismissible {
-  padding-right: 35px;
-}
-
-.mn-module-container .mn-alert-dismissible .mn-close {
+// close button
+.mn-close {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: inherit;
-}
-
-/* success */
-.mn-module-container .mn-alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #3c763d;
-}
-.mn-module-container .mn-alert-success hr {
-  border-top-color: #c9e2b3;
-}
-
-/* info */
-.mn-module-container .mn-alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #31708f;
-}
-.mn-module-container .mn-alert-info hr {
-  border-top-color: #a6e1ec;
-}
-
-/* warning */
-.mn-module-container .mn-alert-warning {
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-  color: #8a6d3b;
-}
-.mn-module-container .mn-alert-warning hr {
-  border-top-color: #f7e1b5;
-}
-
-/* error */
-.mn-module-container .mn-alert-error {
-  background-color: #f2dede;
-  border-color: #ebccd1;
-  color: #a94442;
-}
-.mn-module-container .mn-alert-error hr {
-  border-top-color: #e4b9c0;
-}
-
-.mn-module-container .mn-close {
-  float: right;
   font-size: 21px;
   font-weight: bold;
   line-height: 1;
   color: #000000;
-  text-shadow: 0 1px 0 #ffffff;
   opacity: 0.2;
-  filter: alpha(opacity=20);
-}
-.mn-module-container .mn-close:hover,
-.mn-module-container .mn-close:focus {
-  color: #000000;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-.mn-module-container button.mn-close {
   padding: 0;
   cursor: pointer;
   background: transparent;
   border: 0;
-  -webkit-appearance: none;
+
+  &:hover,
+  &:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.5;
+  }
 }

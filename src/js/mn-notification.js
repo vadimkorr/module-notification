@@ -69,10 +69,8 @@ MNNotification.prototype._addToContainer = function(options) {
           this.options.type
         )
 
-  const animation = options.animation || 'slide' // 'fade', 'swing', 'rotate', 'slide'
-
   const el = getElementFromHtmlString(template)
-  addClass(el, `mn-${animation}`)
+  addClass(el, `mn-${this.options.animation}`)
 
   fns[options.mode](getElement(`#${options.moduleId}`), el)
   setTimeout(() => {

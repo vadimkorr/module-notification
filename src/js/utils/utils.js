@@ -57,13 +57,13 @@ export const getDefaultTemplate = (id, title, message, type) => {
     class="mn-notification"
     id='{{id}}'
   >
-    <div class="mn-alert mn-alert-{{type}} mn-alert-dismissible">
+    <div class="mn-notification-inner mn-notification-inner-{{type}}">
       <button
         type='button'
         class='mn-close-btn mn-close'>
-        <span aria-hidden='true'>&times;</span>
+        <span>&times;</span>
       </button>
-      <div class='mn-notification-container__content'>
+      <div class='mn-notification-content'>
         <i class="mn-icon mn-icon-{{type}}"></i>
         <span><strong>{{title}}</strong> {{message}}</span>
       </div>

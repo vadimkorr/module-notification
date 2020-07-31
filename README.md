@@ -112,6 +112,7 @@ myNotificationsModule.createEmptyGroup({
 let myNotification1 = myMNModule.pushNotification({
   title: 'Hello!',
   message: "I'm a notification",
+  animation: 'fade', // 'fade' (by default), 'rotate'
   closeInMS: 5000, // Notification will be closed automatically in specified amount of milliseconds; to prevent notification from closing, just omit this option. It does not close automatically by default.
   groupId: 'test', // 'default' (by default)
   type: 'info', // "info" (by default), "warning", "error", "success"

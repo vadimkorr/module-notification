@@ -9,13 +9,14 @@ const defaultNotificationOptions = {
   message: '',
   groupId: 'default',
   closeInMS: 5000,
+  animation: 'fade', // 'fade', 'swing', 'rotate', 'slide'
   type: ICONS.INFO, // "info", "warning", "error", "success"
   template: null, // function(title, message) { return "<span>" + title + "</span>"; }
 }
 
 const defaultModuleOptions = {
   container: null, // required
-  onNotificationsCountChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
+  onNotificationsCountChange: null, // e.g. (number) => { console.debug("Number of notifications", number); },
 }
 
 /**
