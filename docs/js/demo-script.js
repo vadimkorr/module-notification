@@ -10,7 +10,7 @@ function addCommonNotif() {
 }
 
 function removeCommonGroup() {
-  myMNModule.pullGroupNotifs('common')
+  myMNModule.removeNotifications('common')
 }
 
 function addTestGroup() {
@@ -29,7 +29,7 @@ function addTestNotification() {
 }
 
 function removeTestGroup() {
-  myMNModule.pullGroupNotifs('test')
+  myMNModule.removeNotifications('test')
 }
 
 function addNotifToGreedyGroup() {
@@ -42,7 +42,7 @@ function addNotifToGreedyGroup() {
 }
 
 function removeGreedyGroup() {
-  myMNModule.pullGroupNotifs('greedy')
+  myMNModule.removeNotifications('greedy')
 }
 
 function addSuccessNotif() {
@@ -98,7 +98,7 @@ function addTimeoutNotif() {
 /* <p>Removing notification</p> */
 
 function removeAll() {
-  myMNModule.pullAll()
+  myMNModule.removeNotifications()
 }
 
 var notifToRemove
@@ -113,7 +113,7 @@ function addNoticeNotifToRemove() {
 }
 
 function removeSpecificNotif() {
-  notifToRemove.pull()
+  notifToRemove.remove()
 }
 
 /* DEMONSTRAING THE DIRECTIONS */
@@ -160,7 +160,7 @@ function addTimeoutNotifFromBottomDir() {
 var customizedNotifsModule
 
 // define function which will return custom template
-var customTemplateFunc = function(title, message) {
+var customTemplateFunc = ({ title, message }) => {
   return (
     "<div class='custom-notification'>" +
     '<span>' +
@@ -185,7 +185,7 @@ function pushCustomNotif() {
 }
 
 function pullCustomizedNotifs() {
-  customizedNotifsModule.pullAll()
+  customizedNotifsModule.removeNotifications()
 }
 
 /*  */
@@ -194,7 +194,7 @@ document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
     myMNModule = new MNModule({
       container: '#notifications',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
@@ -223,7 +223,7 @@ document.onreadystatechange = () => {
 
     dirFromTopMNModule = new MNModule({
       container: '#notifications-from-top',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
@@ -231,7 +231,7 @@ document.onreadystatechange = () => {
 
     dirFromBottomMNModule = new MNModule({
       container: '#notifications-from-bottom',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromBottom',

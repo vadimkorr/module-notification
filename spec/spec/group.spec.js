@@ -5,7 +5,7 @@ describe('Group', function() {
     var testModuleOptions = {
       container: '#notifications-container',
       direction: 'fromTop',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         console.info('Number of notifs = ' + number)
       },
     }
@@ -29,10 +29,10 @@ describe('Group', function() {
       //create group
       mnModule.createEmptyGroup(testGroupOptions)
       //check if group exist
-      expect(mnModule.getGroup(testGroupOptions.id)).toBeTruthy()
+      expect(mnModule._getGroup(testGroupOptions.id)).toBeTruthy()
     }
     //check if non existing group is not exist
-    expect(mnModule.getGroup(nonExustingGroup)).toBeFalsy()
+    expect(mnModule._getGroup(nonExustingGroup)).toBeFalsy()
   })
 
   it('should be able to create groups', function() {
@@ -66,11 +66,11 @@ describe('Group', function() {
       //check result
       expect(result).toBeTruthy()
       //check if options were applied
-      expect(mnModule.getGroup(testGroupOptions.id).options).toEqual(
+      expect(mnModule._getGroup(testGroupOptions.id).options).toEqual(
         testGroupOptions
       )
       //check the amount of groups
-      expect(mnModule.getGroupsCount()).toEqual(i + 1)
+      expect(mnModule._getGroupsCount()).toEqual(i + 1)
     }
   })
 
@@ -112,7 +112,7 @@ describe('Group', function() {
       //check result
       expect(result).toEqual(testGroupOptions.expectedResult)
       //check the amount of groups
-      expect(mnModule.getGroupsCount()).toEqual(testGroupOptions.expectedCount)
+      expect(mnModule._getGroupsCount()).toEqual(testGroupOptions.expectedCount)
     }
   })
 })

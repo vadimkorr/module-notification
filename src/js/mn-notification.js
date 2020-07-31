@@ -25,19 +25,19 @@ const fns = {
 
 /**
  * @constructs MNNotification
- * @param {Object} notifOptions - options of the new notification
+ * @param {Object} options - options of the new notification
  */
 
-export function MNNotification(notifOptions) {
+export function MNNotification(options) {
   this.id = generateId()
-  this.options = notifOptions
+  this.options = options
   this.onBeforeRemove = null
 }
 
 /**
  * Pulls notification
  */
-MNNotification.prototype.pull = function() {
+MNNotification.prototype.remove = function() {
   typeof this.onBeforeRemove === 'function' && this.onBeforeRemove(this)
   const el = getElementById(this.id)
   removeClass(el, 'show')
@@ -48,16 +48,19 @@ MNNotification.prototype.pull = function() {
 
 /**
  * Appends notification element to specified container
- * @param {Object} additionalOptions - Options of the appending
+ * @param {Object} options - Options of the appending
  */
-MNNotification.prototype.addToContainer = function(options) {
+MNNotification.prototype._addToContainer = function(options) {
   this.onBeforeRemove = options.onBeforeRemove
 
   let template =
     typeof this.options.template == 'function'
       ? getCustomTemplate(
           this.id,
-          this.options.template(this.options.title, this.options.message)
+          this.options.template({
+            title: this.options.title,
+            message: this.options.message,
+          })
         )
       : getDefaultTemplate(
           this.id,
@@ -78,16 +81,12 @@ MNNotification.prototype.addToContainer = function(options) {
 
   const setCloseConditions = () => {
     addOnClick(getCloseButtonSelector(this.id), () => {
-      this.pull()
+      this.remove()
     })
-    if (this.options.closeInMS !== false) {
-      if (typeof this.options.closeInMS === 'function') {
-      } else {
-        setTimeout(() => {
-          this.pull()
-        }, this.options.closeInMS)
-      }
-    }
+    this.options.closeInMS &&
+      setTimeout(() => {
+        this.remove()
+      }, this.options.closeInMS)
   }
   setCloseConditions()
 }

@@ -4,14 +4,14 @@ describe('Module', function() {
     var testModuleOptions = {
       container: '#notifications-container',
       direction: 'fromTop',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         return testValue
       },
     }
     var mnModule = new MNModule(testModuleOptions)
     //check if options were applied succesfully
     expect(mnModule.options).toEqual(testModuleOptions)
-    //check if onNotifsNumberChange works correct
-    expect(mnModule.options.onNotifsNumberChange()).toEqual(testValue)
+    //check if onNotificationsCountChange works correct
+    expect(mnModule.options.onNotificationsCountChange()).toEqual(testValue)
   })
 })

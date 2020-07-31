@@ -2,20 +2,20 @@ import { MNGroup } from './mn-group'
 import { MNNotification } from './mn-notification'
 import { applyArgs, generateId } from './utils/utils'
 import { getElement, appendElementToContainer } from './utils/domUtils'
-import { ICONS, ADD_ELEMENT_MODE } from './const'
+import { ICONS, ADD_ELEMENT_MODE, REMOVE_NOTIFICATION_DELAY_MS } from './const'
 
 const defaultNotificationOptions = {
   title: '',
   message: '',
-  groupId: null, // required
+  groupId: 'default',
   closeInMS: 5000,
   type: ICONS.INFO, // "info", "warning", "error", "success"
-  template: undefined, // function(title, message) { return "<span>" + title + "</span>"; }
+  template: null, // function(title, message) { return "<span>" + title + "</span>"; }
 }
 
 const defaultModuleOptions = {
   container: null, // required
-  onNotifsNumberChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
+  onNotificationsCountChange: undefined, // e.g. (number) => { console.debug("Number of notifications", number); },
 }
 
 /**
@@ -25,7 +25,7 @@ const defaultModuleOptions = {
 export const MNModule = function(moduleOptions) {
   this.options = applyArgs(moduleOptions, defaultModuleOptions)
 
-  this.numberOfNotifs = 0
+  this.notificationsCount = 0
   this.groups = new Map()
   this.id = generateId()
 
@@ -37,10 +37,10 @@ export const MNModule = function(moduleOptions) {
   console.debug('New notification module was registered', this.id, this.options)
 }
 
-MNModule.prototype.setNotificationsCount = function(count) {
-  this.numberOfNotifs = Math.max(count, 0)
-  if (typeof this.options.onNotifsNumberChange === 'function') {
-    this.options.onNotifsNumberChange(this.numberOfNotifs)
+MNModule.prototype._setNotificationsCount = function(count) {
+  this.notificationsCount = Math.max(count, 0)
+  if (typeof this.options.onNotificationsCountChange === 'function') {
+    this.options.onNotificationsCountChange(this.notificationsCount)
   }
 }
 
@@ -50,15 +50,15 @@ MNModule.prototype.setNotificationsCount = function(count) {
  * @returns Boolean value
  */
 // used in tests only
-MNModule.prototype.getGroup = function(id) {
+MNModule.prototype._getGroup = function(id) {
   return this.groups.get(id)
 }
 // used in tests only
-MNModule.prototype.getGroups = function() {
+MNModule.prototype._getGroups = function() {
   return this.groups.values()
 }
 // used in tests only
-MNModule.prototype.getGroupsCount = function() {
+MNModule.prototype._getGroupsCount = function() {
   return this.groups.size
 }
 
@@ -77,45 +77,60 @@ MNModule.prototype.createEmptyGroup = function(groupOptions) {
   return true
 }
 
-/**
- * Pulls notifications of the specified group
- * @param {String} groupName - Name of the group
- */
-MNModule.prototype.pullGroupNotifs = function(id) {
+MNModule.prototype._removeGroupNotifications = function(
+  id,
+  notificationStartIndex = 0
+) {
   if (!this.groups.has(id))
     throw new Error(`Group with id ${id} does not exist`)
+  let index = notificationStartIndex
   this.groups
     .get(id)
-    .getNotifications()
-    .forEach(notification => notification.pull())
+    ._getNotifications()
+    .forEach(notification => {
+      setTimeout(() => {
+        notification.remove()
+      }, index * REMOVE_NOTIFICATION_DELAY_MS)
+      index++
+    })
+
   console.debug('Group notifications were removed:', id)
 }
 
 /**
- * Pulls all notifications from current module
+ * Pulls notifications
+ * @param {String} id - id of the group, if not specified removes all notifications
  */
-MNModule.prototype.pullAll = function() {
-  this.groups.forEach((_, groupId) => this.pullGroupNotifs(groupId))
+MNModule.prototype.removeNotifications = function(id) {
+  if (id) {
+    this._removeGroupNotifications(id)
+  } else {
+    let notificationStartIndex = 0
+    this.groups.forEach((_, groupId) => {
+      this._removeGroupNotifications(groupId, notificationStartIndex)
+      notificationStartIndex += this.groups.get(groupId)._getLength()
+    })
+  }
 }
 
-MNModule.prototype._onBeforeRemove = function(mnNotification) {
-  const group = this.groups.get(mnNotification.options.groupId)
-  if (group.hasNotification(mnNotification.id)) {
-    group.removeNotification(mnNotification.id)
+MNModule.prototype._onBeforeRemove = function(notification) {
+  const group = this.groups.get(notification.options.groupId)
+  if (group._hasNotification(notification.id)) {
+    group._removeNotification(notification.id)
   }
-  this.setNotificationsCount(this.numberOfNotifs - 1)
+  this._setNotificationsCount(this.notificationsCount - 1)
 }
 
 MNModule.prototype._createNotification = function(options) {
-  this.setNotificationsCount(this.numberOfNotifs + 1)
+  this._setNotificationsCount(this.notificationsCount + 1)
 
   const notification = new MNNotification(options)
-  notification.addToContainer({
+  notification._addToContainer({
     moduleId: this.id,
     mode: options.mode,
     onBeforeRemove: n => this._onBeforeRemove(n),
   })
-  this.groups.get(options.groupId).addNotification(notification)
+  this.groups.get(options.groupId)._addNotification(notification)
   return notification
 }
 
@@ -125,7 +140,7 @@ MNModule.prototype._addNotification = function(options) {
   this.createEmptyGroup({ id: _options.groupId })
   const group = this.groups.get(_options.groupId)
   const _pushResult =
-    !group.options.greedy || group.isEmpty()
+    !group.options.greedy || group._isEmpty()
       ? this._createNotification(_options)
       : null
 

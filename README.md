@@ -16,25 +16,15 @@ You can check out the [Demo](https://vadimkorr.github.io/module-notification)
 <br />
 <img src="https://content.screencast.com/users/mintday/folders/Jing/media/4ca2e283-8194-46aa-a3d8-5004b2211644/2017-07-24_2108.png" alt="Notifications Preview" width="450px" />
 
-# Table of Contents
-
-1. <a href="#changelog">Change log</a>
-1. <a href="#installation">Installation</a>
-1. <a href="#referencing">Referencing</a>
-1. <a href="#usage">Usage</a>
-1. <a href="#customization">Customization</a>
-
 ## <a name="changelog">Change log</a>
 
 - v2.0.0 - Removed jQuery dependency, used Font Awesome for icons
+- v3.0.0 - Optimized builds, removed third-party font providers, add more animations
 
 ## <a name="installation">Installation</a>
 
 ```console
-npm install module-notification --save
-```
-
-```console
+npm install module-notification
 yarn add module-notification
 ```
 
@@ -43,40 +33,42 @@ yarn add module-notification
 ### requirejs
 
 ```js
-define([
-  './node_modules/module-notification/dist/module-notification.js',
-], function() {
+define(['./node_modules/module-notification/dist/index.js'], function() {
   //...
 })
 ```
 
-### index.html
+### index.html (local)
 
 ```html
 <html>
-  <head>
-    <!-- reference style -->
-    <link
-      rel="stylesheet"
-      href="./node_modules/module-notification/dist/module-notification.css"
-    />
-  </head>
+  <head> </head>
   <body>
-    <!-- reference script -->
-    <script src="./node_modules/module-notification/dist/module-notification.js"></script>
+    <script src="./node_modules/module-notification/dist/index.js"></script>
+  </body>
+</html>
+```
+
+### index.html (CDN)
+
+```html
+<html>
+  <head> </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/module-notification@latest/dist/index.js"></script>
   </body>
 </html>
 ```
 
 ## <a name="usage">Usage</a>
 
-### Create html element where notifications will be pushed
+### 1. Create html element where notifications will be pushed
 
 ```html
 <div id="notifications"></div>
 ```
 
-### Specify styles
+### 2. Specify styles
 
 ```css
 #notifications {
@@ -91,60 +83,63 @@ define([
 }
 ```
 
-### Create new module
+### 3. Create new module
 
 ```js
-let myMNModule = new MNModule({
-  container: '#notifications',
-  onNotifsNumberChange: number => {
-    console.info('Number of notifications', number)
+let myNotificationsModule = new MNModule({
+  container: '#notifications', // required
+  onNotificationsCountChange: number => {
+    console.log('Number of notifications', number)
   },
-  direction: 'fromTop', // 'fromTop' (by default), 'fromBottom'
 })
 ```
 
-### Create group (optional)
+### 4. Create group (optional)
 
-Group is like an id for the set of notifications. Group may have one or more elements. You can force the group to have only one element making field `greedy` equal to `true`.
+Groups used to operate with the subset of notifications. Group may have one or more elements. You can force the group to have only one element making field `greedy` equal to `true`. It is not necessary to create group, all notifications without specifying `groupId` will be associated with group with id `default`.
 
 ```js
-myMNModule.createEmptyGroup({
-  name: 'test',
+myNotificationsModule.createEmptyGroup({
+  id: 'test', // required
   greedy: false,
 })
 ```
 
-### Push notification
+### 5. Add notifications
 
 ```js
-let myNotif = myMNModule.pushNotif({
+// pushNotification - appends new notification (is added from the bottom)
+let myNotification1 = myMNModule.pushNotification({
   title: 'Hello!',
   message: "I'm a notification",
-  icon: 'info-circle', // Font Awesome icon name
-  closeInMS: 5000, // ms, put false (by default) to prevent closing
-  type: 'notice', // 'notice' (by default), 'warning', 'error', 'success'
-  group: 'test', // 'common' (by defalut)
+  closeInMS: 5000, // Notification will be closed automatically in specified amount of milliseconds; to prevent notification from closing, just omit this option. It does not close automatically by default.
+  groupId: 'test', // 'default' (by default)
+  type: 'info', // "info" (by default), "warning", "error", "success"
+  template: ({ title, message }) => `<p>${title}</p>`, // Allows to create customized notifications. If used, type will be ignored.
+})
+
+// unshiftNotification - prepends new notification (is added from the top)
+let myNotification2 = myMNModule.unshiftNotification({
+  // same options as pushNotification
 })
 ```
 
-see other [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free) icons
-
-### Pull notification
+### 6. Pull notification
 
 ```js
-myNotif.pull()
+myNotification1.remove()
 ```
 
-### Pull all the notifications of the specified group
+### 7. Pull all the notifications of the specified group
 
 ```js
-myMNModule.pullGroupNotifs('test')
+myModule.removeNotifications('test')
 ```
 
-### Pull all the notifications of the module
+### 8. Pull all the notifications of the module
 
 ```js
-myMNModule.pullAll()
+myModule.removeNotifications()
 ```
 
 ## <a name="customization">Customization</a>
@@ -159,7 +154,7 @@ To add customized notidfications you have to:
 Specify function which will return custom template, e.g.
 
 ```js
-let customTemplateFunc = (title, message) => {
+const customTemplate = ({ title, message }) => {
   return `
     <div class='custom-notification'>
       <span>${title}</span>
@@ -170,28 +165,27 @@ let customTemplateFunc = (title, message) => {
 }
 ```
 
+In order to make custom notification closable by user click assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
+
+```html
+<span class="mn-close-btn">[x]</span>
+```
+
   </li>
   <li>
 
-And assign this function to **template** field:
+And assign this function to `template` option:
 
 ```js
-customizedNotifsModule.pushNotif({
-  closeInMS: false,
-  title: 'Hey',
-  message: 'I`m a custom notification',
-  template: customTemplateFunc,
+customizedNotifsModule.pushNotification({
+  title: 'Hello!',
+  message: "I'm a custom notification",
+  template: customTemplate,
 })
 ```
 
   </li>
 </ol>
-
-In order to make the notification closable by user click assign class `.mn-close-btn` to the element which will trigger closing on click, e.g.
-
-```html
-<span class="mn-close-btn">[x]</span>
-```
 
 ### Example
 

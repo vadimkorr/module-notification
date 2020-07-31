@@ -1,8 +1,24 @@
+const REMOVE_NOTIFICATION_DELAY_MS = 100
+
+const getRemoveWaitingTimeMS = module => {
+  let allNotificationsCount = 0
+  for (let group of module._getGroups()) {
+    allNotificationsCount += group._getLength()
+  }
+  return allNotificationsCount * REMOVE_NOTIFICATION_DELAY_MS
+}
+
+const getRemoveWaitingTimeMSByGroupId = (module, groupId) => {
+  return module._getGroup(groupId)._getLength() * REMOVE_NOTIFICATION_DELAY_MS
+}
+
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 describe('Notification', function() {
   beforeEach(function() {
     var testModuleOptions = {
       container: '#notifications-container',
-      onNotifsNumberChange: function(number) {
+      onNotificationsCountChange: function(number) {
         console.info('Number of notifs = ' + number)
       },
     }
@@ -87,7 +103,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotification(testNotifOptions)
       //check if notif was pushed to appropriate group
-      expect(mnModule.getGroup(testNotifOptions.groupId).getLength()).toEqual(
+      expect(mnModule._getGroup(testNotifOptions.groupId)._getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       )
     }
@@ -119,7 +135,7 @@ describe('Notification', function() {
       //push notif
       var notif = mnModule.pushNotification(testNotifOptions)
       //check the size of the group
-      expect(mnModule.getGroup(testNotifOptions.groupId).getLength()).toEqual(
+      expect(mnModule._getGroup(testNotifOptions.groupId)._getLength()).toEqual(
         testNotifOptions.expectedNumberOfNotifsAfterPushing
       )
       //check returned result
@@ -134,18 +150,18 @@ describe('Notification', function() {
       var notif = mnModule.pushNotification({ closeInMS: false })
       //check the number of notifs after pushing
       var expectedNumberOfNotifsAfterPushing = 1
-      expect(mnModule.numberOfNotifs).toEqual(
+      expect(mnModule.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPushing
       )
-      //pull notif
-      notif.pull()
+      //remove notif
+      notif.remove()
       //check the number of notifs after pulling
       var expectedNumberOfNotifsAfterPulling = 0
-      expect(mnModule.numberOfNotifs).toEqual(
+      expect(mnModule.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPulling
       )
     }
-    expect(mnModule.numberOfNotifs).toEqual(0)
+    expect(mnModule.notificationsCount).toEqual(0)
   })
 
   function pushNotifs(notifsCount, groupId, module) {
@@ -157,7 +173,7 @@ describe('Notification', function() {
     }
   }
 
-  it('should be able to be pulled from group', function() {
+  it('should be able to be pulled from group', async () => {
     var numberOfNotifsInFirstGroup = 10
     var numberOfNotifsInSecondGroup = 20
     var firstGroupName = 'first group'
@@ -173,26 +189,29 @@ describe('Notification', function() {
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule)
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule)
     //check total number of notifs
-    expect(mnModule.numberOfNotifs).toEqual(
+    expect(mnModule.notificationsCount).toEqual(
       numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
     )
 
     //check number of notifs in first group
-    for (let group of mnModule.getGroups()) {
-      expect(group.getLength()).toEqual(groups[group.getId()].count)
+    for (let group of mnModule._getGroups()) {
+      expect(group._getLength()).toEqual(groups[group._getId()].count)
     }
 
-    //pull notifs of first group
-    mnModule.pullGroupNotifs(firstGroupName)
+    //remove notifs of first group
+    mnModule.removeNotifications(firstGroupName)
+    await wait(getRemoveWaitingTimeMSByGroupId(mnModule, firstGroupName))
     //check number of notifs of module
-    expect(mnModule.numberOfNotifs).toEqual(numberOfNotifsInSecondGroup)
-    //pull notifs of second group
-    mnModule.pullGroupNotifs(secondGroupName)
+    expect(mnModule.notificationsCount).toEqual(numberOfNotifsInSecondGroup)
+
+    //remove notifs of second group
+    mnModule.removeNotifications(secondGroupName)
+    await wait(getRemoveWaitingTimeMSByGroupId(mnModule, secondGroupName))
     //check number of notifs of module
-    expect(mnModule.numberOfNotifs).toEqual(0)
+    expect(mnModule.notificationsCount).toEqual(0)
   })
 
-  it('should be able to be pulled from module (all notifs)', function() {
+  it('should be able to be pulled from module (all notifs)', async () => {
     var numberOfNotifsInFirstGroup = 10
     var numberOfNotifsInSecondGroup = 20
     var firstGroupName = 'first group'
@@ -208,16 +227,25 @@ describe('Notification', function() {
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule2)
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule2)
 
-    //pull notifs from first group
-    mnModule.pullAll()
-    expect(mnModule.numberOfNotifs).toEqual(0)
+    //remove notifs from first group
+    mnModule.removeNotifications()
+
     //check if second group is ok
-    expect(mnModule2.numberOfNotifs).toEqual(
+    expect(mnModule2.notificationsCount).toEqual(
       numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
     )
 
-    //pull notifs from second group
-    mnModule2.pullAll()
-    expect(mnModule.numberOfNotifs).toEqual(0)
+    //remove notifs from second group
+    mnModule2.removeNotifications()
+
+    await wait(
+      Math.max(
+        getRemoveWaitingTimeMS(mnModule),
+        getRemoveWaitingTimeMS(mnModule2)
+      )
+    )
+
+    expect(mnModule.notificationsCount).toEqual(0)
+    expect(mnModule2.notificationsCount).toEqual(0)
   })
 })

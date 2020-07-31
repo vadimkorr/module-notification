@@ -1,7 +1,7 @@
 import { applyArgs } from './utils/utils'
 
 const defaultOptions = {
-  id: null,
+  id: null, // required
   greedy: false,
 }
 
@@ -21,7 +21,8 @@ export function MNGroup(groupOptions) {
  * Returnes id of the group
  * @returns id
  */
-MNGroup.prototype.getId = function() {
+// used in tests only
+MNGroup.prototype._getId = function() {
   return this.options.id
 }
 
@@ -29,7 +30,7 @@ MNGroup.prototype.getId = function() {
  * Adds new notification to the group
  * @param {Object} notification - instance of the notification
  */
-MNGroup.prototype.addNotification = function(notification) {
+MNGroup.prototype._addNotification = function(notification) {
   this._notifications.set(notification.id, notification)
 }
 
@@ -38,7 +39,7 @@ MNGroup.prototype.addNotification = function(notification) {
  * @param {String} id - id of the notification
  * @returns boolean value
  */
-MNGroup.prototype.hasNotification = function(id) {
+MNGroup.prototype._hasNotification = function(id) {
   return this._notifications.has(id)
 }
 
@@ -46,7 +47,7 @@ MNGroup.prototype.hasNotification = function(id) {
  * Removes notification from the group
  * @param {String} id - id of the notification
  */
-MNGroup.prototype.removeNotification = function(id) {
+MNGroup.prototype._removeNotification = function(id) {
   this._notifications.delete(id)
 }
 
@@ -54,7 +55,7 @@ MNGroup.prototype.removeNotification = function(id) {
  * Returnes all notifications from the group
  * @returns list of notifications
  */
-MNGroup.prototype.getNotifications = function() {
+MNGroup.prototype._getNotifications = function() {
   return this._notifications
 }
 
@@ -62,7 +63,8 @@ MNGroup.prototype.getNotifications = function() {
  * Returnes count of notifications in the group
  * @returns number
  */
-MNGroup.prototype.getLength = function() {
+// used in tests only
+MNGroup.prototype._getLength = function() {
   return this._notifications.size
 }
 
@@ -70,6 +72,6 @@ MNGroup.prototype.getLength = function() {
  * Returnes if group is empty
  * @returns boolean
  */
-MNGroup.prototype.isEmpty = function() {
+MNGroup.prototype._isEmpty = function() {
   return this._notifications.size === 0
 }
