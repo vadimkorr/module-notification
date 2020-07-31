@@ -218,7 +218,7 @@ describe('Notification', function() {
     })
   })
 
-  it('should be able to be pulled from module (all notifs)', async function() {
+  it('should be able to be pulled from module (all notifs)', function() {
     var numberOfNotifsInFirstGroup = 10
     var numberOfNotifsInSecondGroup = 20
     var firstGroupName = 'first group'
@@ -245,14 +245,14 @@ describe('Notification', function() {
     //remove notifs from second group
     mnModule2.removeNotifications()
 
-    await wait(
+    wait(
       Math.max(
         getRemoveWaitingTimeMS(mnModule),
         getRemoveWaitingTimeMS(mnModule2)
       )
-    )
-
-    expect(mnModule.notificationsCount).toEqual(0)
-    expect(mnModule2.notificationsCount).toEqual(0)
+    ).then(() => {
+      expect(mnModule.notificationsCount).toEqual(0)
+      expect(mnModule2.notificationsCount).toEqual(0)
+    })
   })
 })
