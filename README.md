@@ -62,13 +62,18 @@ define(['./node_modules/module-notification/dist/index.js'], function() {
 
 ## <a name="usage">Usage</a>
 
-1. Create html element where notifications will be pushed
+<ol start="1">
+  <li>
+Create html element where notifications will be pushed
 
 ```html
 <div id="notifications"></div>
 ```
 
-2. Specify styles
+  </li>
+  <li>
+
+Specify styles
 
 ```css
 #notifications {
@@ -83,7 +88,10 @@ define(['./node_modules/module-notification/dist/index.js'], function() {
 }
 ```
 
-3. Create new module
+  </li>
+  <li>
+
+Create new module
 
 ```js
 let myNotificationsModule = new MNModule({
@@ -94,7 +102,10 @@ let myNotificationsModule = new MNModule({
 })
 ```
 
-4. Create group (optional)
+  </li>
+  <li>
+
+Create group (optional)
 
 Groups used to operate with the subset of notifications. Group may have one or more elements. You can force the group to have only one element making field `greedy` equal to `true`. It is not necessary to create group, all notifications without specifying `groupId` will be associated with group with id `default`.
 
@@ -105,7 +116,10 @@ myNotificationsModule.createEmptyGroup({
 })
 ```
 
-5. Add notifications
+  </li>
+  <li>
+
+Add notifications
 
 ```js
 // pushNotification - appends new notification (is added from the bottom)
@@ -125,27 +139,37 @@ let myNotification2 = myMNModule.unshiftNotification({
 })
 ```
 
-6. Remove notification
+  </li>
+  <li>
+
+Remove notification
 
 ```js
 myNotification1.remove()
 ```
 
-7. Remove all the notifications of the specified group
+  </li>
+  <li>
+
+Remove all the notifications of the specified group
 
 ```js
 myModule.removeNotifications('test')
 ```
 
-8. Remove all the notifications of the module
+  </li>
+  <li>
+
+Remove all the notifications of the module
 
 ```js
 myModule.removeNotifications()
 ```
 
-## <a name="customization">Customization</a>
+  </li>
+</ol>
 
-### Steps
+## <a name="customization">Customization</a>
 
 To add customized notidfications you have to:
 
