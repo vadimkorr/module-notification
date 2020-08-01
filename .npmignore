@@ -1,26 +1,13 @@
-# configs
 config
 .vscode
-
-# dependencies
-node_modules
-
-# test
-spec
-
-# linters
-.eslintrc.js
-.prettierrc.js
-
-# CI
-.travis.yml
-
-# git
-.gitignore
-
-# docs
 docs
+node_modules
+spec
+.eslintrc.js
+.gitignore
+.prettierrc.js
+.travis.yml
+babel.config.js
 DEVELOPMENT.md
-
-# lock
+postcss.config.js
 yarn.lock

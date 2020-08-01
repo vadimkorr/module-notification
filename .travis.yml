@@ -1,9 +1,5 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=b9b5337327c5a877b39a1d842f5d4bf906384747f5ce5ab244651f2405445caa
-    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 language: node_js
-script: karma start spec/karma.conf.js
+script: npm run test
 node_js:
   - '10.16.2'
 
@@ -13,5 +9,3 @@ addons:
 
 services:
   - xvfb
-# before_install:
-#   - export CHROME_BIN=chromium-browser

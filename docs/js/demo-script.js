@@ -1,155 +1,166 @@
-var myMNModule;
+var myMNModule
 
 function addCommonNotif() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Common Group notification',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 function removeCommonGroup() {
-  myMNModule.pullGroupNotifs('common');
+  myMNModule.removeNotifications('common')
 }
 
 function addTestGroup() {
   myMNModule.createEmptyGroup({
-    name: 'test',
-  });
+    id: 'test',
+  })
 }
 
 function addTestNotification() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Test Group notification',
     type: 'success',
-    group: 'test',
-  });
+    groupId: 'test',
+  })
 }
 
 function removeTestGroup() {
-  myMNModule.pullGroupNotifs('test');
+  myMNModule.removeNotifications('test')
 }
 
 function addNotifToGreedyGroup() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Greedy Group notification',
     type: 'warning',
-    group: 'greedy',
-  });
+    groupId: 'greedy',
+  })
 }
 
 function removeGreedyGroup() {
-  myMNModule.pullGroupNotifs('greedy');
+  myMNModule.removeNotifications('greedy')
 }
 
 function addSuccessNotif() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Success',
     message: 'Notification',
     type: 'success',
-  });
+    groupId: 'common',
+  })
 }
 
 function addNoticeNotif() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Notice',
     message: 'Notification',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 function addWarningNotif() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Warning',
     message: 'Notification',
     type: 'warning',
-  });
+    groupId: 'common',
+  })
 }
 
 function addErrorNotif() {
-  myMNModule.pushNotif({
-    closeCond: false,
+  myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Error',
     message: 'Notification',
     type: 'error',
-  });
+    groupId: 'common',
+  })
 }
 
 function addTimeoutNotif() {
-  myMNModule.pushNotif({
-    closeCond: 2000,
+  myMNModule.pushNotification({
+    closeInMS: 2000,
     title: 'Notice',
     message: 'Notification with Timeout',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 /* <p>Removing notification</p> */
 
 function removeAll() {
-  myMNModule.pullAll();
+  myMNModule.removeNotifications()
 }
 
-var notifToRemove;
+var notifToRemove
 function addNoticeNotifToRemove() {
-  notifToRemove = myMNModule.pushNotif({
-    closeCond: false,
+  notifToRemove = myMNModule.pushNotification({
+    closeInMS: false,
     title: 'Add notification',
     message: 'to remove it',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 function removeSpecificNotif() {
-  notifToRemove.pull();
+  notifToRemove.remove()
 }
 
 /* DEMONSTRAING THE DIRECTIONS */
-var dirFromBottomMNModule;
-var dirFromTopMNModule;
+var dirFromBottomMNModule
+var dirFromTopMNModule
 
 function addSuccessNotifFromTopDir() {
-  dirFromTopMNModule.pushNotif({
-    closeCond: false,
+  dirFromTopMNModule.unshiftNotification({
+    closeInMS: false,
     message: 'Success',
     type: 'success',
-  });
+    groupId: 'common',
+  })
 }
 
 function addTimeoutNotifFromTopDir() {
-  dirFromTopMNModule.pushNotif({
-    closeCond: 2000,
+  dirFromTopMNModule.unshiftNotification({
+    closeInMS: 2000,
     message: 'Notice',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 function addSuccessNotifFromBottomDir() {
-  dirFromBottomMNModule.pushNotif({
-    closeCond: false,
+  dirFromBottomMNModule.pushNotification({
+    closeInMS: false,
     message: 'Success',
     type: 'success',
-  });
+    groupId: 'common',
+  })
 }
 
 function addTimeoutNotifFromBottomDir() {
-  dirFromBottomMNModule.pushNotif({
-    closeCond: 2000,
+  dirFromBottomMNModule.pushNotification({
+    closeInMS: 2000,
     message: 'Notice',
-    type: 'notice',
-  });
+    type: 'info',
+    groupId: 'common',
+  })
 }
 
 /* DEMONSTRATING CUSTOMIZED NOTIFICATIONS */
-var customizedNotifsModule;
+var customizedNotifsModule
 
 // define function which will return custom template
-var customTemplateFunc = function(title, message) {
+var customTemplateFunc = ({ title, message }) => {
   return (
     "<div class='custom-notification'>" +
     '<span>' +
@@ -160,20 +171,21 @@ var customTemplateFunc = function(title, message) {
     '</span> ' +
     "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
     '</div>'
-  );
-};
+  )
+}
 
 function pushCustomNotif() {
-  customizedNotifsModule.pushNotif({
-    closeCond: false,
+  customizedNotifsModule.pushNotification({
+    closeInMS: false,
     title: 'Hey',
     message: "I'm a custom notification",
     template: customTemplateFunc,
-  });
+    groupId: 'common',
+  })
 }
 
 function pullCustomizedNotifs() {
-  customizedNotifsModule.pullAll();
+  customizedNotifsModule.removeNotifications()
 }
 
 /*  */
@@ -182,50 +194,52 @@ document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
     myMNModule = new MNModule({
       container: '#notifications',
-      onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+      onNotificationsCountChange: function(number) {
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
-    });
+    })
 
     // add greedy group
     myMNModule.createEmptyGroup({
-      name: 'greedy',
+      id: 'greedy',
       greedy: true,
-    });
+    })
 
-    myMNModule.pushNotif({
+    myMNModule.pushNotification({
       title: 'Hello!',
       message: 'and Welcome ;)',
-      type: 'notice',
-      closeCond: 5000,
-    });
+      type: 'info',
+      groupId: 'common',
+      closeInMS: 5000,
+    })
 
-    myMNModule.pushNotif({
+    myMNModule.pushNotification({
       message: 'Click buttons to push/pull the notifications',
       type: 'success',
-      closeCond: 7000,
-    });
+      closeInMS: 7000,
+      groupId: 'common',
+    })
 
     dirFromTopMNModule = new MNModule({
       container: '#notifications-from-top',
-      onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+      onNotificationsCountChange: function(number) {
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromTop',
-    });
+    })
 
     dirFromBottomMNModule = new MNModule({
       container: '#notifications-from-bottom',
-      onNotifsNumberChange: function(number) {
-        console.info('Number of notifs [' + this.container + ']: ' + number);
+      onNotificationsCountChange: function(number) {
+        console.info('Number of notifs [' + this.container + ']: ' + number)
       },
       direction: 'fromBottom',
-    });
+    })
 
     customizedNotifsModule = new MNModule({
       container: '#custom-notifications-container',
       direction: 'fromTop',
-    });
+    })
   }
-};
+}

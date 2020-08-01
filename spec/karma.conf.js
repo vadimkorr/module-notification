@@ -10,18 +10,21 @@ module.exports = function(config) {
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-jasmine',
-      'karma-browserify',
     ],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['browserify', 'jasmine'],
+    frameworks: ['jasmine'],
+
+    browserify: {
+      debug: true,
+    },
 
     // list of files / patterns to load in the browser
     files: [
-      '../node_modules/cuid/dist/browser-cuid.js',
-      '../docs/dist/module-notification.js',
-      'spec/*.js',
+      'https://cdn.jsdelivr.net/npm/module-notification/dist/index.js',
+      'spec/*.spec.js',
+      // '../dist/index.js', // uncomment fore development
     ],
 
     // list of files to exclude
@@ -29,9 +32,7 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'spec/*.js': ['browserify'],
-    },
+    preprocessors: {},
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -72,11 +73,11 @@ module.exports = function(config) {
     concurrency: Infinity,
 
     failOnEmptyTestSuite: false,
-  };
-
-  if (process.env.TRAVIS) {
-    configuration.browsers = ['Chrome_travis_ci'];
   }
 
-  config.set(configuration);
-};
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Chrome_travis_ci']
+  }
+
+  config.set(configuration)
+}

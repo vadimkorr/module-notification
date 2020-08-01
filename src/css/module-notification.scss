@@ -1,0 +1,76 @@
+.mn-notification {
+  width: 100%;
+  max-height: 0;
+  margin-bottom: 0;
+
+  &.show {
+    // value on max-height is something bigger than container will ever get
+    max-height: 100px;
+    margin-bottom: 10px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.mn-notification-inner {
+  padding: 15px 35px 15px 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  font-size: 14px;
+}
+
+.mn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+}
+
+@mixin type-theme($theme, $colorLighter, $colorLight, $colorDark, $icon) {
+  .mn-notification-inner-#{$theme} {
+    background-color: #{$colorLighter};
+    border-color: #{$colorLight};
+    color: #{$colorDark};
+  }
+  .mn-icon-#{$theme} {
+    background-image: svg-load('../assets/#{$icon}.svg', fill=#{$colorDark});
+  }
+}
+@include type-theme('info', #d9edf7, #bce8f1, #31708f, 'info-circle');
+@include type-theme('success', #dff0d8, #d6e9c6, #3c763d, 'check-circle');
+@include type-theme('warning', #fcf8e3, #faebcc, #8a6d3b, 'exclamation-circle');
+@include type-theme('error', #f2dede, #ebccd1, #a94442, 'times-circle');
+
+// payload content
+.mn-notification-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+// close button
+.mn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  opacity: 0.2;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+}
