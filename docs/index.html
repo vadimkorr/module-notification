@@ -23,7 +23,7 @@
     <script src="js/demo-script.js"></script>
 
     <div class="panel panel-primary">
-      <div class="panel-heading">Basic stuff</div>
+      <div class="panel-heading">Basic examples</div>
       <div class="row">
         <div class="col-md-8">
           <div class="panel-content-unit">
@@ -40,32 +40,32 @@
               class="btn btn-default"
               onclick="removeNotificationsFromDefaultGroup()"
             >
-              Remove notifications from default Group
+              Remove notifications from default group
             </button>
-            <p>.. and of custom group (i.e. "test" group)</p>
+            <p>.. and of custom group (i.e. group with id 'test')</p>
             <button
               type="button"
               class="btn btn-default"
               onclick="addTestGroup()"
             >
-              Add "Test" Group
+              Add 'test' group
             </button>
             <button
               type="button"
               class="btn btn-default"
               onclick="addTestNotification()"
             >
-              Add "Test" Notification
+              Add notification to 'test' group
             </button>
             <button
               type="button"
               class="btn btn-default"
               onclick="removeTestGroup()"
             >
-              Remove "Test" Group
+              Remove notifications from 'test' group
             </button>
             <p>
-              "greedy" group notifications (only one notification can be pushed
+              'greedy' group notifications (only one notification can be added
               to greedy group)
             </p>
             <button
@@ -73,14 +73,14 @@
               class="btn btn-default"
               onclick="addNotifToGreedyGroup()"
             >
-              Add Element To "Greedy" Group
+              Add notification to 'greedy' group
             </button>
             <button
               type="button"
               class="btn btn-default"
               onclick="removeGreedyGroup()"
             >
-              Remove "Greedy" Group
+              Remove notifications from 'greedy' group
             </button>
             <p>Notifications with different types</p>
             <button
@@ -88,28 +88,28 @@
               class="btn btn-success"
               onclick="addSuccessNotif()"
             >
-              Add "Success" Notification
+              Add Success notification
             </button>
             <button
               type="button"
               class="btn btn-info"
-              onclick="addNoticeNotif()"
+              onclick="addInfoNotification()"
             >
-              Add "Notice" Notification
+              Add Info notification
             </button>
             <button
               type="button"
               class="btn btn-warning"
               onclick="addWarningNotif()"
             >
-              Add "Warning" Notification
+              Add Warning notification
             </button>
             <button
               type="button"
               class="btn btn-danger"
               onclick="addErrorNotif()"
             >
-              Add "Error" Notification
+              Add Error notification
             </button>
             <p>Notifications with different timeouts</p>
             <button
@@ -117,7 +117,7 @@
               class="btn btn-default"
               onclick="addTimeoutNotif()"
             >
-              Add Notification with Timeout
+              Add notification with timeout
             </button>
             <p>Removing notification</p>
             <button type="button" class="btn btn-default" onclick="removeAll()">
@@ -126,9 +126,9 @@
             <button
               type="button"
               class="btn btn-info"
-              onclick="addNoticeNotifToRemove()"
+              onclick="addInfoNotificationToRemove()"
             >
-              Add Notification to remove
+              Add notification to remove
             </button>
             <button
               type="button"
@@ -141,15 +141,13 @@
         </div>
         <div class="col-md-4">
           <div class="panel-content-unit">
-            <div class="notifications-outer-container">
-              <div id="notifications"></div>
-            </div>
+            <div id="notifications" class="notifications-container"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="panel panel-primary">
-      <div class="panel-heading">Direction of notification occurances</div>
+      <div class="panel-heading">Direction of notification show</div>
       <div class="row">
         <div class="col-md-6">
           <div class="panel-content-unit">
@@ -159,18 +157,19 @@
               class="btn btn-success"
               onclick="addSuccessNotifFromTopDir()"
             >
-              Add "Success" Notification
+              Add "Success" notification
             </button>
             <button
               type="button"
               class="btn btn-default"
               onclick="addTimeoutNotifFromTopDir()"
             >
-              Add Notification with Timeout
+              Add notification with timeout
             </button>
-            <div class="notifications-outer-container">
-              <div id="notifications-from-top"></div>
-            </div>
+            <div
+              id="notifications-from-top"
+              class="notifications-container"
+            ></div>
           </div>
         </div>
         <div class="col-md-6">
@@ -181,20 +180,19 @@
               class="btn btn-success"
               onclick="addSuccessNotifFromBottomDir()"
             >
-              Add "Success" Notification
+              Add "Success" notification
             </button>
             <button
               type="button"
               class="btn btn-default"
               onclick="addTimeoutNotifFromBottomDir()"
             >
-              Add Notification with Timeout
+              Add notification with timeout
             </button>
             <div
-              class="notifications-outer-container notifications-outer-container-from-bottom"
-            >
-              <div id="notifications-from-bottom"></div>
-            </div>
+              id="notifications-from-bottom"
+              class="notifications-container notifications-container-from-bottom"
+            ></div>
           </div>
         </div>
       </div>
@@ -209,7 +207,7 @@
               class="btn btn-default"
               onclick="pushCustomNotif()"
             >
-              Push customized notification
+              Add customized notification
             </button>
           </div>
         </div>

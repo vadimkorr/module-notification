@@ -2,7 +2,6 @@ var myMNModule
 
 function addNotificationToDefaultGroup() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Default Group notification',
     type: 'info',
   })
@@ -20,7 +19,6 @@ function addTestGroup() {
 
 function addTestNotification() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Test Group notification',
     type: 'success',
     groupId: 'test',
@@ -33,7 +31,6 @@ function removeTestGroup() {
 
 function addNotifToGreedyGroup() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Greedy Group notification',
     type: 'warning',
     groupId: 'greedy',
@@ -46,17 +43,15 @@ function removeGreedyGroup() {
 
 function addSuccessNotif() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Success',
     message: 'Notification',
     type: 'success',
   })
 }
 
-function addNoticeNotif() {
+function addInfoNotification() {
   myMNModule.pushNotification({
-    closeInMS: false,
-    title: 'Notice',
+    title: 'Info',
     message: 'Notification',
     type: 'info',
   })
@@ -64,7 +59,6 @@ function addNoticeNotif() {
 
 function addWarningNotif() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Warning',
     message: 'Notification',
     type: 'warning',
@@ -73,7 +67,6 @@ function addWarningNotif() {
 
 function addErrorNotif() {
   myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Error',
     message: 'Notification',
     type: 'error',
@@ -83,7 +76,7 @@ function addErrorNotif() {
 function addTimeoutNotif() {
   myMNModule.pushNotification({
     closeInMS: 2000,
-    title: 'Notice',
+    title: 'Info',
     message: 'Notification with Timeout',
     type: 'info',
   })
@@ -96,9 +89,8 @@ function removeAll() {
 }
 
 var notifToRemove
-function addNoticeNotifToRemove() {
+function addInfoNotificationToRemove() {
   notifToRemove = myMNModule.pushNotification({
-    closeInMS: false,
     title: 'Add notification',
     message: 'to remove it',
     type: 'info',
@@ -115,7 +107,6 @@ var dirFromTopMNModule
 
 function addSuccessNotifFromTopDir() {
   dirFromTopMNModule.unshiftNotification({
-    closeInMS: false,
     message: 'Success',
     type: 'success',
   })
@@ -124,14 +115,13 @@ function addSuccessNotifFromTopDir() {
 function addTimeoutNotifFromTopDir() {
   dirFromTopMNModule.unshiftNotification({
     closeInMS: 2000,
-    message: 'Notice',
+    message: 'Info',
     type: 'info',
   })
 }
 
 function addSuccessNotifFromBottomDir() {
   dirFromBottomMNModule.pushNotification({
-    closeInMS: false,
     message: 'Success',
     type: 'success',
   })
@@ -140,7 +130,7 @@ function addSuccessNotifFromBottomDir() {
 function addTimeoutNotifFromBottomDir() {
   dirFromBottomMNModule.pushNotification({
     closeInMS: 2000,
-    message: 'Notice',
+    message: 'Info',
     type: 'info',
   })
 }
@@ -149,23 +139,17 @@ function addTimeoutNotifFromBottomDir() {
 var customizedNotifsModule
 
 // define function which will return custom template
-var customTemplateFunc = ({ title, message }) => {
-  return (
-    "<div class='custom-notification'>" +
-    '<span>' +
-    title +
-    '</span> ' +
-    '<span>' +
-    message +
-    '</span> ' +
-    "<span class='mn-close-btn custom-close-btn'>[x]</span>" +
-    '</div>'
-  )
-}
+const customTemplateFunc = ({ title, message }) =>
+  `
+    <div class='custom-notification'>
+      <span>${title}</span>
+      <span>${message}</span>
+      <span class='mn-close-btn custom-close-btn'>[x]</span>
+    </div>
+  `
 
 function pushCustomNotif() {
   customizedNotifsModule.pushNotification({
-    closeInMS: false,
     title: 'Hey',
     message: "I'm a custom notification",
     template: customTemplateFunc,
@@ -185,7 +169,6 @@ document.onreadystatechange = () => {
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
-      direction: 'fromTop',
     })
 
     // add greedy group
@@ -202,7 +185,7 @@ document.onreadystatechange = () => {
     })
 
     myMNModule.pushNotification({
-      message: 'Click buttons to push/pull the notifications',
+      message: 'Click buttons to add/remove the notifications',
       type: 'success',
       closeInMS: 7000,
     })
@@ -212,7 +195,6 @@ document.onreadystatechange = () => {
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
-      direction: 'fromTop',
     })
 
     dirFromBottomMNModule = new MNModule({
@@ -220,12 +202,10 @@ document.onreadystatechange = () => {
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs [' + this.container + ']: ' + number)
       },
-      direction: 'fromBottom',
     })
 
     customizedNotifsModule = new MNModule({
       container: '#custom-notifications-container',
-      direction: 'fromTop',
     })
   }
 }

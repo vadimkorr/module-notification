@@ -8,7 +8,7 @@ const defaultNotificationOptions = {
   title: '',
   message: '',
   groupId: 'default',
-  closeInMS: 5000,
+  closeInMS: null,
   animation: 'fade', // 'fade', 'swing', 'rotate', 'slide'
   type: ICONS.INFO, // "info", "warning", "error", "success"
   template: null, // function(title, message) { return "<span>" + title + "</span>"; }
