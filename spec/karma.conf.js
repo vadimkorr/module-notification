@@ -22,9 +22,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      './utils.js',
+      './spec/*.spec.js',
       'https://cdn.jsdelivr.net/npm/module-notification/dist/index.js',
-      'spec/*.spec.js',
-      // '../dist/index.js', // uncomment fore development
+      // uncomment for development:
+      // '../dist/index.js',
     ],
 
     // list of files to exclude

@@ -1,10 +1,11 @@
 describe('Group', function() {
-  var mnModule
+  let mnModule
 
   beforeEach(function() {
+    const containerId = 'notifications-container'
+    addHtmlSnippet(containerId)
     var testModuleOptions = {
-      container: '#notifications-container',
-      direction: 'fromTop',
+      container: `#${containerId}`,
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs = ' + number)
       },

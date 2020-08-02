@@ -30,9 +30,15 @@ export const MNModule = function(moduleOptions) {
   this.groups = new Map()
   this.id = generateId()
 
-  //append module container to the specified container
+  // append module container to the specified container
+  const el = getElement(this.options.container)
+  if (!el) {
+    throw new Error(
+      `Container with id '${this.options.container}' is not found`
+    )
+  }
   appendElementToContainer(
-    getElement(this.options.container),
+    el,
     `<div id='${this.id}' class='mn-module-container'></div>`
   )
   // console.debug('New notification module was registered', this.id, this.options)

@@ -1,16 +1,15 @@
 var myMNModule
 
-function addCommonNotif() {
+function addNotificationToDefaultGroup() {
   myMNModule.pushNotification({
     closeInMS: false,
-    title: 'Common Group notification',
+    title: 'Default Group notification',
     type: 'info',
-    groupId: 'common',
   })
 }
 
-function removeCommonGroup() {
-  myMNModule.removeNotifications('common')
+function removeNotificationsFromDefaultGroup() {
+  myMNModule.removeNotifications('default')
 }
 
 function addTestGroup() {
@@ -51,7 +50,6 @@ function addSuccessNotif() {
     title: 'Success',
     message: 'Notification',
     type: 'success',
-    groupId: 'common',
   })
 }
 
@@ -61,7 +59,6 @@ function addNoticeNotif() {
     title: 'Notice',
     message: 'Notification',
     type: 'info',
-    groupId: 'common',
   })
 }
 
@@ -71,7 +68,6 @@ function addWarningNotif() {
     title: 'Warning',
     message: 'Notification',
     type: 'warning',
-    groupId: 'common',
   })
 }
 
@@ -81,7 +77,6 @@ function addErrorNotif() {
     title: 'Error',
     message: 'Notification',
     type: 'error',
-    groupId: 'common',
   })
 }
 
@@ -91,7 +86,6 @@ function addTimeoutNotif() {
     title: 'Notice',
     message: 'Notification with Timeout',
     type: 'info',
-    groupId: 'common',
   })
 }
 
@@ -108,7 +102,6 @@ function addNoticeNotifToRemove() {
     title: 'Add notification',
     message: 'to remove it',
     type: 'info',
-    groupId: 'common',
   })
 }
 
@@ -125,7 +118,6 @@ function addSuccessNotifFromTopDir() {
     closeInMS: false,
     message: 'Success',
     type: 'success',
-    groupId: 'common',
   })
 }
 
@@ -134,7 +126,6 @@ function addTimeoutNotifFromTopDir() {
     closeInMS: 2000,
     message: 'Notice',
     type: 'info',
-    groupId: 'common',
   })
 }
 
@@ -143,7 +134,6 @@ function addSuccessNotifFromBottomDir() {
     closeInMS: false,
     message: 'Success',
     type: 'success',
-    groupId: 'common',
   })
 }
 
@@ -152,7 +142,6 @@ function addTimeoutNotifFromBottomDir() {
     closeInMS: 2000,
     message: 'Notice',
     type: 'info',
-    groupId: 'common',
   })
 }
 
@@ -180,7 +169,6 @@ function pushCustomNotif() {
     title: 'Hey',
     message: "I'm a custom notification",
     template: customTemplateFunc,
-    groupId: 'common',
   })
 }
 
@@ -210,7 +198,6 @@ document.onreadystatechange = () => {
       title: 'Hello!',
       message: 'and Welcome ;)',
       type: 'info',
-      groupId: 'common',
       closeInMS: 5000,
     })
 
@@ -218,7 +205,6 @@ document.onreadystatechange = () => {
       message: 'Click buttons to push/pull the notifications',
       type: 'success',
       closeInMS: 7000,
-      groupId: 'common',
     })
 
     dirFromTopMNModule = new MNModule({

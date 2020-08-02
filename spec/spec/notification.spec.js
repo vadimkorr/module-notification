@@ -1,32 +1,24 @@
-const REMOVE_NOTIFICATION_DELAY_MS = 100
-
-function getRemoveWaitingTimeMS(module) {
-  let allNotificationsCount = 0
-  for (let group of module._getGroups()) {
-    allNotificationsCount += group._getLength()
-  }
-  return allNotificationsCount * REMOVE_NOTIFICATION_DELAY_MS
-}
-
-function getRemoveWaitingTimeMSByGroupId(module, groupId) {
-  return module._getGroup(groupId)._getLength() * REMOVE_NOTIFICATION_DELAY_MS
-}
-
-function wait(ms) {
-  return new Promise(function(resolve) {
-    setTimeout(resolve, ms)
-  })
-}
-
 describe('Notification', function() {
-  beforeEach(function() {
-    var testModuleOptions = {
-      container: '#notifications-container',
+  let modules = {
+    module1: null,
+    module2: null,
+  }
+
+  beforeEach(() => {
+    const container1Id = 'notifications-container'
+    addHtmlSnippet(container1Id)
+    modules.module1 = new MNModule({
+      container: `#${container1Id}`,
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs = ' + number)
       },
-    }
-    mnModule = new MNModule(testModuleOptions)
+    })
+
+    const container2Id = 'notifications-container2'
+    addHtmlSnippet(container2Id)
+    modules.module2 = new MNModule({
+      container: `#${container2Id}`,
+    })
   })
 
   it('should be able to be pushed to module', function() {
@@ -37,7 +29,6 @@ describe('Notification', function() {
         icon: 'music',
         closeInMS: 5000,
         type: 'info',
-        groupId: 'common',
         template: () => {
           return '<div></div>'
         },
@@ -48,7 +39,6 @@ describe('Notification', function() {
         icon: 'music',
         closeInMS: 6000,
         type: 'success',
-        groupId: 'common',
         template: () => {
           return '<div></div>'
         },
@@ -59,7 +49,6 @@ describe('Notification', function() {
         icon: 'ok-sign',
         closeInMS: 7000,
         type: 'success',
-        groupId: 'common',
         template: () => {
           return '<div></div>'
         },
@@ -69,7 +58,7 @@ describe('Notification', function() {
     for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = mnModule.pushNotification(testNotifOptions)
+      var notif = modules.module1.pushNotification(testNotifOptions)
       //check if ref is not null
       expect(notif).not.toBeNull()
       //check if notif was pushed with specified params
@@ -105,11 +94,11 @@ describe('Notification', function() {
     for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = mnModule.pushNotification(testNotifOptions)
+      var notif = modules.module1.pushNotification(testNotifOptions)
       //check if notif was pushed to appropriate group
-      expect(mnModule._getGroup(testNotifOptions.groupId)._getLength()).toEqual(
-        testNotifOptions.expectedNumberOfNotifsAfterPushing
-      )
+      expect(
+        modules.module1._getGroup(testNotifOptions.groupId)._getLength()
+      ).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing)
     }
   })
 
@@ -119,7 +108,7 @@ describe('Notification', function() {
       id: greedyGroupName,
       greedy: true,
     }
-    mnModule.createEmptyGroup(greedyGroupOptions)
+    modules.module1.createEmptyGroup(greedyGroupOptions)
 
     var testNotifsOptions = [
       {
@@ -137,11 +126,11 @@ describe('Notification', function() {
     for (var i = 0; i < testNotifsOptions.length; i++) {
       var testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = mnModule.pushNotification(testNotifOptions)
+      var notif = modules.module1.pushNotification(testNotifOptions)
       //check the size of the group
-      expect(mnModule._getGroup(testNotifOptions.groupId)._getLength()).toEqual(
-        testNotifOptions.expectedNumberOfNotifsAfterPushing
-      )
+      expect(
+        modules.module1._getGroup(testNotifOptions.groupId)._getLength()
+      ).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing)
       //check returned result
       expect(notif == null).toEqual(testNotifOptions.isResultNull)
     }
@@ -151,21 +140,21 @@ describe('Notification', function() {
     var numberOfNotifsToCreate = 10
     for (var i = 0; i < numberOfNotifsToCreate.length; i++) {
       //push notif
-      var notif = mnModule.pushNotification({ closeInMS: false })
+      var notif = modules.module1.pushNotification({ closeInMS: false })
       //check the number of notifs after pushing
       var expectedNumberOfNotifsAfterPushing = 1
-      expect(mnModule.notificationsCount).toEqual(
+      expect(modules.module1.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPushing
       )
       //remove notif
       notif.remove()
       //check the number of notifs after pulling
       var expectedNumberOfNotifsAfterPulling = 0
-      expect(mnModule.notificationsCount).toEqual(
+      expect(modules.module1.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPulling
       )
     }
-    expect(mnModule.notificationsCount).toEqual(0)
+    expect(modules.module1.notificationsCount).toEqual(0)
   })
 
   function pushNotifs(notifsCount, groupId, module) {
@@ -190,32 +179,36 @@ describe('Notification', function() {
         count: numberOfNotifsInSecondGroup,
       },
     }
-    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule)
-    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule)
+    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, modules.module1)
+    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, modules.module1)
     //check total number of notifs
-    expect(mnModule.notificationsCount).toEqual(
+    expect(modules.module1.notificationsCount).toEqual(
       numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
     )
 
     //check number of notifs in first group
-    for (let group of mnModule._getGroups()) {
+    for (let group of modules.module1._getGroups()) {
       expect(group._getLength()).toEqual(groups[group._getId()].count)
     }
 
     //remove notifs of first group
-    mnModule.removeNotifications(firstGroupName)
-    wait(getRemoveWaitingTimeMSByGroupId(mnModule, firstGroupName)).then(() => {
-      //check number of notifs of module
-      expect(mnModule.notificationsCount).toEqual(numberOfNotifsInSecondGroup)
-      //remove notifs of second group
-      mnModule.removeNotifications(secondGroupName)
-      wait(getRemoveWaitingTimeMSByGroupId(mnModule, secondGroupName)).then(
-        () => {
+    modules.module1.removeNotifications(firstGroupName)
+    wait(getRemoveWaitingTimeMSByGroupId(modules.module1, firstGroupName)).then(
+      () => {
+        //check number of notifs of module
+        expect(modules.module1.notificationsCount).toEqual(
+          numberOfNotifsInSecondGroup
+        )
+        //remove notifs of second group
+        modules.module1.removeNotifications(secondGroupName)
+        wait(
+          getRemoveWaitingTimeMSByGroupId(modules.module1, secondGroupName)
+        ).then(() => {
           //check number of notifs of module
-          expect(mnModule.notificationsCount).toEqual(0)
-        }
-      )
-    })
+          expect(modules.module1.notificationsCount).toEqual(0)
+        })
+      }
+    )
   })
 
   it('should be able to be pulled from module (all notifs)', function() {
@@ -224,35 +217,30 @@ describe('Notification', function() {
     var firstGroupName = 'first group'
     var secondGroupName = 'second group'
 
-    var testModule2Options = {
-      container: '#notifications-container2',
-    }
-    mnModule2 = new MNModule(testModule2Options)
-
-    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule)
-    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule)
-    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, mnModule2)
-    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, mnModule2)
+    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, modules.module1)
+    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, modules.module1)
+    pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, modules.module2)
+    pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, modules.module2)
 
     //remove notifs from first group
-    mnModule.removeNotifications()
+    modules.module1.removeNotifications()
 
     //check if second group is ok
-    expect(mnModule2.notificationsCount).toEqual(
+    expect(modules.module2.notificationsCount).toEqual(
       numberOfNotifsInFirstGroup + numberOfNotifsInSecondGroup
     )
 
     //remove notifs from second group
-    mnModule2.removeNotifications()
+    modules.module2.removeNotifications()
 
     wait(
       Math.max(
-        getRemoveWaitingTimeMS(mnModule),
-        getRemoveWaitingTimeMS(mnModule2)
+        getRemoveWaitingTimeMS(modules.module1),
+        getRemoveWaitingTimeMS(modules.module2)
       )
     ).then(() => {
-      expect(mnModule.notificationsCount).toEqual(0)
-      expect(mnModule2.notificationsCount).toEqual(0)
+      expect(modules.module1.notificationsCount).toEqual(0)
+      expect(modules.module2.notificationsCount).toEqual(0)
     })
   })
 })
