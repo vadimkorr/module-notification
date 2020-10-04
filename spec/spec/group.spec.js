@@ -30,10 +30,12 @@ describe('Group', function() {
       //create group
       mnModule.createEmptyGroup(testGroupOptions)
       //check if group exist
-      expect(mnModule._getGroup(testGroupOptions.id)).toBeTruthy()
+      expect(
+        groupUtils.getGroupById(mnModule, testGroupOptions.id)
+      ).toBeTruthy()
     }
     //check if non existing group is not exist
-    expect(mnModule._getGroup(nonExustingGroup)).toBeFalsy()
+    expect(groupUtils.getGroupById(mnModule, nonExustingGroup)).toBeFalsy()
   })
 
   it('should be able to create groups', function() {
@@ -67,11 +69,11 @@ describe('Group', function() {
       //check result
       expect(result).toBeTruthy()
       //check if options were applied
-      expect(mnModule._getGroup(testGroupOptions.id).options).toEqual(
-        testGroupOptions
-      )
+      expect(
+        groupUtils.getGroupById(mnModule, testGroupOptions.id).options
+      ).toEqual(testGroupOptions)
       //check the amount of groups
-      expect(mnModule._getGroupsCount()).toEqual(i + 1)
+      expect(groupUtils.getGroupsCount(mnModule)).toEqual(i + 1)
     }
   })
 
@@ -113,7 +115,9 @@ describe('Group', function() {
       //check result
       expect(result).toEqual(testGroupOptions.expectedResult)
       //check the amount of groups
-      expect(mnModule._getGroupsCount()).toEqual(testGroupOptions.expectedCount)
+      expect(groupUtils.getGroupsCount(mnModule)).toEqual(
+        testGroupOptions.expectedCount
+      )
     }
   })
 })

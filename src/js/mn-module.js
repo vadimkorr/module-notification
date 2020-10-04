@@ -52,24 +52,6 @@ MNModule.prototype._setNotificationsCount = function(count) {
 }
 
 /**
- * Detects if group with specified id exist
- * @param {String} groupName - Name of the group
- * @returns Boolean value
- */
-// used in tests only
-MNModule.prototype._getGroup = function(id) {
-  return this.groups.get(id)
-}
-// used in tests only
-MNModule.prototype._getGroups = function() {
-  return this.groups.values()
-}
-// used in tests only
-MNModule.prototype._getGroupsCount = function() {
-  return this.groups.size
-}
-
-/**
  * Creates an empty group
  * @param {Object} groupOptions - Options of the group
  * @returns Boolean value of result
@@ -166,4 +148,9 @@ MNModule.prototype.pushNotification = function(options) {
 
 MNModule.prototype.unshiftNotification = function(options) {
   return this._addNotification({ ...options, mode: ADD_ELEMENT_MODE.UNSHIFT })
+}
+
+// The following methods used in tests only
+MNModule.prototype.__getGroups = function() {
+  return this.groups
 }
