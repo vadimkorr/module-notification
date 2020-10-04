@@ -22,7 +22,7 @@ describe('Notification', function() {
   })
 
   it('should be able to be pushed to module', function() {
-    var testNotifsOptions = [
+    const testNotifsOptions = [
       {
         title: 'title1',
         message: 'message1',
@@ -55,10 +55,10 @@ describe('Notification', function() {
       },
     ]
 
-    for (var i = 0; i < testNotifsOptions.length; i++) {
-      var testNotifOptions = testNotifsOptions[i]
+    for (let i = 0; i < testNotifsOptions.length; i++) {
+      const testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = modules.module1.pushNotification(testNotifOptions)
+      const notif = modules.module1.pushNotification(testNotifOptions)
       //check if ref is not null
       expect(notif).not.toBeNull()
       //check if notif was pushed with specified params
@@ -68,7 +68,7 @@ describe('Notification', function() {
   })
 
   it('should be able to be pushed to specified group', function() {
-    var testNotifsOptions = [
+    const testNotifsOptions = [
       {
         groupId: 'common1',
         expectedNumberOfNotifsAfterPushing: 1,
@@ -91,10 +91,10 @@ describe('Notification', function() {
       },
     ]
 
-    for (var i = 0; i < testNotifsOptions.length; i++) {
-      var testNotifOptions = testNotifsOptions[i]
+    for (let i = 0; i < testNotifsOptions.length; i++) {
+      const testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = modules.module1.pushNotification(testNotifOptions)
+      const notif = modules.module1.pushNotification(testNotifOptions)
       //check if notif was pushed to appropriate group
       expect(
         groupUtils
@@ -105,14 +105,14 @@ describe('Notification', function() {
   })
 
   it('should be able to be pushed to greedy group only ones', function() {
-    var greedyGroupName = 'some greedy group'
-    var greedyGroupOptions = {
+    const greedyGroupName = 'some greedy group'
+    const greedyGroupOptions = {
       id: greedyGroupName,
       greedy: true,
     }
     modules.module1.createEmptyGroup(greedyGroupOptions)
 
-    var testNotifsOptions = [
+    const testNotifsOptions = [
       {
         groupId: greedyGroupName,
         expectedNumberOfNotifsAfterPushing: 1,
@@ -125,10 +125,10 @@ describe('Notification', function() {
       },
     ]
 
-    for (var i = 0; i < testNotifsOptions.length; i++) {
-      var testNotifOptions = testNotifsOptions[i]
+    for (let i = 0; i < testNotifsOptions.length; i++) {
+      const testNotifOptions = testNotifsOptions[i]
       //push notif
-      var notif = modules.module1.pushNotification(testNotifOptions)
+      const notif = modules.module1.pushNotification(testNotifOptions)
       //check the size of the group
       expect(
         groupUtils
@@ -141,19 +141,19 @@ describe('Notification', function() {
   })
 
   it('should be able to be pulled', function() {
-    var numberOfNotifsToCreate = 10
-    for (var i = 0; i < numberOfNotifsToCreate.length; i++) {
+    const numberOfNotifsToCreate = 10
+    for (let i = 0; i < numberOfNotifsToCreate.length; i++) {
       //push notif
-      var notif = modules.module1.pushNotification({ closeInMS: false })
+      const notif = modules.module1.pushNotification({ closeInMS: false })
       //check the number of notifs after pushing
-      var expectedNumberOfNotifsAfterPushing = 1
+      const expectedNumberOfNotifsAfterPushing = 1
       expect(modules.module1.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPushing
       )
       //remove notif
       notif.remove()
       //check the number of notifs after pulling
-      var expectedNumberOfNotifsAfterPulling = 0
+      const expectedNumberOfNotifsAfterPulling = 0
       expect(modules.module1.notificationsCount).toEqual(
         expectedNumberOfNotifsAfterPulling
       )
@@ -162,7 +162,7 @@ describe('Notification', function() {
   })
 
   function pushNotifs(notifsCount, groupId, module) {
-    for (var i = 0; i < notifsCount; i++) {
+    for (let i = 0; i < notifsCount; i++) {
       module.pushNotification({
         groupId: groupId,
         closeInMS: false,
@@ -171,10 +171,10 @@ describe('Notification', function() {
   }
 
   it('should be able to be pulled from group', function() {
-    var numberOfNotifsInFirstGroup = 10
-    var numberOfNotifsInSecondGroup = 20
-    var firstGroupName = 'first group'
-    var secondGroupName = 'second group'
+    const numberOfNotifsInFirstGroup = 10
+    const numberOfNotifsInSecondGroup = 20
+    const firstGroupName = 'first group'
+    const secondGroupName = 'second group'
     const groups = {
       [firstGroupName]: {
         count: numberOfNotifsInFirstGroup,
@@ -216,10 +216,10 @@ describe('Notification', function() {
   })
 
   it('should be able to be pulled from module (all notifs)', function() {
-    var numberOfNotifsInFirstGroup = 10
-    var numberOfNotifsInSecondGroup = 20
-    var firstGroupName = 'first group'
-    var secondGroupName = 'second group'
+    const numberOfNotifsInFirstGroup = 10
+    const numberOfNotifsInSecondGroup = 20
+    const firstGroupName = 'first group'
+    const secondGroupName = 'second group'
 
     pushNotifs(numberOfNotifsInFirstGroup, firstGroupName, modules.module1)
     pushNotifs(numberOfNotifsInSecondGroup, secondGroupName, modules.module1)
