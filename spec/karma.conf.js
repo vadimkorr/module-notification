@@ -24,7 +24,7 @@ module.exports = function(config) {
     files: [
       './utils.js',
       './spec/*.spec.js',
-      'https://cdn.jsdelivr.net/npm/module-notification/dist/index.js',
+      'https://cdn.jsdelivr.net/npm/module-notification@latest/dist/index.js',
       // uncomment for development:
       // '../dist/index.js',
     ],
