@@ -192,7 +192,7 @@ describe('Notification', function() {
 
     //check number of notifs in first group
     for (let group of groupUtils.getGroups(modules.module1)) {
-      expect(group._getLength()).toEqual(groups[group._getId()].count)
+      expect(group._getLength()).toEqual(groups[group.__getId()].count)
     }
 
     //remove notifs of first group
