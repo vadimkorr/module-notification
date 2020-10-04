@@ -4,7 +4,7 @@ describe('Group', function() {
   beforeEach(function() {
     const containerId = 'notifications-container'
     addHtmlSnippet(containerId)
-    var testModuleOptions = {
+    const testModuleOptions = {
       container: `#${containerId}`,
       onNotificationsCountChange: function(number) {
         console.info('Number of notifs = ' + number)
@@ -14,7 +14,7 @@ describe('Group', function() {
   })
 
   it('should be able to detect existance of the group', function() {
-    var testGroupsOptions = [
+    const testGroupsOptions = [
       {
         id: 'group1',
         greedy: false,
@@ -24,9 +24,9 @@ describe('Group', function() {
         greedy: false,
       },
     ]
-    var nonExustingGroup = 'non_existing_group'
-    for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i]
+    const nonExustingGroup = 'non_existing_group'
+    for (let i = 0; i < testGroupsOptions.length; i++) {
+      const testGroupOptions = testGroupsOptions[i]
       //create group
       mnModule.createEmptyGroup(testGroupOptions)
       //check if group exist
@@ -39,7 +39,7 @@ describe('Group', function() {
   })
 
   it('should be able to create groups', function() {
-    var testGroupsOptions = [
+    const testGroupsOptions = [
       {
         id: 'group1',
         greedy: false,
@@ -62,10 +62,10 @@ describe('Group', function() {
       },
     ]
 
-    for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i]
+    for (let i = 0; i < testGroupsOptions.length; i++) {
+      const testGroupOptions = testGroupsOptions[i]
       //create group
-      var result = mnModule.createEmptyGroup(testGroupOptions)
+      const result = mnModule.createEmptyGroup(testGroupOptions)
       //check result
       expect(result).toBeTruthy()
       //check if options were applied
@@ -78,7 +78,7 @@ describe('Group', function() {
   })
 
   it('should not create groups with the same id', function() {
-    var testGroupsOptions = [
+    const testGroupsOptions = [
       {
         id: 'group1',
         greedy: false,
@@ -105,10 +105,10 @@ describe('Group', function() {
       },
     ]
 
-    for (var i = 0; i < testGroupsOptions.length; i++) {
-      var testGroupOptions = testGroupsOptions[i]
+    for (let i = 0; i < testGroupsOptions.length; i++) {
+      const testGroupOptions = testGroupsOptions[i]
       //create group
-      var result = mnModule.createEmptyGroup({
+      const result = mnModule.createEmptyGroup({
         id: testGroupOptions.id,
         greedy: testGroupOptions.greedy,
       })
