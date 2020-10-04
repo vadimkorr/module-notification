@@ -97,7 +97,9 @@ describe('Notification', function() {
       var notif = modules.module1.pushNotification(testNotifOptions)
       //check if notif was pushed to appropriate group
       expect(
-        modules.module1._getGroup(testNotifOptions.groupId)._getLength()
+        groupUtils
+          .getGroupById(modules.module1, testNotifOptions.groupId)
+          ._getLength()
       ).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing)
     }
   })
@@ -129,7 +131,9 @@ describe('Notification', function() {
       var notif = modules.module1.pushNotification(testNotifOptions)
       //check the size of the group
       expect(
-        modules.module1._getGroup(testNotifOptions.groupId)._getLength()
+        groupUtils
+          .getGroupById(modules.module1, testNotifOptions.groupId)
+          ._getLength()
       ).toEqual(testNotifOptions.expectedNumberOfNotifsAfterPushing)
       //check returned result
       expect(notif == null).toEqual(testNotifOptions.isResultNull)
@@ -187,7 +191,7 @@ describe('Notification', function() {
     )
 
     //check number of notifs in first group
-    for (let group of modules.module1._getGroups()) {
+    for (let group of groupUtils.getGroups(modules.module1)) {
       expect(group._getLength()).toEqual(groups[group._getId()].count)
     }
 
