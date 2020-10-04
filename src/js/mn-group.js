@@ -18,15 +18,6 @@ export function MNGroup(groupOptions) {
 }
 
 /**
- * Returnes id of the group
- * @returns id
- */
-// used in tests only
-MNGroup.prototype._getId = function() {
-  return this.options.id
-}
-
-/**
  * Adds new notification to the group
  * @param {Object} notification - instance of the notification
  */
@@ -73,4 +64,13 @@ MNGroup.prototype._getLength = function() {
  */
 MNGroup.prototype._isEmpty = function() {
   return this._getLength() === 0
+}
+
+// The following methods used in tests only
+/**
+ * Returnes id of the group
+ * @returns id
+ */
+MNGroup.prototype.__getId = function() {
+  return this.options.id
 }
