@@ -63,7 +63,6 @@ MNGroup.prototype._getNotifications = function() {
  * Returnes count of notifications in the group
  * @returns number
  */
-// used in tests only
 MNGroup.prototype._getLength = function() {
   return this._notifications.size
 }
@@ -73,5 +72,5 @@ MNGroup.prototype._getLength = function() {
  * @returns boolean
  */
 MNGroup.prototype._isEmpty = function() {
-  return this._notifications.size === 0
+  return this._getLength() === 0
 }
